@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		6D283EAC2CBF0AC400E143B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D283EAB2CBF0AC400E143B1 /* AppDelegate.swift */; };
 		6D283EAE2CBF0AC400E143B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D283EAD2CBF0AC400E143B1 /* SceneDelegate.swift */; };
-		6D283EB02CBF0AC400E143B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D283EAF2CBF0AC400E143B1 /* ViewController.swift */; };
+		6D283EB02CBF0AC400E143B1 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D283EAF2CBF0AC400E143B1 /* RegisterViewController.swift */; };
 		6D283EB32CBF0AC400E143B1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 6D283EB22CBF0AC400E143B1 /* Base */; };
 		6D283EB52CBF0AC500E143B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D283EB42CBF0AC500E143B1 /* Assets.xcassets */; };
 		6D283EB82CBF0AC500E143B1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 6D283EB72CBF0AC500E143B1 /* Base */; };
+		6D283EC22CBF121D00E143B1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D283EC12CBF121D00E143B1 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6D283EA82CBF0AC400E143B1 /* RentCar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RentCar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D283EAB2CBF0AC400E143B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D283EAD2CBF0AC400E143B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6D283EAF2CBF0AC400E143B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6D283EAF2CBF0AC400E143B1 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		6D283EB22CBF0AC400E143B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6D283EB42CBF0AC500E143B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D283EB72CBF0AC500E143B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6D283EB92CBF0AC500E143B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D283EC12CBF121D00E143B1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +58,9 @@
 		6D283EAA2CBF0AC400E143B1 /* RentCar */ = {
 			isa = PBXGroup;
 			children = (
+				6D283EC02CBF120100E143B1 /* Resources */,
 				6D283EBF2CBF0AD700E143B1 /* Delegates */,
-				6D283EAF2CBF0AC400E143B1 /* ViewController.swift */,
+				6D283EAF2CBF0AC400E143B1 /* RegisterViewController.swift */,
 				6D283EB12CBF0AC400E143B1 /* Main.storyboard */,
 				6D283EB42CBF0AC500E143B1 /* Assets.xcassets */,
 				6D283EB62CBF0AC500E143B1 /* LaunchScreen.storyboard */,
@@ -73,6 +76,14 @@
 				6D283EAD2CBF0AC400E143B1 /* SceneDelegate.swift */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		6D283EC02CBF120100E143B1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6D283EC12CBF121D00E143B1 /* Extensions.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,9 +157,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D283EB02CBF0AC400E143B1 /* ViewController.swift in Sources */,
+				6D283EB02CBF0AC400E143B1 /* RegisterViewController.swift in Sources */,
 				6D283EAC2CBF0AC400E143B1 /* AppDelegate.swift in Sources */,
 				6D283EAE2CBF0AC400E143B1 /* SceneDelegate.swift in Sources */,
+				6D283EC22CBF121D00E143B1 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
