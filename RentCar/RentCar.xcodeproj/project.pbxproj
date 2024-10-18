@@ -20,7 +20,6 @@
 		6D418AF82CC2AE52003B851C /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AF72CC2AE52003B851C /* FavoritesViewController.swift */; };
 		6D418AFA2CC2AF27003B851C /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AF92CC2AF27003B851C /* FavoritesCollectionViewCell.swift */; };
 		6D418AFC2CC2B028003B851C /* PersonalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AFB2CC2B028003B851C /* PersonalPageViewController.swift */; };
-		6D418AFE2CC2B0BD003B851C /* PersonalPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AFD2CC2B0BD003B851C /* PersonalPageTableViewCell.swift */; };
 		6D418B042CC2BEFB003B851C /* SliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418B032CC2BEFB003B851C /* SliderViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +39,6 @@
 		6D418AF72CC2AE52003B851C /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		6D418AF92CC2AF27003B851C /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
 		6D418AFB2CC2B028003B851C /* PersonalPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPageViewController.swift; sourceTree = "<group>"; };
-		6D418AFD2CC2B0BD003B851C /* PersonalPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPageTableViewCell.swift; sourceTree = "<group>"; };
 		6D418B032CC2BEFB003B851C /* SliderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,7 +119,6 @@
 			children = (
 				6D418AF32CC2ABB3003B851C /* MainPageCollectionViewCell.swift */,
 				6D418AF92CC2AF27003B851C /* FavoritesCollectionViewCell.swift */,
-				6D418AFD2CC2B0BD003B851C /* PersonalPageTableViewCell.swift */,
 			);
 			path = ViewCells;
 			sourceTree = "<group>";
@@ -201,7 +198,6 @@
 				6D418AF62CC2AD71003B851C /* SearchViewController.swift in Sources */,
 				6D418AFA2CC2AF27003B851C /* FavoritesCollectionViewCell.swift in Sources */,
 				6D418B042CC2BEFB003B851C /* SliderViewController.swift in Sources */,
-				6D418AFE2CC2B0BD003B851C /* PersonalPageTableViewCell.swift in Sources */,
 				6D418AF82CC2AE52003B851C /* FavoritesViewController.swift in Sources */,
 				6D418AFC2CC2B028003B851C /* PersonalPageViewController.swift in Sources */,
 				6D283EAC2CBF0AC400E143B1 /* AppDelegate.swift in Sources */,

@@ -13,6 +13,8 @@ class PersonalPageViewController: UIViewController {
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var tableView: UITableView!
    
+    let array = ["Hesap Bilgileri","Geçmiş Kiralamalar","Ödeme Bilgileri","Araç Bilgileri","Kullanıcı Ayarları","Yardım ve Destek","Uygulama Bilgileri"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
@@ -38,15 +40,28 @@ class PersonalPageViewController: UIViewController {
 extension PersonalPageViewController: UITableViewDataSource,UITableViewDelegate{
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return array.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "Row \(indexPath.row + 1)"
-
+        cell.textLabel?.text = array[indexPath.row]
+        cell.textLabel?.font = UIFont(name: "GillSans", size: 20) 
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+           switch indexPath.row {
+           case 0:
+     
+               let vc1 = storyboard?.instantiateViewController(withIdentifier: "favs") as! FavoritesViewController
+               navigationController?.pushViewController(vc1, animated: true)
+              
+           default:
+               break
+           }
+        
+           tableView.deselectRow(at: indexPath, animated: true)
+       }
     
     
 }
