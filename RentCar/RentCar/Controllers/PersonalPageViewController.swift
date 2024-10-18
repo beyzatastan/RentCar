@@ -17,6 +17,8 @@ class PersonalPageViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
         view1.layer.cornerRadius = 10
+        tableView.delegate=self
+        tableView.dataSource=self
     }
 
     @IBAction func homeButton(_ sender: Any) {
@@ -32,4 +34,19 @@ class PersonalPageViewController: UIViewController {
         let viewcontroller = storyboard?.instantiateViewController(identifier: "favs") as! FavoritesViewController
         self.navigationController?.pushViewController(viewcontroller, animated: false)
     }
+}
+extension PersonalPageViewController: UITableViewDataSource,UITableViewDelegate{
+   
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = "Row \(indexPath.row + 1)"
+
+        return cell
+    }
+    
+    
 }

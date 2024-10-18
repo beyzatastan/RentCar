@@ -7,6 +7,10 @@
         <string>Poppins-Bold.ttf</string>
         <string>Poppins-ExtraLight.ttf</string>
     </array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Your app needs access to your location to show nearby cars.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Your app needs access to your location to show nearby cars.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
