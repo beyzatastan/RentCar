@@ -15,7 +15,6 @@
 		6D418AE32CC27406003B851C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AE22CC27406003B851C /* RegisterViewController.swift */; };
 		6D418AE52CC27420003B851C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D418AE42CC27420003B851C /* Main.storyboard */; };
 		6D418AF12CC2A433003B851C /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AF02CC2A433003B851C /* MainPageViewController.swift */; };
-		6D418AF42CC2ABB3003B851C /* MainPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AF32CC2ABB3003B851C /* MainPageCollectionViewCell.swift */; };
 		6D418AF62CC2AD71003B851C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AF52CC2AD71003B851C /* SearchViewController.swift */; };
 		6D418AF82CC2AE52003B851C /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AF72CC2AE52003B851C /* FavoritesViewController.swift */; };
 		6D418AFA2CC2AF27003B851C /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AF92CC2AF27003B851C /* FavoritesCollectionViewCell.swift */; };
@@ -26,6 +25,7 @@
 		6D418B0B2CC2E88E003B851C /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418B0A2CC2E88E003B851C /* PaymentViewController.swift */; };
 		6D418B0D2CC2E909003B851C /* CarInfosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418B0C2CC2E909003B851C /* CarInfosViewController.swift */; };
 		6D418B0F2CC2EA37003B851C /* SupportPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418B0E2CC2EA37003B851C /* SupportPageViewController.swift */; };
+		6D418B132CC3A8A5003B851C /* CarsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418B122CC3A8A5003B851C /* CarsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +39,6 @@
 		6D418AE22CC27406003B851C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		6D418AE42CC27420003B851C /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		6D418AF02CC2A433003B851C /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
-		6D418AF32CC2ABB3003B851C /* MainPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageCollectionViewCell.swift; sourceTree = "<group>"; };
 		6D418AF52CC2AD71003B851C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		6D418AF72CC2AE52003B851C /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		6D418AF92CC2AF27003B851C /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		6D418B0A2CC2E88E003B851C /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		6D418B0C2CC2E909003B851C /* CarInfosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarInfosViewController.swift; sourceTree = "<group>"; };
 		6D418B0E2CC2EA37003B851C /* SupportPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportPageViewController.swift; sourceTree = "<group>"; };
+		6D418B122CC3A8A5003B851C /* CarsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,8 +128,8 @@
 		6D418AF22CC2AB98003B851C /* ViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				6D418AF32CC2ABB3003B851C /* MainPageCollectionViewCell.swift */,
 				6D418AF92CC2AF27003B851C /* FavoritesCollectionViewCell.swift */,
+				6D418B122CC3A8A5003B851C /* CarsTableViewCell.swift */,
 			);
 			path = ViewCells;
 			sourceTree = "<group>";
@@ -139,8 +139,8 @@
 			children = (
 				6D418B052CC2E6EE003B851C /* PersonalInfosViewController.swift */,
 				6D418B082CC2E7DC003B851C /* LastRidesViewController.swift */,
-				6D418B0A2CC2E88E003B851C /* PaymentViewController.swift */,
 				6D418B0C2CC2E909003B851C /* CarInfosViewController.swift */,
+				6D418B0A2CC2E88E003B851C /* PaymentViewController.swift */,
 				6D418B0E2CC2EA37003B851C /* SupportPageViewController.swift */,
 			);
 			path = Personal;
@@ -224,12 +224,12 @@
 				6D418B0D2CC2E909003B851C /* CarInfosViewController.swift in Sources */,
 				6D418B062CC2E6EE003B851C /* PersonalInfosViewController.swift in Sources */,
 				6D418AFA2CC2AF27003B851C /* FavoritesCollectionViewCell.swift in Sources */,
+				6D418B132CC3A8A5003B851C /* CarsTableViewCell.swift in Sources */,
 				6D418B042CC2BEFB003B851C /* SliderViewController.swift in Sources */,
 				6D418AF82CC2AE52003B851C /* FavoritesViewController.swift in Sources */,
 				6D418B0B2CC2E88E003B851C /* PaymentViewController.swift in Sources */,
 				6D418AFC2CC2B028003B851C /* PersonalPageViewController.swift in Sources */,
 				6D283EAC2CBF0AC400E143B1 /* AppDelegate.swift in Sources */,
-				6D418AF42CC2ABB3003B851C /* MainPageCollectionViewCell.swift in Sources */,
 				6D283EAE2CBF0AC400E143B1 /* SceneDelegate.swift in Sources */,
 				6D283EC22CBF121D00E143B1 /* Extensions.swift in Sources */,
 				6D418AE32CC27406003B851C /* RegisterViewController.swift in Sources */,

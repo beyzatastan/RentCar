@@ -9,12 +9,18 @@ import UIKit
 
 class PersonalInfosViewController: UIViewController {
 
+    @IBOutlet weak var usernameText: UITextField!
+    
+    @IBOutlet weak var phoneText: UITextField!
+    @IBOutlet weak var emailText: UITextField!
+    @IBOutlet weak var fullnameText: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
+    @IBAction func updateChangesButton(_ sender: Any) {
+    }
 }
 class PersonalSettingsViewController: UIViewController{
     override func viewDidLoad() {
