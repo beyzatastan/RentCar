@@ -53,25 +53,25 @@ extension PersonalPageViewController: UITableViewDataSource,UITableViewDelegate{
            switch indexPath.row {
            case 0:
                let vc1 = storyboard?.instantiateViewController(withIdentifier: "personalInfos") as! PersonalInfosViewController
-               navigationController?.pushViewController(vc1, animated: false)
+               navigationController?.pushViewController(vc1, animated: true)
            case 1:
                let vc2=storyboard?.instantiateViewController(identifier: "lastRides") as! LastRidesViewController
-               navigationController?.pushViewController(vc2, animated: false)
+               navigationController?.pushViewController(vc2, animated: true)
            case 2:
                let vc4=storyboard?.instantiateViewController(identifier: "carInfos") as! CarInfosViewController
-               navigationController?.pushViewController(vc4, animated: false)
+               navigationController?.pushViewController(vc4, animated: true)
            case 3:
                let vc3=storyboard?.instantiateViewController(identifier: "payment") as! PaymentViewController
-               navigationController?.pushViewController(vc3, animated: false)
+               navigationController?.pushViewController(vc3, animated: true)
            case 4:
                let vc5=storyboard?.instantiateViewController(identifier: "personalSettings") as! PersonalSettingsViewController
-               navigationController?.pushViewController(vc5, animated: false)
+               navigationController?.pushViewController(vc5, animated: true)
            case 5:
                let vc6=storyboard?.instantiateViewController(identifier: "support") as! SupportPageViewController
-               navigationController?.pushViewController(vc6, animated: false)
+               navigationController?.pushViewController(vc6, animated: true)
            case 6:
                let vc7=storyboard?.instantiateViewController(identifier: "appInfos") as! ApplicationInfosViewController
-               navigationController?.pushViewController(vc7, animated: false)
+               navigationController?.pushViewController(vc7, animated: true)
            default:
                break
            }

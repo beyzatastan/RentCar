@@ -12,8 +12,9 @@ class FavoritesViewController: UIViewController,UICollectionViewDataSource,UICol
     @IBOutlet weak var favsView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let names = ["honda civic","supra"]
-    let photos = ["lale","kule"]
+    let names = ["bmw 3.20 i","dodge charger","toyota corolla","mercedes c180"]
+    let photos = ["bmw","dodge","corolla","mercedes"]
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class FavoritesViewController: UIViewController,UICollectionViewDataSource,UICol
         favsView.layer.cornerRadius = 10
         collectionView.dataSource = self
         collectionView.delegate = self
+        
     }
     
     @IBAction func homeButton(_ sender: Any) {
@@ -51,6 +53,7 @@ extension FavoritesViewController{
         let imageName = photos[indexPath.row]
         cell.imageView?.image = UIImage(named: imageName)
         cell.nameText.text = names[indexPath.row]
+        cell.imageView.layer.cornerRadius = 5
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

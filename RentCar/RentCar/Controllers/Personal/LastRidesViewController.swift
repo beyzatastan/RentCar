@@ -9,8 +9,8 @@ import UIKit
 
 class LastRidesViewController: UIViewController,UITableViewDataSource,UITableViewDelegate{
    
-    let names = ["honda civic","mercedes g","range rover","toyota corolla"]
-    let photos = ["lale","kule","bas","lale"]
+    let names = ["bmw 3.20 i","dodge charger","toyota corolla","mercedes c180"]
+    let photos = ["bmw","dodge","corolla","mercedes"]
   
  
  
@@ -23,10 +23,18 @@ class LastRidesViewController: UIViewController,UITableViewDataSource,UITableVie
         lastRidesView.layer.cornerRadius = 10
         tableView.delegate=self
         tableView.dataSource=self
-        
-        
+        navigationItem.hidesBackButton = true
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(goBack))
+        backButton.tintColor = .white
+        navigationItem.leftBarButtonItem = backButton
     }
 
+    @objc func goBack() {
+        navigationController?.popViewController(animated: true)
+    }
 }
 extension LastRidesViewController{
     
