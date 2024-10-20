@@ -9,4 +9,7 @@ import UIKit
 
 class FavoritesCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var nameText: UILabel!
+    @IBOutlet weak var rateText: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
 }
