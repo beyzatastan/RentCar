@@ -9,16 +9,23 @@ import UIKit
 
 class PersonalPageViewController: UIViewController {
 
+    @IBOutlet weak var personView: UIView!
     @IBOutlet weak var personLabel: UILabel!
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var tableView: UITableView!
    
+    @IBOutlet weak var buttonView: UIView!
     let array = ["Hesap Bilgileri","Geçmiş Kiralamalar","Araç Bilgileri","Ödeme Bilgileri","Kullanıcı Ayarları","Yardım ve Destek","Geri Bildirim ve Şikayer","Uygulama Bilgileri"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
+        view.sendSubviewToBack(view1)
+        view.bringSubviewToFront(buttonView)
+        view.bringSubviewToFront(personView)
         view1.layer.cornerRadius = 10
+        personView.layer.cornerRadius = 10
+        buttonView.layer.cornerRadius = 10
         tableView.delegate=self
         tableView.dataSource=self
     }

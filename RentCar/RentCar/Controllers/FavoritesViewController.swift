@@ -10,6 +10,8 @@ import UIKit
 class FavoritesViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var favsView: UIView!
+    @IBOutlet weak var favsTitleView: UIView!
+    @IBOutlet weak var buttonsView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     let names = ["bmw 3.20 i","dodge charger","toyota corolla","mercedes c180"]
@@ -19,6 +21,10 @@ class FavoritesViewController: UIViewController,UICollectionViewDataSource,UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
+        favsTitleView.layer.cornerRadius = 10
+        buttonsView.layer.cornerRadius = 10
+        view.sendSubviewToBack(favsView)
+        view.bringSubviewToFront(buttonsView)
         favsView.layer.cornerRadius = 10
         collectionView.dataSource = self
         collectionView.delegate = self

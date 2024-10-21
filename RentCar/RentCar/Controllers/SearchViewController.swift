@@ -13,11 +13,15 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchText: UITextField!
     @IBOutlet weak var lastSearchView: UIView!
     
+    @IBOutlet weak var tabView: UIView!
+    @IBOutlet weak var buttonView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
+        buttonView.layer.cornerRadius = 10
         searchView.layer.cornerRadius = 10
         lastSearchView.layer.cornerRadius = 10
+        tabView.layer.cornerRadius = 10
     }
     
     

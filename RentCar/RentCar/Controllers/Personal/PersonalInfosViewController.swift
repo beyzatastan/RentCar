@@ -10,7 +10,6 @@ import UIKit
 class PersonalInfosViewController: UIViewController {
 
     @IBOutlet weak var usernameText: UITextField!
-    
     @IBOutlet weak var phoneText: UITextField!
     @IBOutlet weak var emailText: UITextField!
     @IBOutlet weak var fullnameText: UITextField!
