@@ -122,6 +122,7 @@
 				6D418AF52CC2AD71003B851C /* SearchViewController.swift */,
 				6D418AF72CC2AE52003B851C /* FavoritesViewController.swift */,
 				6D418AFB2CC2B028003B851C /* PersonalPageViewController.swift */,
+				6DE78DB42CC6C8A300C564BC /* RentPageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -144,7 +145,6 @@
 				6D418B0A2CC2E88E003B851C /* PaymentViewController.swift */,
 				6D418B0E2CC2EA37003B851C /* SupportPageViewController.swift */,
 				6D15EB792CC5BFA7003CF7D2 /* AddCarViewController.swift */,
-				6DE78DB42CC6C8A300C564BC /* RentPageViewController.swift */,
 			);
 			path = Personal;
 			sourceTree = "<group>";

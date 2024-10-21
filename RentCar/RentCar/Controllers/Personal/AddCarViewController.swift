@@ -43,7 +43,7 @@ extension AddCarViewController{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "carphotos", for: indexPath) as! CarPhotosCollectionViewCell
-        cell.imageView?.image=UIImage(named: "bmw")
+        cell.imageView?.image=UIImage(named: "dodge")
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

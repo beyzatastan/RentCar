@@ -16,11 +16,12 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
     @IBOutlet weak var view3: UIView!
     @IBOutlet weak var view2: UIView!
     
+    
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var scrollView: UIScrollView!
     var currentPage = 0
     var timer:Timer?
-    let photos = ["reklam","bmw","dodge"]
+    let photos = ["reklam1","reklam2","reklam3"]
   
     @IBOutlet weak var mapKit: MKMapView!
     let locationManager=CLLocationManager()
@@ -33,7 +34,8 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
         view3.layer.cornerRadius = 10
         view4.layer.cornerRadius = 10
         view5.layer.cornerRadius = 10
-        
+        scrollView.layer.cornerRadius = 10
+
         locationManager.delegate = self
         //en detaylı konumu almak için
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -55,6 +57,9 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
     func setupScrollView() {
         for i in 0..<photos.count {
             let imageView = UIImageView()
+            imageView.layer.cornerRadius = 10
+            imageView.layer.masksToBounds = true
+            imageView.clipsToBounds = true
             imageView.image = UIImage(named: photos[i])
             imageView.contentMode = .scaleAspectFit
             imageView.clipsToBounds = true

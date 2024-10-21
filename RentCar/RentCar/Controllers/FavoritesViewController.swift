@@ -65,5 +65,16 @@ extension FavoritesViewController{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             return CGSize(width: 160, height: 240)
         }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedImageName = photos[indexPath.row]
+        let selectedModel = names[indexPath.row]
+        let rentPageVC = storyboard?.instantiateViewController(identifier: "rent") as! RentPageViewController
+        
+        rentPageVC.selectedImage = UIImage(named: selectedImageName)
+        rentPageVC.aracMarkaLabel?.text = selectedModel
+        
+        navigationController?.pushViewController(rentPageVC, animated: true)
+    }
+
     
 }
