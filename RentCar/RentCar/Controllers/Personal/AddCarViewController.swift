@@ -9,12 +9,16 @@ import UIKit
 
 class AddCarViewController: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var pageView: UIView!
     @IBOutlet weak var photoView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         photoView.layer.cornerRadius = 10
+        pageView.layer.cornerRadius = 10
+        nextButton.layer.cornerRadius = 10
         navigationItem.hidesBackButton = true
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
                                          style: .plain,

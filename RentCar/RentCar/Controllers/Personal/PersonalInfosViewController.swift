@@ -10,11 +10,13 @@ import UIKit
 class PersonalInfosViewController: UIViewController {
 
     @IBOutlet weak var usernameText: UITextField!
+    @IBOutlet weak var updateButton: UIButton!
     @IBOutlet weak var phoneText: UITextField!
     @IBOutlet weak var emailText: UITextField!
     @IBOutlet weak var fullnameText: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateButton.layer.cornerRadius = 10
         navigationItem.hidesBackButton = true
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
                                          style: .plain,

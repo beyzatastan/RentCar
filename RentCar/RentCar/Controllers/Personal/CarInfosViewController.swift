@@ -63,5 +63,15 @@ extension CarInfosViewController{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedImageName = photos[indexPath.row]
+        let selectedModel = names[indexPath.row]
+        let rentPageVC = storyboard?.instantiateViewController(identifier: "rent") as! RentPageViewController
+        
+        rentPageVC.selectedImage = UIImage(named: selectedImageName)
+        rentPageVC.aracMarkaLabel?.text = selectedModel
+        
+        navigationController?.pushViewController(rentPageVC, animated: true)
     
+    }
 }
