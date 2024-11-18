@@ -22,7 +22,7 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
     var currentPage = 0
     var timer:Timer?
     let photos = ["reklam1","reklam2","reklam3"]
-  
+    
     @IBOutlet weak var mapKit: MKMapView!
     let locationManager=CLLocationManager()
     
@@ -35,7 +35,7 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
         view4.layer.cornerRadius = 10
         view5.layer.cornerRadius = 10
         scrollView.layer.cornerRadius = 10
-
+        
         locationManager.delegate = self
         //en detaylı konumu almak için
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -44,14 +44,14 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
         mapKit.showsUserLocation = true
         
         scrollView.delegate = self
-                setupScrollView()
+        setupScrollView()
         pageControl.numberOfPages = photos.count
         scrollView.isPagingEnabled = true
         timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(autoScrollImages), userInfo: nil, repeats: true)
         scrollView.showsHorizontalScrollIndicator = false
-
-
-
+        
+        
+        
     }
     
     func setupScrollView() {
@@ -74,47 +74,33 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
         }
     }
     @objc func autoScrollImages() {
-           currentPage += 1
-           if currentPage >= photos.count {
-               currentPage = 0
-           }
-           
-           // Scroll işlemini gerçekleştir
-           let xOffset = CGFloat(currentPage) * scrollView.frame.width
-           scrollView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: true)
-       }
-       
-       deinit {
-           // Timer'ı iptal et
-           timer?.invalidate()
-       }
-
+        currentPage += 1
+        if currentPage >= photos.count {
+            currentPage = 0
+        }
+        
+        // Scroll işlemini gerçekleştir
+        let xOffset = CGFloat(currentPage) * scrollView.frame.width
+        scrollView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: true)
+    }
+    
+    deinit {
+        // Timer'ı iptal et
+        timer?.invalidate()
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-           let pageIndex = round(scrollView.contentOffset.x / scrollView.frame.width)
-           pageControl.currentPage = Int(pageIndex)
-       }
+        let pageIndex = round(scrollView.contentOffset.x / scrollView.frame.width)
+        pageControl.currentPage = Int(pageIndex)
+    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapKit.setRegion(region, animated: true)
-        }
+    }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-            print("Failed to find user's location: \(error.localizedDescription)")
-        }
-    
-    
-    @IBAction func searchButton(_ sender: Any) {
-        let viewcontroller = storyboard?.instantiateViewController(identifier: "search") as! SearchViewController
-        self.navigationController?.pushViewController(viewcontroller, animated: false)
+        print("Failed to find user's location: \(error.localizedDescription)")
     }
     
-    @IBAction func favsButton(_ sender: Any) {
-        let viewcontroller = storyboard?.instantiateViewController(identifier: "favs") as! FavoritesViewController
-        self.navigationController?.pushViewController(viewcontroller, animated: false)
-    }
-    @IBAction func personButton(_ sender: Any) {
-        let viewcontroller = storyboard?.instantiateViewController(identifier: "personal") as! PersonalPageViewController
-        self.navigationController?.pushViewController(viewcontroller, animated: false)
-    }
 }

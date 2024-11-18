@@ -8,12 +8,12 @@
 import UIKit
 
 class PersonalPageViewController: UIViewController {
-
+    
     @IBOutlet weak var personView: UIView!
     @IBOutlet weak var personLabel: UILabel!
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var tableView: UITableView!
-   
+    
     @IBOutlet weak var buttonView: UIView!
     let array = ["Hesap Bilgileri","Geçmiş Kiralamalar","Araç Bilgileri","Ödeme Bilgileri","Kullanıcı Ayarları","Yardım ve Destek","Geri Bildirim ve Şikayer","Uygulama Bilgileri"]
     
@@ -29,21 +29,14 @@ class PersonalPageViewController: UIViewController {
         tableView.delegate=self
         tableView.dataSource=self
     }
-
+    
     @IBAction func homeButton(_ sender: Any) {
         let viewcontroller = storyboard?.instantiateViewController(identifier: "main") as! MainPageViewController
         self.navigationController?.pushViewController(viewcontroller, animated: false)
     }
     
-    @IBAction func searchButton(_ sender: Any) {
-        let viewcontroller = storyboard?.instantiateViewController(identifier: "search") as! SearchViewController
-        self.navigationController?.pushViewController(viewcontroller, animated: false)
-    }
-    @IBAction func favsButton(_ sender: Any) {
-        let viewcontroller = storyboard?.instantiateViewController(identifier: "favs") as! FavoritesViewController
-        self.navigationController?.pushViewController(viewcontroller, animated: false)
-    }
 }
+
 extension PersonalPageViewController: UITableViewDataSource,UITableViewDelegate{
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -66,7 +66,7 @@ extension CarInfosViewController{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedImageName = photos[indexPath.row]
         let selectedModel = names[indexPath.row]
-        let rentPageVC = storyboard?.instantiateViewController(identifier: "rent") as! RentPageViewController
+        let rentPageVC = storyboard?.instantiateViewController(identifier: "rentcar") as! RentPageViewController
         
         rentPageVC.selectedImage = UIImage(named: selectedImageName)
         rentPageVC.aracMarkaLabel?.text = selectedModel
