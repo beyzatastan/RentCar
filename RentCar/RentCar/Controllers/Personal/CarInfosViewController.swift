@@ -4,6 +4,8 @@
 //
 //  Created by beyza nur on 18.10.2024.
 //
+///
+/*
 
 import UIKit
 
@@ -75,3 +77,4 @@ extension CarInfosViewController{
     
     }
 }
+ */

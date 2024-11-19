@@ -4,7 +4,7 @@
 //
 //  Created by beyza nur on 21.10.2024.
 //
-
+/*
 import UIKit
 
 class AddCarViewController: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
@@ -40,6 +40,7 @@ class AddCarViewController: UIViewController ,UICollectionViewDelegate,UICollect
     }
     
 }
+
 extension AddCarViewController{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
@@ -55,3 +56,4 @@ extension AddCarViewController{
         }
     
 }
+*/

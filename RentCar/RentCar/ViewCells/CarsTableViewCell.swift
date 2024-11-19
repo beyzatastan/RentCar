@@ -2,30 +2,29 @@
 //  CarsTableViewCell.swift
 //  RentCar
 //
-//  Created by beyza nur on 19.10.2024.
+//  Created by beyza nur on 19.11.2024.
 //
 
 import UIKit
 
 class CarsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var carNameLabel: UILabel!
     
-    @IBOutlet weak var carsImageView: UIImageView!
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var toplamFiyat: UILabel!
+    @IBOutlet weak var gunlukFiyat: UILabel!
+    @IBOutlet weak var puanDurumu: UILabel!
+    @IBOutlet weak var depozito: UILabel!
+    @IBOutlet weak var aracTeslim: UILabel!
+    @IBOutlet weak var yolcuSayisi: UILabel!
+    @IBOutlet weak var aracSınıfı: UILabel!
+    @IBOutlet weak var benzinDurumu: UILabel!
+    @IBOutlet weak var vitesDurumu: UILabel!
+    @IBOutlet weak var carImageView: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    
+    @IBAction func nextButton(_ sender: Any) {
+        
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-       
-    }
-
-}
-class LastRidesTableViewCell: UITableViewCell{
     
-    @IBOutlet weak var labelText: UILabel!
-    @IBOutlet weak var lastRideImageView: UIImageView!
 }

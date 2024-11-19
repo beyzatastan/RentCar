@@ -53,6 +53,19 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
         
         
     }
+    @IBAction func rentPageButton(_ sender: Any) {
+        let rentVc=storyboard?.instantiateViewController(identifier: "rent") as! RentViewController
+        navigationController?.pushViewController(rentVc, animated: false)
+    }
+    
+    @IBAction func personButton(_ sender: Any) {
+        let personVc=storyboard?.instantiateViewController(identifier: "personal") as! PersonalPageViewController
+        navigationController?.pushViewController(personVc, animated: false)
+    }
+    @IBAction func settingsButton(_ sender: Any) {
+        let settingVc=storyboard?.instantiateViewController(identifier: "settings") as! SettingsViewController
+        navigationController?.pushViewController(settingVc, animated: false)
+    }
     
     func setupScrollView() {
         for i in 0..<photos.count {
