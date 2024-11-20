@@ -10,22 +10,6 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var window: UIWindow?
-    
-    func new(){
-        let lsvc=UIStoryboard(name:"LaunchScreen" , bundle: nil)
-        let gecisVc=lsvc.instantiateViewController(withIdentifier:"launch" )
-        window?.rootViewController = gecisVc
-        window?.makeKeyAndVisible()
-        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(home), userInfo: nil, repeats: false)
-    }
-    @objc func home(){
-        let mainvc=UIStoryboard(name:"Main" , bundle: nil)
-        let gecisVc=mainvc.instantiateViewController(withIdentifier:"main" )
-        window?.rootViewController = gecisVc
-        window?.makeKeyAndVisible()
-    }
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true

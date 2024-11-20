@@ -114,6 +114,7 @@ class InfosViewController: UIViewController {
         
         EasyLease uygulamasını kullandığınızda aşağıdaki kullanım koşullarını kabul etmiş sayılmaktasınız.
 
+        *******************************************
         
         """
         case "3":
@@ -125,6 +126,8 @@ class InfosViewController: UIViewController {
 
         Bu uygulamanın tüm hakları gizlidir.Kullanım koşulları belirtilirken bahsi geçen "Biz" ve "Bizi" kelimeleri ile kast edilen EasyLease ailesi;"Siz" ve "Sizi" kelimeleri ile kast edilen ise uygulamamızı kullanan siz değerli müşterilerimizdir.Kullanım koşulları, uygulamamızı kullanmaya başlamadan önce ziyaret edilmelidir.
         
+        
+        *******************************************
         
         """
         case "4":
