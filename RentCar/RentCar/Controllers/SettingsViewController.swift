@@ -66,6 +66,18 @@ extension SettingsViewController:UITableViewDelegate,UITableViewDataSource{
                let vc=storyboard?.instantiateViewController(identifier: "infos") as! InfosViewController
                vc.selectedCase="0"
                navigationController?.pushViewController(vc, animated: true)
+           case 1 :
+               let vc=storyboard?.instantiateViewController(identifier: "infos") as! InfosViewController
+               vc.selectedCase="1"
+               navigationController?.pushViewController(vc, animated: true)
+           case 2 :
+               let vc=storyboard?.instantiateViewController(identifier: "infos") as! InfosViewController
+               vc.selectedCase="2"
+               navigationController?.pushViewController(vc, animated: true)
+           case 3 :
+               let vc=storyboard?.instantiateViewController(identifier: "infos") as! InfosViewController
+               vc.selectedCase="3"
+               navigationController?.pushViewController(vc, animated: true)
            default:
                break
            }

@@ -64,7 +64,20 @@ extension PersonalPageViewController: UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
            switch indexPath.row {
            case 0:
-               let vc=storyboard?.instantiateViewController(identifier: "uyelik") as! InfosViewController
+               let vc=storyboard?.instantiateViewController(identifier: "infos") as! InfosViewController
+               vc.selectedCase = "4"
+               navigationController?.pushViewController(vc, animated: true)
+           case 1:
+               let vc=storyboard?.instantiateViewController(identifier: "infos") as! InfosViewController
+               vc.selectedCase = "5"
+               navigationController?.pushViewController(vc, animated: true)
+           case 2:
+               let vc=storyboard?.instantiateViewController(identifier: "infos") as! InfosViewController
+               vc.selectedCase = "6"
+               navigationController?.pushViewController(vc, animated: true)
+           case 3:
+               let vc=storyboard?.instantiateViewController(identifier: "infos") as! InfosViewController
+               vc.selectedCase = "7"
                navigationController?.pushViewController(vc, animated: true)
            default:
                break
