@@ -20,6 +20,10 @@ class CarsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
+    @IBAction func nextButton(_ sender: Any) {
+        let vc=storyboard?.instantiateViewController(identifier: "details") as! CarDetailsViewController
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     
 }

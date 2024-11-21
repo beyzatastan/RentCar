@@ -23,8 +23,6 @@ class CarsTableViewCell: UITableViewCell {
     @IBOutlet weak var carImageView: UIImageView!
     
     
-    @IBAction func nextButton(_ sender: Any) {
-        
-    }
+   
     
 }
