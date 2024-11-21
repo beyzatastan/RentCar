@@ -20,6 +20,7 @@
 		6D418AF12CC2A433003B851C /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AF02CC2A433003B851C /* MainPageViewController.swift */; };
 		6D418AFC2CC2B028003B851C /* PersonalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AFB2CC2B028003B851C /* PersonalPageViewController.swift */; };
 		6D418B092CC2E7DC003B851C /* LastRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418B082CC2E7DC003B851C /* LastRidesViewController.swift */; };
+		6D5508CE2CEF443600824731 /* CarDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5508CD2CEF443600824731 /* CarDetailsViewController.swift */; };
 		6DBBA8352CEB6A2A00ABCA9A /* RentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBA8342CEB6A2A00ABCA9A /* RentViewController.swift */; };
 		6DBBA8372CECB34A00ABCA9A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBA8362CECB34A00ABCA9A /* SettingsViewController.swift */; };
 		6DBBA8392CECC53200ABCA9A /* CarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBA8382CECC53200ABCA9A /* CarsViewController.swift */; };
@@ -41,6 +42,7 @@
 		6D418AF02CC2A433003B851C /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		6D418AFB2CC2B028003B851C /* PersonalPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPageViewController.swift; sourceTree = "<group>"; };
 		6D418B082CC2E7DC003B851C /* LastRidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastRidesViewController.swift; sourceTree = "<group>"; };
+		6D5508CD2CEF443600824731 /* CarDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsViewController.swift; sourceTree = "<group>"; };
 		6DBBA8342CEB6A2A00ABCA9A /* RentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentViewController.swift; sourceTree = "<group>"; };
 		6DBBA8362CECB34A00ABCA9A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6DBBA8382CECC53200ABCA9A /* CarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				6DBBA8342CEB6A2A00ABCA9A /* RentViewController.swift */,
 				6DBBA8362CECB34A00ABCA9A /* SettingsViewController.swift */,
 				6DBBA8382CECC53200ABCA9A /* CarsViewController.swift */,
+				6D5508CD2CEF443600824731 /* CarDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				6D418AFC2CC2B028003B851C /* PersonalPageViewController.swift in Sources */,
 				6D283EAC2CBF0AC400E143B1 /* AppDelegate.swift in Sources */,
 				6DBBA8352CEB6A2A00ABCA9A /* RentViewController.swift in Sources */,
+				6D5508CE2CEF443600824731 /* CarDetailsViewController.swift in Sources */,
 				6DBBA8372CECB34A00ABCA9A /* SettingsViewController.swift in Sources */,
 				6D283EAE2CBF0AC400E143B1 /* SceneDelegate.swift in Sources */,
 				6D283EC22CBF121D00E143B1 /* Extensions.swift in Sources */,

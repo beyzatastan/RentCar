@@ -62,7 +62,6 @@ class InfosViewController: UIViewController {
         ])
         
         var detailedText: String?
-        // Label Eklenmesi
         switch selectedCase {
         case "0":
             labelText.text="Hakkımızda"
@@ -166,6 +165,7 @@ class InfosViewController: UIViewController {
         
         
         """
+           
         case "7":
             labelText.text="Kullanıcı İzinleri"
             labelText.textColor = .white
