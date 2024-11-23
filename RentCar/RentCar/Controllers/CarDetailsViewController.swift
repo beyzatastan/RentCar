@@ -36,6 +36,10 @@ class CarDetailsViewController: UIViewController {
         
     }
     
-    @IBOutlet var kiralaButton: UIView!
+
+    @IBAction func kiralaButton(_ sender: Any) {
+        let vc=storyboard?.instantiateViewController(identifier: "fatura") as! FaturaViewController
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
 }

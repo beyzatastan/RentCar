@@ -13,11 +13,12 @@ class CarsViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource=self
         tableView.delegate=self
-        self.navigationItem.hidesBackButton = false
+        self.navigationItem.hidesBackButton = true
     }
    
-    @IBAction func backButton(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+    @IBAction func backButton(_ sender: Any) {  
+        let vc=storyboard?.instantiateViewController(identifier: "rent") as! RentViewController
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     @IBAction func nextButton(_ sender: Any) {

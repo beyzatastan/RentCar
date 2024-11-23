@@ -285,15 +285,6 @@ class FaturaViewController: UIViewController, UITextFieldDelegate{
         
         return formattedDate
     }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // 'Return' tuşuna basıldığında bir sonraki textfield'a geç
-        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
-            nextField.becomeFirstResponder()
-        } else {
-            textField.resignFirstResponder()
-        }
-        return false
-    }
     
     func createToolBar() -> UIToolbar {
         let toolBar = UIToolbar()
@@ -347,6 +338,12 @@ class FaturaViewController: UIViewController, UITextFieldDelegate{
             buton4=false
         }
     }
+    
+    @IBAction func devamButtonClicked(_ sender: Any) {
+        let vc=storyboard?.instantiateViewController(identifier: "nextFatura") as! NextFaturaViewController
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
    
 
