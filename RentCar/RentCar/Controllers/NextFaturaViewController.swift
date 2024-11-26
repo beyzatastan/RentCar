@@ -304,6 +304,8 @@ class NextFaturaViewController: UIViewController ,UITextFieldDelegate{
     }
     
     @IBAction func devamButtonClicked(_ sender: Any) {
+        let vc=storyboard?.instantiateViewController(identifier: "odeme") as! OdemeViewController
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
