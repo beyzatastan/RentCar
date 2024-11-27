@@ -33,8 +33,27 @@ class CarDetailsViewController: UIViewController {
         surusView.layer.cornerRadius=10
         toplamFiyattLabel.layer.cornerRadius=5
         toplamFiyattLabel.layer.masksToBounds=true
-        
-    }
+        navigationItem.backButtonTitle = ""
+         
+        // Özel UIButton oluştur
+          let backButton = UIButton(type: .system)
+          backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+          backButton.tintColor = .white
+          backButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+          backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+          
+          // Dikey konum için transform uygula
+          backButton.transform = CGAffineTransform(translationX: 0, y: -5) // `y: -5` butonu yukarı taşır
+          
+          // UIBarButtonItem olarak ekle
+          let barButtonItem = UIBarButtonItem(customView: backButton)
+          navigationItem.leftBarButtonItem = barButtonItem
+      }
+
+      @objc func backButtonTapped() {
+          navigationController?.popViewController(animated: true)
+      }
+
     
 
     @IBAction func kiralaButton(_ sender: Any) {

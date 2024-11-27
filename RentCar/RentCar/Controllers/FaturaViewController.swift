@@ -178,8 +178,28 @@ class FaturaViewController: UIViewController, UITextFieldDelegate{
             tcText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             tcText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
         ])
-    }
-    
+        
+        navigationItem.backButtonTitle = ""
+         
+        // Özel UIButton oluştur
+          let backButton = UIButton(type: .system)
+          backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+          backButton.tintColor = .white
+          backButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+          backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+          
+          // Dikey konum için transform uygula
+          backButton.transform = CGAffineTransform(translationX: 0, y: -5) // `y: -5` butonu yukarı taşır
+          
+          // UIBarButtonItem olarak ekle
+          let barButtonItem = UIBarButtonItem(customView: backButton)
+          navigationItem.leftBarButtonItem = barButtonItem
+      }
+
+      @objc func backButtonTapped() {
+          navigationController?.popViewController(animated: true)
+      }
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == nameField {
             nameLabel.isHidden = false
@@ -340,7 +360,7 @@ class FaturaViewController: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func devamButtonClicked(_ sender: Any) {
-        let vc=storyboard?.instantiateViewController(identifier: "nextFatura") as! NextFaturaViewController
+        let vc=storyboard?.instantiateViewController(identifier: "dogrulama") as! TelefonDogrulamaViewController
         navigationController?.pushViewController(vc, animated: true)
     }
     

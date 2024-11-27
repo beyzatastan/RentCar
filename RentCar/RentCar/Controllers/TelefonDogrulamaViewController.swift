@@ -21,8 +21,29 @@ class TelefonDogrulamaViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         mainView.layer.cornerRadius = 10
         bottomView.layer.cornerRadius = 10
+        
         createOtpFields()
-    }
+        navigationItem.backButtonTitle = ""
+        
+        // Özel UIButton oluştur
+          let backButton = UIButton(type: .system)
+          backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+          backButton.tintColor = .white
+          backButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+          backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+          
+          // Dikey konum için transform uygula
+          backButton.transform = CGAffineTransform(translationX: 0, y: -5) // `y: -5` butonu yukarı taşır
+          
+          // UIBarButtonItem olarak ekle
+          let barButtonItem = UIBarButtonItem(customView: backButton)
+          navigationItem.leftBarButtonItem = barButtonItem
+      }
+
+      @objc func backButtonTapped() {
+          navigationController?.popViewController(animated: true)
+      }
+
     func createOtpFields() {
         let numberOfFields = 6 // 6 haneli kod
         let fieldWidth: CGFloat = 40
@@ -95,6 +116,8 @@ class TelefonDogrulamaViewController: UIViewController,UITextFieldDelegate {
         }
     }
     @IBAction func devamButtonClicked(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(identifier: "nextFatura") as! NextFaturaViewController
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     

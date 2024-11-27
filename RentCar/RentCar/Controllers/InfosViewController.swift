@@ -20,14 +20,26 @@ class InfosViewController: UIViewController {
         upView.layer.cornerRadius = 20
         view.sendSubviewToBack(mainView)
         updateContent(for: selectedCase)
-        navigationItem.hidesBackButton = false
+        navigationItem.backButtonTitle = ""
+        
+        // Özel UIButton oluştur
+          let backButton = UIButton(type: .system)
+          backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+          backButton.tintColor = .white
+          backButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+          backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+          
+          // Dikey konum için transform uygula
+          backButton.transform = CGAffineTransform(translationX: 0, y: -5) // `y: -5` butonu yukarı taşır
+          
+          // UIBarButtonItem olarak ekle
+          let barButtonItem = UIBarButtonItem(customView: backButton)
+          navigationItem.leftBarButtonItem = barButtonItem
+      }
 
-    }
-    @IBAction func backButtonClicked(_ sender: Any) {
-        let vs = storyboard?.instantiateViewController(identifier: "settings") as! SettingsViewController
-        navigationController?.pushViewController(vs, animated: false)
-    }
-    
+      @objc func backButtonTapped() {
+          navigationController?.popViewController(animated: true)
+      }
     func updateContent(for selectedCase: String?) {
         mainView.subviews.forEach { $0.removeFromSuperview() } // Eski alt görünümleri kaldır
         

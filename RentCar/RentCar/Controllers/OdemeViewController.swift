@@ -130,7 +130,27 @@ class OdemeViewController: UIViewController ,UITextFieldDelegate{
                 cvvText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                 
             ])
-    }
+        navigationItem.backButtonTitle = ""
+        
+        // Özel UIButton oluştur
+          let backButton = UIButton(type: .system)
+          backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+          backButton.tintColor = .white
+          backButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+          backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+          
+          // Dikey konum için transform uygula
+          backButton.transform = CGAffineTransform(translationX: 0, y: -5) // `y: -5` butonu yukarı taşır
+          
+          // UIBarButtonItem olarak ekle
+          let barButtonItem = UIBarButtonItem(customView: backButton)
+          navigationItem.leftBarButtonItem = barButtonItem
+      }
+
+      @objc func backButtonTapped() {
+          navigationController?.popViewController(animated: true)
+      }
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == kartNumText {
             kartNumLabel.isHidden = false
@@ -221,6 +241,10 @@ class OdemeViewController: UIViewController ,UITextFieldDelegate{
     }
     
    
+    @IBAction func devamButtonClicked(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(identifier: "onay") as! OnayPageViewController
+        navigationController?.pushViewController(vc, animated: true)
+    }
     @IBAction func securityButtonClicked(_ sender: Any) {
         if (butonDolu == false) {
             securityButton.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
@@ -325,8 +349,27 @@ class SurucuBilgiViewController: UIViewController ,UITextFieldDelegate{
             ehliyettx.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
            
         ])
-        
-    }
+        navigationItem.backButtonTitle = ""
+         
+        // Özel UIButton oluştur
+          let backButton = UIButton(type: .system)
+          backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+          backButton.tintColor = .white
+          backButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+          backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+          
+          // Dikey konum için transform uygula
+          backButton.transform = CGAffineTransform(translationX: 0, y: -5) // `y: -5` butonu yukarı taşır
+          
+          // UIBarButtonItem olarak ekle
+          let barButtonItem = UIBarButtonItem(customView: backButton)
+          navigationItem.leftBarButtonItem = barButtonItem
+      }
+
+      @objc func backButtonTapped() {
+          navigationController?.popViewController(animated: true)
+      }
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == surucukimliktx {
             surucukimliklb.isHidden = false
@@ -410,6 +453,12 @@ class SurucuBilgiViewController: UIViewController ,UITextFieldDelegate{
         if let currentField = ehliyettx  as? UITextField {
             currentField.resignFirstResponder()
         }
+    }   
+    @IBAction func devamButtonClicked(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(identifier: "odeme") as! OdemeViewController
+            navigationController?.pushViewController(vc, animated: true)
     }
+   
+    
     
 }

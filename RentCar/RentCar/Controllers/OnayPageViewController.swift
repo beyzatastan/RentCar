@@ -15,8 +15,6 @@ class OnayPageViewController: UIViewController {
         super.viewDidLoad()
         mainView.layer.cornerRadius = 10
     }
-    
-
     @IBAction func nextButton(_ sender: Any) {
     }
     
