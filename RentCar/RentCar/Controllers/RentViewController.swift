@@ -25,8 +25,24 @@ class RentViewController: UIViewController {
         upView.layer.cornerRadius=10
         buttonView.layer.cornerRadius=10
         
-    }
+        //arama kısmına basılınca
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mekanTapped))
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(ikinciMekanTapped))
+
+            mekan.addGestureRecognizer(tapGesture)
+            ikinciMekan.addGestureRecognizer(tapGesture2)
+        }
+
+        @objc func mekanTapped() {
+            let vc = storyboard?.instantiateViewController(identifier: "search") as! SearchPageViewController
+            navigationController?.pushViewController(vc, animated: true)
+        }
     
+        @objc func ikinciMekanTapped() {
+            let vc = storyboard?.instantiateViewController(identifier: "search") as! SearchPageViewController
+            navigationController?.pushViewController(vc, animated: true)
+    }
+        
     
     @IBAction func homeButton(_ sender: Any) {
         let homeVc=storyboard?.instantiateViewController(identifier: "main") as! MainPageViewController
