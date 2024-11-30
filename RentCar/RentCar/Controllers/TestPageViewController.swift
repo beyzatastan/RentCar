@@ -43,6 +43,7 @@ class TestPageViewController: UIViewController {
         mainView.layer.cornerRadius = 10
         bottonView.layer.cornerRadius = 10
         resimButton.layer.cornerRadius = 10
+        navigationItem.hidesBackButton = true
     }
     
     @IBAction func buton11Clicked(_ sender: Any) {
@@ -175,5 +176,11 @@ class TestPageViewController: UIViewController {
     }
     
     @IBAction func resimButtonClicked(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "camera") as? CameraPageViewController{
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        else {
+               print("CameraPageViewController bulunamadı.")
+           }
     }
 }

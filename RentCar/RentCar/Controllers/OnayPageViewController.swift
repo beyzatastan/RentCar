@@ -14,8 +14,11 @@ class OnayPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.layer.cornerRadius = 10
+        navigationItem.hidesBackButton = true
     }
     @IBAction func nextButton(_ sender: Any) {
+        let vc=storyboard?.instantiateViewController(identifier: "test") as! TestPageViewController
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

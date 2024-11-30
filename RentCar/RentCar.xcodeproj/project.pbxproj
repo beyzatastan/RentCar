@@ -27,6 +27,10 @@
 		6DA132622CF5CAEC002000EB /* TelefonDogrulamaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA132612CF5CAEC002000EB /* TelefonDogrulamaViewController.swift */; };
 		6DA132642CF68EA2002000EB /* OnayPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA132632CF68EA2002000EB /* OnayPageViewController.swift */; };
 		6DA132662CF77040002000EB /* TestPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA132652CF77040002000EB /* TestPageViewController.swift */; };
+		6DA132682CFB1523002000EB /* CameraPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA132672CFB1523002000EB /* CameraPageViewController.swift */; };
+		6DA1326B2CFB20DA002000EB /* CitysWebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1326A2CFB20DA002000EB /* CitysWebServices.swift */; };
+		6DA1326E2CFB2214002000EB /* CityViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1326D2CFB2214002000EB /* CityViewModels.swift */; };
+		6DA132712CFB22B6002000EB /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA132702CFB22B6002000EB /* CityModel.swift */; };
 		6DBBA8352CEB6A2A00ABCA9A /* RentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBA8342CEB6A2A00ABCA9A /* RentViewController.swift */; };
 		6DBBA8372CECB34A00ABCA9A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBA8362CECB34A00ABCA9A /* SettingsViewController.swift */; };
 		6DBBA8392CECC53200ABCA9A /* CarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBA8382CECC53200ABCA9A /* CarsViewController.swift */; };
@@ -55,6 +59,10 @@
 		6DA132612CF5CAEC002000EB /* TelefonDogrulamaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelefonDogrulamaViewController.swift; sourceTree = "<group>"; };
 		6DA132632CF68EA2002000EB /* OnayPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnayPageViewController.swift; sourceTree = "<group>"; };
 		6DA132652CF77040002000EB /* TestPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPageViewController.swift; sourceTree = "<group>"; };
+		6DA132672CFB1523002000EB /* CameraPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPageViewController.swift; sourceTree = "<group>"; };
+		6DA1326A2CFB20DA002000EB /* CitysWebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitysWebServices.swift; sourceTree = "<group>"; };
+		6DA1326D2CFB2214002000EB /* CityViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityViewModels.swift; sourceTree = "<group>"; };
+		6DA132702CFB22B6002000EB /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
 		6DBBA8342CEB6A2A00ABCA9A /* RentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentViewController.swift; sourceTree = "<group>"; };
 		6DBBA8362CECB34A00ABCA9A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6DBBA8382CECC53200ABCA9A /* CarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +98,9 @@
 		6D283EAA2CBF0AC400E143B1 /* RentCar */ = {
 			isa = PBXGroup;
 			children = (
+				6DA1326F2CFB22A8002000EB /* Models */,
+				6DA1326C2CFB2203002000EB /* ViewModels */,
+				6DA132692CFB209E002000EB /* WebServices */,
 				6D418AF22CC2AB98003B851C /* ViewCells */,
 				6D418AE62CC27488003B851C /* Controllers */,
 				6D283EC02CBF120100E143B1 /* Resources */,
@@ -137,6 +148,7 @@
 				6DA1325F2CF5BCB4002000EB /* OdemeViewController.swift */,
 				6DA132632CF68EA2002000EB /* OnayPageViewController.swift */,
 				6DA132652CF77040002000EB /* TestPageViewController.swift */,
+				6DA132672CFB1523002000EB /* CameraPageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -156,6 +168,30 @@
 				6D15EB792CC5BFA7003CF7D2 /* AddCarViewController.swift */,
 			);
 			path = Personal;
+			sourceTree = "<group>";
+		};
+		6DA132692CFB209E002000EB /* WebServices */ = {
+			isa = PBXGroup;
+			children = (
+				6DA1326A2CFB20DA002000EB /* CitysWebServices.swift */,
+			);
+			path = WebServices;
+			sourceTree = "<group>";
+		};
+		6DA1326C2CFB2203002000EB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				6DA1326D2CFB2214002000EB /* CityViewModels.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		6DA1326F2CFB22A8002000EB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6DA132702CFB22B6002000EB /* CityModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,17 +271,21 @@
 				6DA132662CF77040002000EB /* TestPageViewController.swift in Sources */,
 				6D15EB7A2CC5BFA7003CF7D2 /* AddCarViewController.swift in Sources */,
 				6D3B487F2CED33EE00B961FD /* InfosViewController.swift in Sources */,
+				6DA1326E2CFB2214002000EB /* CityViewModels.swift in Sources */,
 				6DA132602CF5BCB4002000EB /* OdemeViewController.swift in Sources */,
 				6DA132622CF5CAEC002000EB /* TelefonDogrulamaViewController.swift in Sources */,
 				6DBBA8392CECC53200ABCA9A /* CarsViewController.swift in Sources */,
 				6D418AFC2CC2B028003B851C /* PersonalPageViewController.swift in Sources */,
 				6D283EAC2CBF0AC400E143B1 /* AppDelegate.swift in Sources */,
+				6DA1326B2CFB20DA002000EB /* CitysWebServices.swift in Sources */,
 				6DBBA8352CEB6A2A00ABCA9A /* RentViewController.swift in Sources */,
 				6D5508CE2CEF443600824731 /* CarDetailsViewController.swift in Sources */,
+				6DA132682CFB1523002000EB /* CameraPageViewController.swift in Sources */,
 				6DBBA8372CECB34A00ABCA9A /* SettingsViewController.swift in Sources */,
 				6DA1325E2CF23E46002000EB /* NextFaturaViewController.swift in Sources */,
 				6D5508D02CEF553500824731 /* FaturaViewController.swift in Sources */,
 				6D283EAE2CBF0AC400E143B1 /* SceneDelegate.swift in Sources */,
+				6DA132712CFB22B6002000EB /* CityModel.swift in Sources */,
 				6D283EC22CBF121D00E143B1 /* Extensions.swift in Sources */,
 				6D3B487A2CED25DA00B961FD /* CarsTableViewCell.swift in Sources */,
 				6D418AE32CC27406003B851C /* RegisterViewController.swift in Sources */,
