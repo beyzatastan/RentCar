@@ -42,8 +42,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                self.window?.rootViewController = navigationController
                              },
                              completion: nil)
-       }*/
-
+       }
+*/
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

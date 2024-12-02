@@ -35,11 +35,14 @@ class RentViewController: UIViewController {
 
         @objc func mekanTapped() {
             let vc = storyboard?.instantiateViewController(identifier: "search") as! SearchPageViewController
+            vc.caseNumber = 1
             navigationController?.pushViewController(vc, animated: true)
         }
     
         @objc func ikinciMekanTapped() {
             let vc = storyboard?.instantiateViewController(identifier: "search") as! SearchPageViewController
+            
+            vc.caseNumber = 2
             navigationController?.pushViewController(vc, animated: true)
     }
         

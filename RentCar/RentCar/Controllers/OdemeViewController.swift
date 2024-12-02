@@ -36,7 +36,7 @@ class OdemeViewController: UIViewController ,UITextFieldDelegate{
         
         addToolBarToTextField(cvvText)
         
-        kartNumText.placeholder = "KART NUMARASI"
+        kartNumText.placeholder = "Kart Numarası"
         kartNumText.borderStyle = .roundedRect
         kartNumText.delegate = self
         kartNumText.keyboardType = .phonePad
@@ -44,7 +44,7 @@ class OdemeViewController: UIViewController ,UITextFieldDelegate{
         mainView.addSubview(kartNumText)
         
         
-        kartNumLabel.text = "KART NUMARASI"
+        kartNumLabel.text = "Kart Numarası"
         kartNumLabel.font = UIFont.systemFont(ofSize: 14)
         kartNumLabel.textColor = .gray
         kartNumLabel.isHidden = true
@@ -52,21 +52,21 @@ class OdemeViewController: UIViewController ,UITextFieldDelegate{
         mainView.addSubview(kartNumLabel)
         
         
-        kartAdıText.placeholder = "KART ÜZERİNDEKİ İSİM"
+        kartAdıText.placeholder = "Kart Üzerindeki İsim"
         kartAdıText.borderStyle = .roundedRect
         kartAdıText.delegate = self
         kartAdıText.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(kartAdıText)
         
         
-        kartAdıLabel.text = "KART ÜZERİNDEKİ İSİM"
+        kartAdıLabel.text = "Kart Üzerindeki İsim"
         kartAdıLabel.font = UIFont.systemFont(ofSize: 14)
         kartAdıLabel.textColor = .gray
         kartAdıLabel.isHidden = true
         kartAdıLabel.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(kartAdıLabel)
         
-        sonKullanmaText.placeholder = "SON KULLANMA TARİHİ"
+        sonKullanmaText.placeholder = "Son Kullanma Tarihi"
         sonKullanmaText.borderStyle = .roundedRect
         sonKullanmaText.keyboardType = .phonePad
         sonKullanmaText.delegate = self
@@ -74,7 +74,7 @@ class OdemeViewController: UIViewController ,UITextFieldDelegate{
         mainView.addSubview(sonKullanmaText)
         
         
-        sonKullanmalabel.text = "SON KULLANMA TARİHİ"
+        sonKullanmalabel.text = "Son Kullanma Tarihi"
         sonKullanmalabel.font = UIFont.systemFont(ofSize: 14)
         sonKullanmalabel.textColor = .gray
         sonKullanmalabel.isHidden = true

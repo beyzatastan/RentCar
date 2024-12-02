@@ -58,93 +58,93 @@ class NextFaturaViewController: UIViewController ,UITextFieldDelegate{
         firmaAdıText.delegate = self
 
         
-        firmaAdıLabel.text = "FİRMA ADI"
+        firmaAdıLabel.text = "Firma Adı"
         firmaAdıLabel.font = UIFont.systemFont(ofSize: 12)
         firmaAdıLabel.textColor = .gray
         firmaAdıLabel.isHidden = true
         firmaAdıLabel.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(firmaAdıLabel)
         
-        firmaAdıText.placeholder = "FİRMA ADI"
+        firmaAdıText.placeholder = "Firma Adı"
         firmaAdıText.borderStyle = .roundedRect
         firmaAdıText.delegate = self
         firmaAdıText.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(firmaAdıText)
         
-        vergiDLabel.text = "VERGİ DAİRESİ"
+        vergiDLabel.text = "Vergi Dairesi"
         vergiDLabel.font = UIFont.systemFont(ofSize: 12)
         vergiDLabel.textColor = .gray
         vergiDLabel.isHidden = true
         vergiDLabel.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(vergiDLabel)
         
-        vergiDText.placeholder = "VERDİ DAİRESİ"
+        vergiDText.placeholder = "Vergi Dairesi"
         vergiDText.borderStyle = .roundedRect
         vergiDText.delegate = self
         vergiDText.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(vergiDText)
         
-        vergiNumLabel.text = "VERGİ NUMARASI"
+        vergiNumLabel.text = "Vergi Numarası"
         vergiNumLabel.font = UIFont.systemFont(ofSize: 12)
         vergiNumLabel.textColor = .gray
         vergiNumLabel.isHidden = true
         vergiNumLabel.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(vergiNumLabel)
         
-        vergiNumText.placeholder = "VERGİ NUMARASI"
+        vergiNumText.placeholder = "Vergi Numarası"
         vergiNumText.borderStyle = .roundedRect
         vergiNumText.delegate = self
         vergiNumText.keyboardType = .numberPad
         vergiNumText.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(vergiNumText)
         
-        ilLabel.text = "İL"
+        ilLabel.text = "İl"
         ilLabel.font = UIFont.systemFont(ofSize: 12)
         ilLabel.textColor = .gray
         ilLabel.isHidden = true
         ilLabel.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(ilLabel)
         
-        ilField.placeholder = "İL"
+        ilField.placeholder = "İl"
         ilField.borderStyle = .roundedRect
         ilField.delegate = self
         ilField.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(ilField)
         
-        ilceLabel.text = "İLÇE"
+        ilceLabel.text = "İlçe"
         ilceLabel.font = UIFont.systemFont(ofSize: 12)
         ilceLabel.textColor = .gray
         ilceLabel.isHidden = true
         ilceLabel.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(ilceLabel)
         
-        ilceText.placeholder = "İLÇE"
+        ilceText.placeholder = "İlçe"
         ilceText.borderStyle = .roundedRect
         ilceText.delegate = self
         ilceText.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(ilceText)
         
-        adresLabel.text = "ADRES"
+        adresLabel.text = "Adres"
         adresLabel.font = UIFont.systemFont(ofSize: 12)
         adresLabel.textColor = .gray
         adresLabel.isHidden = true
         adresLabel.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(adresLabel)
         
-        adresText.placeholder = "ADRES"
+        adresText.placeholder = "Adres"
         adresText.borderStyle = .roundedRect
         adresText.delegate = self
         adresText.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(adresText)
         
-        postaKoduLabel.text = "POSTA KODU"
+        postaKoduLabel.text = "Posta Kodu"
         postaKoduLabel.font = UIFont.systemFont(ofSize: 12)
         postaKoduLabel.textColor = .gray
         postaKoduLabel.isHidden = true
         postaKoduLabel.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(postaKoduLabel)
         
-        postaKoduText.placeholder = "POSTA KODU"
+        postaKoduText.placeholder = "Posta Kodu"
         postaKoduText.borderStyle = .roundedRect
         postaKoduText.delegate = self
         postaKoduText.translatesAutoresizingMaskIntoConstraints = false

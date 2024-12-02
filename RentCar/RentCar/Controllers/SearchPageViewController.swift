@@ -12,39 +12,55 @@ class SearchPageViewController: UIViewController, UITableViewDelegate, UITableVi
     let tableView = UITableView()
     var cities: [City] = []
     var filteredCities: [City] = []
+    var cityViewModel = CityViewModel()
+    var selectedCity: City?
+    var selectedCity2: City?
+
     
+    var caseNumber: Int = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
-        fetchCities()
         navigationItem.backButtonTitle = ""
-         
         
-      
-        
+        cityViewModel.fetchCities {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            // Şehirler alındıktan sonra veriyi güncelle
+            self.cities = self.cityViewModel.cities
+            self.filteredCities = self.cityViewModel.cities
+            
+            /*  // Veriler geldikten sonra, şehir ve ilçeleri konsola yazdır
+             for city in self.cityViewModel.cities {
+             print("Şehir adı: \(city.name), Şehir ID: \(city.id)")
+             for district in city.districts {
+             print("İlçe adı: \(district.name), İlçe ID: \(district.id)")
+             }
+             } */
+        }
         // Özel UIButton oluştur
-          let backButton = UIButton(type: .system)
-          backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-          backButton.tintColor = .white
-          backButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-          backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-          
-          // Dikey konum için transform uygula
-          backButton.transform = CGAffineTransform(translationX: 0, y: -5) // `y: -5` butonu yukarı taşır
-
-          // UIBarButtonItem olarak ekle
-          let barButtonItem = UIBarButtonItem(customView: backButton)
-          navigationItem.leftBarButtonItem = barButtonItem
-      }
-
-      @objc func backButtonTapped() {
-          navigationController?.popViewController(animated: true)
-      }
+        let backButton = UIButton(type: .system)
+        backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        backButton.tintColor = .white
+        backButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        
+        // Dikey konum için transform uygula
+        backButton.transform = CGAffineTransform(translationX: 0, y: -5) // `y: -5` butonu yukarı taşır
+        
+        // UIBarButtonItem olarak ekle
+        let barButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = barButtonItem
+    }
+    
+    @objc func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
     
     
-    func setupUI() {    
-        title = "Alış-Bırakış Yeri"
+    func setupUI() {
         // Search Bar
         searchBar.delegate = self
         searchBar.placeholder = "Şehir veya ilçe ara"
@@ -72,24 +88,6 @@ class SearchPageViewController: UIViewController, UITableViewDelegate, UITableVi
             
         ])
     }
-    
-    func fetchCities() {
-        WebService.shared.fetchCities { [weak self] cities in
-            DispatchQueue.main.async {
-                // Eğer cities nil ise, hata mesajı gösterip devam et
-                guard let cities = cities else {
-                    print("Cities verisi boş!")
-                    return
-                }
-
-                self?.cities = cities
-                self?.filteredCities = cities
-                self?.tableView.reloadData()
-            }
-        }
-    }
-
-    
     // UITableView Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredCities.count
@@ -104,16 +102,48 @@ class SearchPageViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let city = filteredCities[indexPath.row]
         print("Seçilen şehir: \(city.name)")
+        // Seçilen şehri 'mekan' TextField'ına yazdırıyoruz
+  
+        if(caseNumber==1){
+            self.selectedCity = city
+            let vc = storyboard?.instantiateViewController(identifier: "rent") as! RentViewController
+            vc.mekan.attributedPlaceholder = NSAttributedString(
+                string: "  \(selectedCity?.name ?? " ")",
+                attributes: [
+                    .foregroundColor: UIColor.black // Burada istediğiniz rengi belirleyin
+                ]
+            )
+            navigationController?.pushViewController(vc, animated: false)
+            
+        }
+        else if (caseNumber==2){
+            self.selectedCity2 = city
+            let vc = storyboard?.instantiateViewController(identifier: "rent") as! RentViewController
+            vc.ikinciMekan.isHidden = false
+            vc.farkliBirakSwitch.isOn = true
+            vc.ikinciMekan.attributedPlaceholder = NSAttributedString(
+                string: "  \(selectedCity2?.name ?? " ")",
+                attributes: [
+                    .foregroundColor: UIColor.black // Burada istediğiniz rengi belirleyin
+                ]
+            )
+            navigationController?.pushViewController(vc, animated: false)
+            
+        }
         
         // İlçeleri göstermek için bir sonraki ekranı açabilirsiniz
     }
-    
-    // UISearchBar Methods
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            filteredCities = cities
+            filteredCities = cities // Eğer arama boşsa tüm şehirleri göster
         } else {
-            filteredCities = cities.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+            filteredCities = cities.filter { city in
+                // Şehir adı veya ilçelerden herhangi biri arama metnini içeriyorsa göster
+                city.name.lowercased().contains(searchText.lowercased()) ||
+                city.districts.contains { district in
+                    district.name.lowercased().contains(searchText.lowercased())
+                }
+            }
         }
         tableView.reloadData()
     }

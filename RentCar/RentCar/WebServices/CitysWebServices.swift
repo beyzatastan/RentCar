@@ -7,16 +7,13 @@
 import Foundation
 
 class WebService {
+    
     static let shared = WebService()
     
     func fetchCities(completion: @escaping ([City]?) -> Void) {
-        guard let url = URL(string: "https://turkiyeapi.dev/api/v1/cities") else {
-            print("Geçersiz URL.")
-            completion(nil)
-            return
-        }
+        let url = URL(string: "https://turkiyeapi.dev/api/v1/provinces")! // Gerçek API URL'si
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Hata oluştu: \(error.localizedDescription)")
                 completion(nil)
@@ -24,18 +21,23 @@ class WebService {
             }
             
             guard let data = data else {
-                print("Veri boş.")
+                print("Veri boş!")
                 completion(nil)
                 return
             }
             
+            //if data == data {
+               // print("Gelen veri: \(String(data: data, encoding: .utf8) ?? "Geçersiz veri")")
+            //  }
             do {
-                let response = try JSONDecoder().decode(CityModel.self, from: data)
-                completion(response.data)
+                // CityModel'i decode et
+                let cityModel = try JSONDecoder().decode(CityModel.self, from: data)
+                completion(cityModel.data) // Şehirleri döndür
             } catch {
                 print("JSON çözümleme hatası: \(error.localizedDescription)")
                 completion(nil)
             }
-        }.resume()
+        }
+        task.resume()
     }
 }
