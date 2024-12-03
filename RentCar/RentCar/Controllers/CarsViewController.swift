@@ -8,7 +8,15 @@
 import UIKit
 
 class CarsViewController: UIViewController {
+
+    
+    @IBOutlet weak var birakisTimeLabel: UILabel!
+    @IBOutlet weak var birakisLabel: UILabel!
+    @IBOutlet weak var alisLabel: UILabel!
+    @IBOutlet weak var alisTimeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource=self

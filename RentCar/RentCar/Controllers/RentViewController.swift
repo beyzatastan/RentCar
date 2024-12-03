@@ -31,18 +31,15 @@ class RentViewController: UIViewController {
 
             mekan.addGestureRecognizer(tapGesture)
             ikinciMekan.addGestureRecognizer(tapGesture2)
+        
         }
-
         @objc func mekanTapped() {
             let vc = storyboard?.instantiateViewController(identifier: "search") as! SearchPageViewController
-            vc.caseNumber = 1
             navigationController?.pushViewController(vc, animated: true)
         }
     
         @objc func ikinciMekanTapped() {
-            let vc = storyboard?.instantiateViewController(identifier: "search") as! SearchPageViewController
-            
-            vc.caseNumber = 2
+            let vc = storyboard?.instantiateViewController(identifier: "search2") as! Search2PageViewController
             navigationController?.pushViewController(vc, animated: true)
     }
         
@@ -66,6 +63,10 @@ class RentViewController: UIViewController {
     
     @IBAction func findButtonClicked(_ sender: Any) {
         let carsVv=storyboard?.instantiateViewController(withIdentifier: "cars") as! CarsViewController
+        //carsVv.alisLabel.text = mekan.attributedPlaceholder?.string ??
+       // carsVv.birakisLabel.text = ikinciMekan.placeholder
+        //carsVv.alisTimeLabel.text = alisDate.text
+        //carsVv.birakisTimeLabel.text = birakisDate.text
         navigationController?.pushViewController(carsVv, animated: true)
     }
     

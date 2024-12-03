@@ -1,4 +1,10 @@
 //
+//  Search2PageViewController.swift
+//  RentCar
+//
+//  Created by beyza nur on 3.12.2024.
+//
+//
 //  SearchPageViewController.swift
 //  RentCar
 //
@@ -6,7 +12,7 @@
 //
 import UIKit
 
-class SearchPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class Search2PageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     let searchBar = UISearchBar()
     let tableView = UITableView()
@@ -103,7 +109,9 @@ class SearchPageViewController: UIViewController, UITableViewDelegate, UITableVi
         print("Seçilen şehir: \(city.name)")
             self.selectedCity = city
             let vc = storyboard?.instantiateViewController(identifier: "rent") as! RentViewController
-            vc.mekan.attributedPlaceholder = NSAttributedString(
+            vc.farkliBirakSwitch.isOn = true
+            vc.ikinciMekan.isHidden = false
+            vc.ikinciMekan.attributedPlaceholder = NSAttributedString(
                 string: "  \(selectedCity?.name ?? " ")",
                 attributes: [
                     .foregroundColor: UIColor.black // Burada istediğiniz rengi belirleyin
