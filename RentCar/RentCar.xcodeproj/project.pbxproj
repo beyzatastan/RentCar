@@ -7,23 +7,69 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D15EB7A2CC5BFA7003CF7D2 /* AddCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D15EB792CC5BFA7003CF7D2 /* AddCarViewController.swift */; };
 		6D283EAC2CBF0AC400E143B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D283EAB2CBF0AC400E143B1 /* AppDelegate.swift */; };
 		6D283EAE2CBF0AC400E143B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D283EAD2CBF0AC400E143B1 /* SceneDelegate.swift */; };
-		6D283EB02CBF0AC400E143B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D283EAF2CBF0AC400E143B1 /* ViewController.swift */; };
-		6D283EB32CBF0AC400E143B1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 6D283EB22CBF0AC400E143B1 /* Base */; };
 		6D283EB52CBF0AC500E143B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D283EB42CBF0AC500E143B1 /* Assets.xcassets */; };
 		6D283EB82CBF0AC500E143B1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 6D283EB72CBF0AC500E143B1 /* Base */; };
+		6D283EC22CBF121D00E143B1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D283EC12CBF121D00E143B1 /* Extensions.swift */; };
+		6D3B487A2CED25DA00B961FD /* CarsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3B48792CED25DA00B961FD /* CarsTableViewCell.swift */; };
+		6D3B487F2CED33EE00B961FD /* InfosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3B487E2CED33EE00B961FD /* InfosViewController.swift */; };
+		6D418AE32CC27406003B851C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AE22CC27406003B851C /* RegisterViewController.swift */; };
+		6D418AE52CC27420003B851C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D418AE42CC27420003B851C /* Main.storyboard */; };
+		6D418AF12CC2A433003B851C /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AF02CC2A433003B851C /* MainPageViewController.swift */; };
+		6D418AFC2CC2B028003B851C /* PersonalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418AFB2CC2B028003B851C /* PersonalPageViewController.swift */; };
+		6D418B092CC2E7DC003B851C /* LastRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D418B082CC2E7DC003B851C /* LastRidesViewController.swift */; };
+		6D49DFE22CFE7422003E7484 /* Search2PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D49DFE12CFE7422003E7484 /* Search2PageViewController.swift */; };
+		6D5508CE2CEF443600824731 /* CarDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5508CD2CEF443600824731 /* CarDetailsViewController.swift */; };
+		6D5508D02CEF553500824731 /* FaturaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5508CF2CEF553500824731 /* FaturaViewController.swift */; };
+		6DA1325E2CF23E46002000EB /* NextFaturaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1325D2CF23E46002000EB /* NextFaturaViewController.swift */; };
+		6DA132602CF5BCB4002000EB /* OdemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1325F2CF5BCB4002000EB /* OdemeViewController.swift */; };
+		6DA132622CF5CAEC002000EB /* TelefonDogrulamaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA132612CF5CAEC002000EB /* TelefonDogrulamaViewController.swift */; };
+		6DA132642CF68EA2002000EB /* OnayPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA132632CF68EA2002000EB /* OnayPageViewController.swift */; };
+		6DA132662CF77040002000EB /* TestPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA132652CF77040002000EB /* TestPageViewController.swift */; };
+		6DA132682CFB1523002000EB /* CameraPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA132672CFB1523002000EB /* CameraPageViewController.swift */; };
+		6DA1326B2CFB20DA002000EB /* CitysWebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1326A2CFB20DA002000EB /* CitysWebServices.swift */; };
+		6DA1326E2CFB2214002000EB /* CityViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1326D2CFB2214002000EB /* CityViewModels.swift */; };
+		6DA132712CFB22B6002000EB /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA132702CFB22B6002000EB /* CityModel.swift */; };
+		6DA132732CFB2D3A002000EB /* SearchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA132722CFB2D3A002000EB /* SearchPageViewController.swift */; };
+		6DBBA8352CEB6A2A00ABCA9A /* RentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBA8342CEB6A2A00ABCA9A /* RentViewController.swift */; };
+		6DBBA8372CECB34A00ABCA9A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBA8362CECB34A00ABCA9A /* SettingsViewController.swift */; };
+		6DBBA8392CECC53200ABCA9A /* CarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBA8382CECC53200ABCA9A /* CarsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D15EB792CC5BFA7003CF7D2 /* AddCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarViewController.swift; sourceTree = "<group>"; };
 		6D283EA82CBF0AC400E143B1 /* RentCar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RentCar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D283EAB2CBF0AC400E143B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D283EAD2CBF0AC400E143B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6D283EAF2CBF0AC400E143B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		6D283EB22CBF0AC400E143B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6D283EB42CBF0AC500E143B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D283EB72CBF0AC500E143B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6D283EB92CBF0AC500E143B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D283EC12CBF121D00E143B1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		6D3B48792CED25DA00B961FD /* CarsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsTableViewCell.swift; sourceTree = "<group>"; };
+		6D3B487E2CED33EE00B961FD /* InfosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfosViewController.swift; sourceTree = "<group>"; };
+		6D418AE22CC27406003B851C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		6D418AE42CC27420003B851C /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		6D418AF02CC2A433003B851C /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		6D418AFB2CC2B028003B851C /* PersonalPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPageViewController.swift; sourceTree = "<group>"; };
+		6D418B082CC2E7DC003B851C /* LastRidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastRidesViewController.swift; sourceTree = "<group>"; };
+		6D49DFE12CFE7422003E7484 /* Search2PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search2PageViewController.swift; sourceTree = "<group>"; };
+		6D5508CD2CEF443600824731 /* CarDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsViewController.swift; sourceTree = "<group>"; };
+		6D5508CF2CEF553500824731 /* FaturaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaturaViewController.swift; sourceTree = "<group>"; };
+		6DA1325D2CF23E46002000EB /* NextFaturaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextFaturaViewController.swift; sourceTree = "<group>"; };
+		6DA1325F2CF5BCB4002000EB /* OdemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OdemeViewController.swift; path = RentCar/Controllers/OdemeViewController.swift; sourceTree = SOURCE_ROOT; };
+		6DA132612CF5CAEC002000EB /* TelefonDogrulamaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelefonDogrulamaViewController.swift; sourceTree = "<group>"; };
+		6DA132632CF68EA2002000EB /* OnayPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnayPageViewController.swift; sourceTree = "<group>"; };
+		6DA132652CF77040002000EB /* TestPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPageViewController.swift; sourceTree = "<group>"; };
+		6DA132672CFB1523002000EB /* CameraPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPageViewController.swift; sourceTree = "<group>"; };
+		6DA1326A2CFB20DA002000EB /* CitysWebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitysWebServices.swift; sourceTree = "<group>"; };
+		6DA1326D2CFB2214002000EB /* CityViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityViewModels.swift; sourceTree = "<group>"; };
+		6DA132702CFB22B6002000EB /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
+		6DA132722CFB2D3A002000EB /* SearchPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewController.swift; sourceTree = "<group>"; };
+		6DBBA8342CEB6A2A00ABCA9A /* RentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentViewController.swift; sourceTree = "<group>"; };
+		6DBBA8362CECB34A00ABCA9A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6DBBA8382CECC53200ABCA9A /* CarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +102,15 @@
 		6D283EAA2CBF0AC400E143B1 /* RentCar */ = {
 			isa = PBXGroup;
 			children = (
+				6DA1326F2CFB22A8002000EB /* Models */,
+				6DA1326C2CFB2203002000EB /* ViewModels */,
+				6DA132692CFB209E002000EB /* WebServices */,
+				6D418AF22CC2AB98003B851C /* ViewCells */,
+				6D418AE62CC27488003B851C /* Controllers */,
+				6D283EC02CBF120100E143B1 /* Resources */,
 				6D283EBF2CBF0AD700E143B1 /* Delegates */,
-				6D283EAF2CBF0AC400E143B1 /* ViewController.swift */,
-				6D283EB12CBF0AC400E143B1 /* Main.storyboard */,
 				6D283EB42CBF0AC500E143B1 /* Assets.xcassets */,
+				6D418AE42CC27420003B851C /* Main.storyboard */,
 				6D283EB62CBF0AC500E143B1 /* LaunchScreen.storyboard */,
 				6D283EB92CBF0AC500E143B1 /* Info.plist */,
 			);
@@ -73,6 +124,80 @@
 				6D283EAD2CBF0AC400E143B1 /* SceneDelegate.swift */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		6D283EC02CBF120100E143B1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6D283EC12CBF121D00E143B1 /* Extensions.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6D418AE62CC27488003B851C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6D418B072CC2E7C1003B851C /* Personal */,
+				6D3B487E2CED33EE00B961FD /* InfosViewController.swift */,
+				6D418AE22CC27406003B851C /* RegisterViewController.swift */,
+				6D418AF02CC2A433003B851C /* MainPageViewController.swift */,
+				6D418AFB2CC2B028003B851C /* PersonalPageViewController.swift */,
+				6DBBA8342CEB6A2A00ABCA9A /* RentViewController.swift */,
+				6DA132722CFB2D3A002000EB /* SearchPageViewController.swift */,
+				6DBBA8362CECB34A00ABCA9A /* SettingsViewController.swift */,
+				6DBBA8382CECC53200ABCA9A /* CarsViewController.swift */,
+				6D5508CD2CEF443600824731 /* CarDetailsViewController.swift */,
+				6D5508CF2CEF553500824731 /* FaturaViewController.swift */,
+				6DA132612CF5CAEC002000EB /* TelefonDogrulamaViewController.swift */,
+				6DA1325D2CF23E46002000EB /* NextFaturaViewController.swift */,
+				6DA1325F2CF5BCB4002000EB /* OdemeViewController.swift */,
+				6DA132632CF68EA2002000EB /* OnayPageViewController.swift */,
+				6DA132652CF77040002000EB /* TestPageViewController.swift */,
+				6DA132672CFB1523002000EB /* CameraPageViewController.swift */,
+				6D49DFE12CFE7422003E7484 /* Search2PageViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6D418AF22CC2AB98003B851C /* ViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				6D3B48792CED25DA00B961FD /* CarsTableViewCell.swift */,
+			);
+			path = ViewCells;
+			sourceTree = "<group>";
+		};
+		6D418B072CC2E7C1003B851C /* Personal */ = {
+			isa = PBXGroup;
+			children = (
+				6D418B082CC2E7DC003B851C /* LastRidesViewController.swift */,
+				6D15EB792CC5BFA7003CF7D2 /* AddCarViewController.swift */,
+			);
+			path = Personal;
+			sourceTree = "<group>";
+		};
+		6DA132692CFB209E002000EB /* WebServices */ = {
+			isa = PBXGroup;
+			children = (
+				6DA1326A2CFB20DA002000EB /* CitysWebServices.swift */,
+			);
+			path = WebServices;
+			sourceTree = "<group>";
+		};
+		6DA1326C2CFB2203002000EB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				6DA1326D2CFB2214002000EB /* CityViewModels.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		6DA1326F2CFB22A8002000EB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6DA132702CFB22B6002000EB /* CityModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,9 +258,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D418AE52CC27420003B851C /* Main.storyboard in Resources */,
 				6D283EB52CBF0AC500E143B1 /* Assets.xcassets in Resources */,
 				6D283EB82CBF0AC500E143B1 /* Base in Resources */,
-				6D283EB32CBF0AC400E143B1 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,23 +271,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D283EB02CBF0AC400E143B1 /* ViewController.swift in Sources */,
+				6D418AF12CC2A433003B851C /* MainPageViewController.swift in Sources */,
+				6D418B092CC2E7DC003B851C /* LastRidesViewController.swift in Sources */,
+				6DA132642CF68EA2002000EB /* OnayPageViewController.swift in Sources */,
+				6DA132662CF77040002000EB /* TestPageViewController.swift in Sources */,
+				6D15EB7A2CC5BFA7003CF7D2 /* AddCarViewController.swift in Sources */,
+				6D3B487F2CED33EE00B961FD /* InfosViewController.swift in Sources */,
+				6DA1326E2CFB2214002000EB /* CityViewModels.swift in Sources */,
+				6DA132602CF5BCB4002000EB /* OdemeViewController.swift in Sources */,
+				6D49DFE22CFE7422003E7484 /* Search2PageViewController.swift in Sources */,
+				6DA132622CF5CAEC002000EB /* TelefonDogrulamaViewController.swift in Sources */,
+				6DBBA8392CECC53200ABCA9A /* CarsViewController.swift in Sources */,
+				6D418AFC2CC2B028003B851C /* PersonalPageViewController.swift in Sources */,
+				6DA132732CFB2D3A002000EB /* SearchPageViewController.swift in Sources */,
 				6D283EAC2CBF0AC400E143B1 /* AppDelegate.swift in Sources */,
+				6DA1326B2CFB20DA002000EB /* CitysWebServices.swift in Sources */,
+				6DBBA8352CEB6A2A00ABCA9A /* RentViewController.swift in Sources */,
+				6D5508CE2CEF443600824731 /* CarDetailsViewController.swift in Sources */,
+				6DA132682CFB1523002000EB /* CameraPageViewController.swift in Sources */,
+				6DBBA8372CECB34A00ABCA9A /* SettingsViewController.swift in Sources */,
+				6DA1325E2CF23E46002000EB /* NextFaturaViewController.swift in Sources */,
+				6D5508D02CEF553500824731 /* FaturaViewController.swift in Sources */,
 				6D283EAE2CBF0AC400E143B1 /* SceneDelegate.swift in Sources */,
+				6DA132712CFB22B6002000EB /* CityModel.swift in Sources */,
+				6D283EC22CBF121D00E143B1 /* Extensions.swift in Sources */,
+				6D3B487A2CED25DA00B961FD /* CarsTableViewCell.swift in Sources */,
+				6D418AE32CC27406003B851C /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6D283EB12CBF0AC400E143B1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6D283EB22CBF0AC400E143B1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6D283EB62CBF0AC500E143B1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

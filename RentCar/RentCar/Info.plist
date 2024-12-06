@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Poppins-Bold.ttf</string>
+		<string>Poppins-ExtraLight.ttf</string>
+	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your app needs access to your location to show nearby cars.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Aracın fotoğrafını ve videosunu çekmek için kamera erişimi gerekiyor.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Video kaydı için mikrofon erişimi gerekiyor.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Uygulama, fotoğraf kitaplığına erişim sağlayacak.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your app needs access to your location to show nearby cars.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
