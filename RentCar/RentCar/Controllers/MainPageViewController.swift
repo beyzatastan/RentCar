@@ -16,7 +16,11 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
     @IBOutlet weak var view3: UIView!
     @IBOutlet weak var view2: UIView!
     
-    
+    var viewModelB = BookingViewModel()
+    var viewModelC = CarViewModel()
+    var viewModelR = ReviewViewModel()
+
+
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var scrollView: UIScrollView!
     var currentPage = 0
@@ -26,8 +30,11 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
     @IBOutlet weak var mapKit: MKMapView!
     let locationManager=CLLocationManager()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         self.navigationItem.hidesBackButton = true
         view1.layer.cornerRadius = 10
         view2.layer.cornerRadius = 10
@@ -116,4 +123,58 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
         print("Failed to find user's location: \(error.localizedDescription)")
     }
     
+    func doStuff(){
+        let carId = 2
+        let customerId = 1
+        
+        viewModelR.getReviewsByCarId(for: carId) { success in
+            if success {
+                // UI'yi güncelle
+                print(self.viewModelB.bookings)
+            } else {
+                print("Failed to fetch reviews")
+            }
+        }
+        viewModelB.getBookingsByCustomerId(for: customerId) { success in
+            if success {
+                // UI'yi güncelle
+                print(self.viewModelB.bookings)
+            } else {
+                print("Failed to fetch bookings")
+            }
+        }
+               viewModelB.getBookingsByCarId(for: carId) { success in
+                   if success {
+                       // UI'yi güncelle
+                       print(self.viewModelB.bookings)
+                   } else {
+                       print("Failed to fetch car by ıd")
+                   }
+               }
+        viewModelC.getCar { success in
+            if success {
+                // Update your UI with viewModelC.cars
+                print(self.viewModelC.cars)
+            } else {
+                print("Failed to fetch cars")
+            }
+        }
+
+        viewModelC.getCarById(for: carId) { success in
+            DispatchQueue.main.async {
+                if success {
+                    // Access the car details from viewModel.cars
+                    if let car = self.viewModelC.cars.first {
+                        print("Car fetched: \(car.brand) \(car.model)")
+                        // Update the UI with the car details
+                        
+                    } else {
+                        print("No car found with ID \(carId)")
+                    }
+                } else {
+                    print("Failed to fetch car with ID \(carId)")
+                }
+            }
+        }
+    }
 }
