@@ -27,22 +27,13 @@ class RentViewController: UIViewController {
         
         //arama kısmına basılınca
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mekanTapped))
-        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(ikinciMekanTapped))
-
             mekan.addGestureRecognizer(tapGesture)
-            ikinciMekan.addGestureRecognizer(tapGesture2)
-        
         }
         @objc func mekanTapped() {
             let vc = storyboard?.instantiateViewController(identifier: "search") as! SearchPageViewController
             navigationController?.pushViewController(vc, animated: true)
         }
     
-        @objc func ikinciMekanTapped() {
-            let vc = storyboard?.instantiateViewController(identifier: "search2") as! Search2PageViewController
-            navigationController?.pushViewController(vc, animated: true)
-    }
-        
     
     @IBAction func homeButton(_ sender: Any) {
         let homeVc=storyboard?.instantiateViewController(identifier: "main") as! MainPageViewController
@@ -62,14 +53,26 @@ class RentViewController: UIViewController {
     
     
     @IBAction func findButtonClicked(_ sender: Any) {
-        let carsVv=storyboard?.instantiateViewController(withIdentifier: "cars") as! CarsViewController
-        //carsVv.alisLabel.text = mekan.attributedPlaceholder?.string ??
-       // carsVv.birakisLabel.text = ikinciMekan.placeholder
-        //carsVv.alisTimeLabel.text = alisDate.text
-        //carsVv.birakisTimeLabel.text = birakisDate.text
+        guard let carsVv = storyboard?.instantiateViewController(withIdentifier: "cars") as? CarsViewController else {
+            print("CarsViewController could not be instantiated")
+            return
+        }
+        if let mekanPlaceholder = mekan.attributedPlaceholder?.string {
+            carsVv.alisText = mekanPlaceholder
+        } else {
+            carsVv.alisText = "Varsayılan Text" // Placeholder yoksa bir varsayılan metin kullanabilirsiniz
+        }
+        if let mekanPlaceholder = mekan.attributedPlaceholder?.string {
+            carsVv.birakisText = mekanPlaceholder
+        } else {
+            carsVv.birakisText = "Varsayılan Text" // Placeholder yoksa bir varsayılan metin kullanabilirsiniz
+        }
+        carsVv.birakisTimeText=birakisDate.text
+        carsVv.alisTimeText=alisDate.text
         navigationController?.pushViewController(carsVv, animated: true)
     }
-    
+
+
     
     
     let mekan: UITextField = {
@@ -90,41 +93,7 @@ class RentViewController: UIViewController {
         return textField
     }()
     
-    let farkliBirakLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Aracı farklı bir yerde bırakmak istiyorum"
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .darkGray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let farkliBirakSwitch: UISwitch = {
-        let switchControl = UISwitch()
-        switchControl.isOn = false
-        switchControl.translatesAutoresizingMaskIntoConstraints = false
-        return switchControl
-    }()
-    
-    let ikinciMekan: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = " Bırakılacak yer"
-        textField.borderStyle = .none
-        textField.font = UIFont.systemFont(ofSize: 16)
-        textField.textColor = .darkGray
-        textField.backgroundColor = .white
-        textField.layer.borderColor = UIColor.lightGray.cgColor
-        textField.layer.borderWidth = 1.0
-        textField.layer.cornerRadius = 9
-        textField.layer.shadowColor = UIColor.black.cgColor
-        textField.layer.shadowOffset = CGSize(width: 0, height: 2)
-        textField.layer.shadowOpacity = 0.1
-        textField.layer.shadowRadius = 4
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.isHidden = true // Başlangıçta gizli
-        return textField
-    }()
-    
+  
     let alisDate: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Araç Alış Tarihi"
@@ -171,9 +140,7 @@ class RentViewController: UIViewController {
     
     func setupUI() {
         view.addSubview(mekan)
-        view.addSubview(farkliBirakLabel)
-        view.addSubview(farkliBirakSwitch)
-        view.addSubview(ikinciMekan)
+       
         
         // Tarih ve saat için stackView'ları ayarla
         let alisStackView = UIStackView(arrangedSubviews: [alisTime, alisDate])
@@ -199,29 +166,15 @@ class RentViewController: UIViewController {
             mekan.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             mekan.heightAnchor.constraint(equalToConstant: 50),
             
-            farkliBirakLabel.topAnchor.constraint(equalTo: mekan.bottomAnchor, constant: 20),
-            farkliBirakLabel.leadingAnchor.constraint(equalTo: mekan.leadingAnchor),
-            
-            farkliBirakSwitch.centerYAnchor.constraint(equalTo: farkliBirakLabel.centerYAnchor),
-            farkliBirakSwitch.leadingAnchor.constraint(equalTo: farkliBirakLabel.trailingAnchor, constant: 8),
-            
-            ikinciMekan.topAnchor.constraint(equalTo: farkliBirakLabel.bottomAnchor, constant: 20),
-            ikinciMekan.leadingAnchor.constraint(equalTo: mekan.leadingAnchor),
-            ikinciMekan.trailingAnchor.constraint(equalTo: mekan.trailingAnchor),
-            ikinciMekan.heightAnchor.constraint(equalToConstant: 50),
-            
-            horizontalStackView.topAnchor.constraint(equalTo: ikinciMekan.bottomAnchor, constant: 20),
+           
+            horizontalStackView.topAnchor.constraint(equalTo: mekan.bottomAnchor, constant: 20),
             horizontalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             horizontalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
         
-        // Switch action
-        farkliBirakSwitch.addTarget(self, action: #selector(toggleSwitch), for: .valueChanged)
     }
     
-    @objc func toggleSwitch() {
-        ikinciMekan.isHidden = !farkliBirakSwitch.isOn
-    }
+   
     func createDatePicker(for textField: UITextField) {
            let datePicker = UIDatePicker()
            datePicker.preferredDatePickerStyle = .wheels

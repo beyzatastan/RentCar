@@ -5,9 +5,6 @@ class LocationWebServices {
     static let shared = LocationWebServices() // Singleton pattern
     
     private init() {}
-    
-    // Tüm şehirleri çekme
-    // Tüm şehirleri çekme
     func getLocations(completion: @escaping (Result<[LocationModel], Error>) -> Void) {
         let url = URL(string: "http://localhost:5163/api/Location/getAllLocations")!
         
@@ -25,14 +22,13 @@ class LocationWebServices {
                 return
             }
             
-            // Gelen veriyi print ederek kontrol et
+            // Gelen veriyi kontrol etmek için JSON'u yazdır
             if let jsonString = String(data: data, encoding: .utf8) {
-                print("API Yanıtı: \(jsonString)") // Burada API'den gelen ham JSON yanıtını kontrol edin
             }
             
             do {
-                let locations = try JSONDecoder().decode([LocationModel].self, from: data)
-                completion(.success(locations))
+                let apiResponse = try JSONDecoder().decode(ApiResponse<LocationModel>.self, from: data)
+                completion(.success(apiResponse.values))
             } catch {
                 completion(.failure(error))
             }
@@ -40,7 +36,7 @@ class LocationWebServices {
         
         task.resume()
     }
-    
+
     func getLocationById(for locationId: Int, completion: @escaping (Result<LocationModel, Error>) -> Void) {
         let urlString = "http://localhost:5163/api/Location/getLocationById/\(locationId)"
         guard let url = URL(string: urlString) else {

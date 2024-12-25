@@ -198,7 +198,7 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
                                print("Failed to fetch location")
                            }
                        }
-            
+       
         
           viewModelL.getLocation { result in
                      switch result {

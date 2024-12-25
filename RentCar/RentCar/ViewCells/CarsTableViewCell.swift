@@ -10,7 +10,6 @@ import UIKit
 class CarsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var carNameLabel: UILabel!
-    
     @IBOutlet weak var toplamFiyat: UILabel!
     @IBOutlet weak var gunlukFiyat: UILabel!
     @IBOutlet weak var puanDurumu: UILabel!

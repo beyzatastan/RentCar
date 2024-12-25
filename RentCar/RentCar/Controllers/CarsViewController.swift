@@ -16,12 +16,20 @@ class CarsViewController: UIViewController {
     @IBOutlet weak var alisTimeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    var birakisTimeText: String?
+    var birakisText: String?
+    var alisTimeText: String?
+    var alisText: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource=self
         tableView.delegate=self
         navigationItem.backButtonTitle = ""
+        birakisLabel.text = birakisText
+        birakisTimeLabel.text = birakisTimeText
+        alisLabel.text=alisText
+        alisTimeLabel.text = alisTimeText
          
         // Özel UIButton oluştur
           let backButton = UIButton(type: .system)
