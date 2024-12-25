@@ -26,17 +26,15 @@ class CarViewModel {
             }
         }
     }
-
-    // Function to add a car
     func addCar(car: CarModel, completion: @escaping (Bool) -> Void) {
         CarWebService.shared.addCar(car: car) { result in
             switch result {
             case .success(let message):
                 print(message) // Optional: Log success message
-                completion(true)
+                completion(true)  // Indicating success
             case .failure(let error):
-                print("Error adding car: \(error)")
-                completion(false)
+                print("Error adding car: \(error.localizedDescription)")
+                completion(false)  // Indicating failure
             }
         }
     }

@@ -19,6 +19,7 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
     var viewModelB = BookingViewModel()
     var viewModelC = CarViewModel()
     var viewModelR = ReviewViewModel()
+    var viewModelL = LocationViewModel()
 
 
     @IBOutlet weak var pageControl: UIPageControl!
@@ -33,7 +34,10 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+   
+   
+
+ 
         
         self.navigationItem.hidesBackButton = true
         view1.layer.cornerRadius = 10
@@ -159,7 +163,57 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
                 print("Failed to fetch cars")
             }
         }
+        
+        let carModel = CarModel(
+            id: 0, // Otomatik olarak belirlenmiş bir id kullanabilirsiniz, ya da backend tarafından atanacaktır.
+            brand: "toyota",
+            model: "corolla",
+            year: 2019,
+            licensePlate: "34tlm54",
+            transmissionType: "otomatik",
+            seatCount: 5,
+            dailyPrice: 3500,
+            supplierId: 1,
+            supplier: nil, locationId: 1,  // Supplier için geçici olarak nil
+            location: nil,  // Location için geçici olarak nil
+            bookings: [],    // Bookings boş bir array
+            images: [], reviews: []       // Resimler boş
+        )
 
+        viewModelC.addCar(car: carModel) { success in
+            DispatchQueue.main.async {
+                if success {
+                    print("Car added successfully.")
+                    // Update the UI or show success message
+                } else {
+                    print("Failed to add car.")
+                    // Handle failure (show error message, etc.)
+                }
+            }
+        }
+        viewModelL.getLocationById(for: 1) { success in
+                           if success {
+                               print("Location fetched successfully")
+                           } else {
+                               print("Failed to fetch location")
+                           }
+                       }
+            
+        
+          viewModelL.getLocation { result in
+                     switch result {
+                     case .success(_):
+                         // Başarı durumunda UI'yi güncelle
+                         DispatchQueue.main.async {
+                             print("Şehirler başarıyla alındı: \(self.viewModelL.locations)")
+                         }
+                     case .failure(let error):
+                         // Hata durumunda hata mesajını yazdır
+                         DispatchQueue.main.async {
+                             print("Hata: \(error.localizedDescription)")
+                         }
+                     }
+                 }
         viewModelC.getCarById(for: carId) { success in
             DispatchQueue.main.async {
                 if success {

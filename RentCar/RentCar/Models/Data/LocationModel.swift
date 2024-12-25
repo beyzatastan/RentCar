@@ -12,3 +12,8 @@ struct LocationModel: Codable {
     var city: String
     var cars: [CarModel] = []
 }
+enum CodingKeys: String, CodingKey {
+       case id = "id"
+       case city = "city"
+       case cars = "cars" // Eğer farklı bir anahtar ismi varsa, onu buraya yazmalısınız
+   }

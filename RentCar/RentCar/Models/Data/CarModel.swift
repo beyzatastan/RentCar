@@ -23,6 +23,7 @@ struct CarModel: Codable {
     let bookings: [BookingModel] // List of bookings
     let images: [CarImageModel] // Car images
     let reviews: [ReviewModel] // Car reviews
+    
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
