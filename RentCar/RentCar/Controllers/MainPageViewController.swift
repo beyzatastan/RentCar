@@ -20,8 +20,9 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
     var viewModelC = CarViewModel()
     var viewModelR = ReviewViewModel()
     var viewModelL = LocationViewModel()
-
-
+    var viewModelCustomer = CustomerViewModel()
+    
+    
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var scrollView: UIScrollView!
     var currentPage = 0
@@ -34,11 +35,8 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
     
     override func viewDidLoad() {
         super.viewDidLoad()
-   
-   
-
- 
         
+      
         self.navigationItem.hidesBackButton = true
         view1.layer.cornerRadius = 10
         view2.layer.cornerRadius = 10
@@ -139,6 +137,20 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
                 print("Failed to fetch reviews")
             }
         }
+        //************************************************
+        let newBooking = AddBookingModel(
+            customerId: 3,
+            carId: 7,
+            startDate: "2024-12-28T10:00:00Z",
+            endDate: "2024-12-30T10:00:00Z",
+            startLocationId: 16,
+            endLocationId: 16,
+            deposit: 3000.0,
+            startLocation: "Bursa",
+            endLocation: "Bursa"
+        )
+        viewModelB.addBooking(booking: newBooking)
+        //------------------------------------------------
         viewModelB.getBookingsByCustomerId(for: customerId) { success in
             if success {
                 // UI'yi güncelle
@@ -155,42 +167,18 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
                        print("Failed to fetch car by ıd")
                    }
                }
-        viewModelC.getCar { success in
-            if success {
-                // Update your UI with viewModelC.cars
-                print(self.viewModelC.cars)
-            } else {
-                print("Failed to fetch cars")
-            }
-        }
-        
-        let carModel = CarModel(
-            id: 0, // Otomatik olarak belirlenmiş bir id kullanabilirsiniz, ya da backend tarafından atanacaktır.
-            brand: "toyota",
-            model: "corolla",
-            year: 2019,
-            licensePlate: "34tlm54",
-            transmissionType: "otomatik",
-            seatCount: 5,
-            dailyPrice: 3500,
-            supplierId: 1,
-            supplier: nil, locationId: 1,  // Supplier için geçici olarak nil
-            location: nil,  // Location için geçici olarak nil
-            bookings: [],    // Bookings boş bir array
-            images: [], reviews: []       // Resimler boş
+       
+        //************************************************
+        let newReview=AddReviewModel(
+            customerId: 14,
+            supplierId: 3,
+            carId: 7,
+              rating: 5,
+              comment: "Çok fena"
         )
+        viewModelR.addReview(review: newReview)
+        //************************************************
 
-        viewModelC.addCar(car: carModel) { success in
-            DispatchQueue.main.async {
-                if success {
-                    print("Car added successfully.")
-                    // Update the UI or show success message
-                } else {
-                    print("Failed to add car.")
-                    // Handle failure (show error message, etc.)
-                }
-            }
-        }
         viewModelL.getLocationById(for: 1) { success in
                            if success {
                                print("Location fetched successfully")
@@ -199,7 +187,7 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
                            }
                        }
        
-        
+        //************************************************
           viewModelL.getLocation { result in
                      switch result {
                      case .success(_):
@@ -214,6 +202,43 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
                          }
                      }
                  }
+        //************************************************
+        let newCar = AddCarModel(
+                                 brand: "Toyota",
+                                 model: "Corolla",
+                                 year: 2019,
+                                 licensePlate: "34tlm54",
+                                 transmissionType: "Otomatik",
+                                 seatCount: 5,
+                                 dailyPrice: 2500,
+                                 deposit: 1000,
+                                 gasType: "Dizel",
+                                 carClass:"Ekonomi",
+                                 supplierId:3,
+                                 locationId: 16,
+                                 imageUrl: "https://otoyazar.com/wp-content/uploads/2021/12/toyota-corolla.jpg" )
+            
+            viewModelC.addCar(car: newCar)
+        //************************************************
+        //customer adddddd
+        let customerToAdd = AddCustomerModel(
+            firstName: "İrem",
+            lastName: "Yaşar",
+            email: "iremyasar@gmail.com",
+            phoneNumber: "5055424343",
+            identityNumber: "11223344578",
+            drivingLicenseIssuedDate: "2000-10-12T00:00:00",
+            drivingLicenseNumber: "11223344567",
+            birthDate: "1993-04-09T00:00:00",
+            city: "Bursa",
+            district: "Nilüfer",
+            address: "Ord Kent",
+            postalCode: "16200",
+            role: nil
+        )
+        viewModelCustomer.addCustomer(customer: customerToAdd)
+        //************************************************
+        //karıd
         viewModelC.getCarById(for: carId) { success in
             DispatchQueue.main.async {
                 if success {
@@ -231,4 +256,5 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
             }
         }
     }
+   
 }

@@ -9,6 +9,9 @@ import UIKit
 
 class NextFaturaViewController: UIViewController ,UITextFieldDelegate{
 
+    var customerBilgi2 : AddCustomerModel?
+    var CustomerViewModel: CustomerViewModel?
+    
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var buton1: UIButton!
     @IBOutlet weak var buton2: UIButton!
@@ -322,7 +325,12 @@ class NextFaturaViewController: UIViewController ,UITextFieldDelegate{
     }
     
     @IBAction func devamButtonClicked(_ sender: Any) {
+        customerBilgi2?.city = ilField.text ?? ""
+        customerBilgi2?.district = ilceText.text ?? ""
+        customerBilgi2?.address = adresText.text ?? "" 
+        customerBilgi2?.postalCode = postaKoduText.text ?? ""
         let vc=storyboard?.instantiateViewController(identifier: "surucu") as! SurucuBilgiViewController
+        vc.customerBilgi3 = customerBilgi2
         navigationController?.pushViewController(vc, animated: true)
     }
     

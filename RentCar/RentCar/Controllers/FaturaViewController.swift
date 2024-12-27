@@ -360,8 +360,40 @@ class FaturaViewController: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func devamButtonClicked(_ sender: Any) {
+        var userInput = AddCustomerModel(firstName: nameField.text ?? "",
+                                         lastName: soyadText.text ?? "",
+                                         email: epostaText.text ?? "",
+                                         phoneNumber: telefonText.text ?? "",
+                                         identityNumber: tcText.text ?? "",
+                                         drivingLicenseIssuedDate: "",
+                                         drivingLicenseNumber: "",
+                                         birthDate: dogumText.text ?? "",
+                                         city: "",
+                                         district: "",
+                                         address: "",
+                                         postalCode: "",
+                                         role: "customer")
+        
+        if let dogumText = convertToISO8601Date(dogumText.text) {
+            userInput.birthDate = dogumText } else {
+                print("Invalid date format for dogumText")
+                return
+            }
+        
         let vc=storyboard?.instantiateViewController(identifier: "dogrulama") as! TelefonDogrulamaViewController
+        vc.customerBilgi=userInput
         navigationController?.pushViewController(vc, animated: true)
+    }
+    func convertToISO8601Date(_ dateString: String?) -> String? {
+        guard let dateString = dateString else {
+            return nil }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        if let date = dateFormatter.date(from: dateString) {
+            let isoFormatter = ISO8601DateFormatter()
+            return isoFormatter.string(from: date)
+        } else {
+            return nil }
     }
     
 }

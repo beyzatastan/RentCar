@@ -26,8 +26,38 @@ class CarDetailsViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var aracNameLabel: UILabel!
     @IBOutlet weak var toplamFiyattLabel: UILabel!
+    
+    var car: CarModel?
+    var gunSayisi:Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let car = car {
+                   aracNameLabel.text = (car.brand ?? " ") + " " + car.model
+                   gunlukFiyatLabel.text = "Günlük Fiyat: \(car.dailyPrice)₺"
+                   yolcuSayisiLabel.text = "\(car.seatCount)"
+                   vitesLabel.text = car.transmissionType
+                   benzinLabel.text = car.gasType
+                   depozitoLabel.text = "\(car.deposit)₺"
+            toplamFiyattLabel.text="Toplam Fiyat(\(gunSayisi ?? 1) gün):"
+            if let gunSayisi = self.gunSayisi {
+                let toplamFiyat = car.dailyPrice * Decimal(gunSayisi)
+               toplamFiyatLabel.text = "\(toplamFiyat)₺"
+            } else {
+              toplamFiyatLabel.text = " -"
+            }
+                   // Eğer araç resmi varsa, resmi göster
+                   if let imageUrl = URL(string: car.imageUrl) {
+                       DispatchQueue.global().async {
+                           if let data = try? Data(contentsOf: imageUrl) {
+                               DispatchQueue.main.async {
+                                   self.imageView.image = UIImage(data: data)
+                               }
+                           }
+                       }
+                   }
+               }
 
         mainView.layer.cornerRadius=10
         surusView.layer.cornerRadius=10

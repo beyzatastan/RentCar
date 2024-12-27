@@ -9,11 +9,13 @@ import UIKit
 
 class OdemeViewController: UIViewController ,UITextFieldDelegate{
 
+    var customerId: Int?
+    
     @IBOutlet weak var upView: UIView!
     @IBOutlet weak var Label: UILabel!
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var securityButton: UIButton!
-    
+
     var butonDolu = false
     
     let kartNumText = UITextField()
@@ -265,11 +267,11 @@ class SurucuBilgiViewController: UIViewController ,UITextFieldDelegate{
     let surucukimliktx = UITextField()
     let surucukimliklb = UILabel()
     
-    let surucudgtx=UITextField()
-    let surucudglb=UILabel()
-    
     let ehliyettx=UITextField()
     let ehliteylb=UILabel()
+    
+    var customerBilgi3:AddCustomerModel?
+    var viewModel = CustomerViewModel()
     
     @IBOutlet weak var main2View: UIView!
     override func viewDidLoad() {
@@ -279,7 +281,7 @@ class SurucuBilgiViewController: UIViewController ,UITextFieldDelegate{
         
         addToolBarToTextField(ehliyettx)
         
-        surucukimliktx.placeholder = "Sürücü TC Kimlik Numarası"
+        surucukimliktx.placeholder = "Ehliyet Numarası"
         surucukimliktx.borderStyle = .roundedRect
         surucukimliktx.delegate = self
         surucukimliktx.keyboardType = .phonePad
@@ -287,27 +289,12 @@ class SurucuBilgiViewController: UIViewController ,UITextFieldDelegate{
         mainView.addSubview(surucukimliktx)
         
         
-        surucukimliklb.text = "Sürücü TC Kimlik Numarası"
+        surucukimliklb.text = "Ehliyet Numarası"
         surucukimliklb.font = UIFont.systemFont(ofSize: 14)
         surucukimliklb.textColor = .gray
         surucukimliklb.isHidden = true
         surucukimliklb.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(surucukimliklb)
-        
-        surucudgtx.placeholder = "Sürücü Doğum Tarihi"
-        surucudgtx.borderStyle = .roundedRect
-        surucudgtx.delegate = self
-        surucudgtx.keyboardType = .phonePad
-        surucudgtx.translatesAutoresizingMaskIntoConstraints = false
-        mainView.addSubview(surucudgtx)
-        
-        
-        surucudglb.text = "Sürücü Doğum Tarihi"
-        surucudglb.font = UIFont.systemFont(ofSize: 14)
-        surucudglb.textColor = .gray
-        surucudglb.isHidden = true
-        surucudglb.translatesAutoresizingMaskIntoConstraints = false
-        mainView.addSubview(surucudglb)
         
         ehliyettx.placeholder = "Ehliyet Veriliş Tarihi"
         ehliyettx.borderStyle = .roundedRect
@@ -332,19 +319,10 @@ class SurucuBilgiViewController: UIViewController ,UITextFieldDelegate{
             surucukimliktx.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             surucukimliktx.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            
-            surucudglb.leadingAnchor.constraint(equalTo: surucudgtx.leadingAnchor),
-            surucudglb.bottomAnchor.constraint(equalTo: surucudgtx.topAnchor),
-            
-            surucudgtx.topAnchor.constraint(equalTo: surucukimliktx.bottomAnchor, constant: 15),
-            surucudgtx.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            surucudgtx.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            
-            
             ehliteylb.leadingAnchor.constraint(equalTo: ehliyettx.leadingAnchor),
             ehliteylb.bottomAnchor.constraint(equalTo: ehliyettx.topAnchor),
             
-            ehliyettx.topAnchor.constraint(equalTo: surucudgtx.bottomAnchor, constant: 15),
+            ehliyettx.topAnchor.constraint(equalTo: surucukimliktx.bottomAnchor, constant: 15),
             ehliyettx.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             ehliyettx.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
            
@@ -373,8 +351,6 @@ class SurucuBilgiViewController: UIViewController ,UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == surucukimliktx {
             surucukimliklb.isHidden = false
-        } else if textField == surucudgtx {
-            surucudglb.isHidden = false
         } else if textField == ehliyettx {
             ehliteylb.isHidden = false
         }
@@ -383,27 +359,12 @@ class SurucuBilgiViewController: UIViewController ,UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == surucukimliktx && textField.text?.isEmpty == true {
             surucukimliklb.isHidden = true
-        } else if textField == surucudgtx && textField.text?.isEmpty == true {
-            surucudglb.isHidden = true
         } else if textField == ehliyettx && textField.text?.isEmpty == true {
             ehliteylb.isHidden = true
         }
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == ehliyettx {
-            let maxLength = 10
-            let currentString: NSString = textField.text! as NSString
-            let updatedString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
-            
-            if updatedString.length > maxLength {
-                return false
-            }
-            
-            let formattedString = formatDate(updatedString as String)
-            textField.text = formattedString
-            return false
-        }
-        if textField == surucudgtx {
             let maxLength = 10
             let currentString: NSString = textField.text! as NSString
             let updatedString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
@@ -455,10 +416,31 @@ class SurucuBilgiViewController: UIViewController ,UITextFieldDelegate{
         }
     }   
     @IBAction func devamButtonClicked(_ sender: Any) {
+        customerBilgi3?.drivingLicenseIssuedDate = ehliyettx.text ?? ""
+        customerBilgi3?.drivingLicenseNumber = surucukimliktx.text ?? ""
+        
+        if let drivingLicenseDate = convertToISO8601Date(ehliyettx.text) {
+            customerBilgi3?.drivingLicenseIssuedDate = drivingLicenseDate } else {
+                print("Invalid date format for drivingLicenseIssuedDate")
+                return
+            }
+        
+        viewModel.addCustomer(customer: customerBilgi3!)
+        
+        
         let vc = storyboard?.instantiateViewController(identifier: "odeme") as! OdemeViewController
+        
             navigationController?.pushViewController(vc, animated: true)
     }
-   
-    
-    
+    func convertToISO8601Date(_ dateString: String?) -> String? {
+        guard let dateString = dateString else {
+            return nil }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        if let date = dateFormatter.date(from: dateString) {
+            let isoFormatter = ISO8601DateFormatter()
+            return isoFormatter.string(from: date)
+        } else {
+            return nil }
+    }
 }

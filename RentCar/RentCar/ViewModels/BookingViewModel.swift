@@ -10,6 +10,12 @@ import Foundation
 class BookingViewModel {
 
     var bookings: [BookingModel] = []
+    
+    @Published var bookingMessage: String = ""
+    @Published var errorMessage: String?
+    @Published var isLoading = false
+    @Published var booking: BookingModel?
+    
 
     func getBookingsByCarId(for carId: Int, completion: @escaping (Bool) -> Void) {
         BookingWebService.shared.getBookingsByCarId(for: carId) { [weak self] result in
@@ -36,4 +42,19 @@ class BookingViewModel {
             }
         }
     }
+    func addBooking(booking: AddBookingModel) {
+        isLoading = true
+        BookingWebService.shared.addBooking(booking: booking) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isLoading = false
+                switch result {
+                case .success(let booking):
+                    self?.booking = booking
+                case .failure(let error):
+                    self?.errorMessage = error.localizedDescription
+                }
+            }
+        }
+    }
 }
+

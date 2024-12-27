@@ -67,14 +67,39 @@ class RentViewController: UIViewController {
         } else {
             carsVv.birakisText = "Varsayılan Text" // Placeholder yoksa bir varsayılan metin kullanabilirsiniz
         }
+        
         carsVv.birakisTimeText=birakisDate.text
         carsVv.alisTimeText=alisDate.text
+        if let alisDateText = alisDate.text, let birakisDateText = birakisDate.text {
+            print("Alış Tarihi: \(alisDateText)")
+            print("Bırakış Tarihi: \(birakisDateText)")
+
+            if let differenceInDays = calculateDateDifference(from: alisDateText, to: birakisDateText) {
+                carsVv.gunSayisi = differenceInDays
+            } else {
+                print("Invalid dates")  // Bu kısımda tarihler hala geçersizse buraya düşer.
+            }
+        
+           }
         navigationController?.pushViewController(carsVv, animated: true)
     }
 
+    func calculateDateDifference(from startDateText: String, to endDateText: String) -> Int? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy" // Tarih formatını doğru şekilde ayarla
+        dateFormatter.locale = Locale(identifier: "en_US") // İngilizce ay ismi ile uyumlu olması için
+        
+        guard let startDate = dateFormatter.date(from: startDateText),
+              let endDate = dateFormatter.date(from: endDateText) else {
+            return nil
+        }
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day], from: startDate, to: endDate)
+        return components.day
+    }
 
-    
-    
+
     let mekan: UITextField = {
         let textField = UITextField()
         textField.placeholder = " İl, ilçe ya da havalimanı"

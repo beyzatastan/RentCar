@@ -1,68 +1,62 @@
-//
-//  CarViewModel.swift
-//  RentCar
-//
-//  Created by beyza nur on 22.12.2024.
-//
-
 import Foundation
+import Combine
 
-class CarViewModel {
-
-    // The list of cars will be populated after fetching the data
-    var cars: [CarModel] = []
+class CarViewModel: ObservableObject {
+    @Published var cars: [CarModel] = []
+    @Published var car: CarModel?
+    @Published var errorMessage: String?
+    @Published var isLoading = false
+    private var cancellables = Set<AnyCancellable>()
     
-  
-    func getCar(completion: @escaping (Bool) -> Void) {
+    
+    func getCars(completion: @escaping (Result<[CarModel], Error>) -> Void) {
         CarWebService.shared.getCars { [weak self] result in
             switch result {
             case .success(let cars):
-                // Update the local model property with fetched cars
                 self?.cars = cars
-                completion(true)
+                print(cars)
+                completion(.success(cars))
             case .failure(let error):
-                print("Error fetching cars: \(error.localizedDescription)")
-                completion(false)
+                print("Hata: \(error.localizedDescription), Detaylar: \(error)")
+                completion(.failure(error))
             }
         }
     }
-    func addCar(car: CarModel, completion: @escaping (Bool) -> Void) {
-        CarWebService.shared.addCar(car: car) { result in
-            switch result {
-            case .success(let message):
-                print(message) // Optional: Log success message
-                completion(true)  // Indicating success
-            case .failure(let error):
-                print("Error adding car: \(error.localizedDescription)")
-                completion(false)  // Indicating failure
+    func addCar(car: AddCarModel) {
+        isLoading = true
+        CarWebService.shared.addCar(car: car ) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isLoading = false
+                switch result {
+                case .success(let car):
+                    self?.car = car
+                case .failure(let error):
+                    self?.errorMessage = error.localizedDescription
+                }
             }
         }
     }
-
     func getCarById(for carId: Int, completion: @escaping (Bool) -> Void) {
         CarWebService.shared.getCarById(for: carId) { [weak self] result in
-            switch result {
-            case .success(let car):
-                self?.cars = [car] // Assign the single car wrapped in an array
+            if case let .success(car) = result {
+                self?.cars = [car]
                 completion(true)
-            case .failure(let error):
-                print("Error fetching car: \(error.localizedDescription)")
+            } else {
                 completion(false)
             }
         }
     }
 
-    // Function to delete a car by ID
     func deleteCar(id: Int, completion: @escaping (Bool) -> Void) {
         CarWebService.shared.deleteCar(id: id) { result in
-            switch result {
-            case .success:
-                print("Car deleted successfully.")
-                completion(true)
-            case .failure(let error):
-                print("Error deleting car: \(error)")
-                completion(false)
-            }
+            completion(result.isSuccess)
         }
+    }
+}
+
+extension Result {
+    var isSuccess: Bool {
+        if case .success = self { return true }
+        return false
     }
 }
