@@ -9,6 +9,7 @@ import UIKit
 
 class CarsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var toplamGunLabel: UILabel!
     @IBOutlet weak var carNameLabel: UILabel!
     @IBOutlet weak var toplamFiyat: UILabel!
     @IBOutlet weak var gunlukFiyat: UILabel!
@@ -20,8 +21,5 @@ class CarsTableViewCell: UITableViewCell {
     @IBOutlet weak var benzinDurumu: UILabel!
     @IBOutlet weak var vitesDurumu: UILabel!
     @IBOutlet weak var carImageView: UIImageView!
-    
-    
-   
     
 }

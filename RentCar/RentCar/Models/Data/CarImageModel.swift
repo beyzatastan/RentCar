@@ -7,10 +7,24 @@
 
 import Foundation
 struct CarImageModel: Codable {
-    var id: Int
-    var carId: Int
-    var imageUrl: String
-    var isPrimary: Bool
-    var data: Data? // The image data
-    var mimeType: String? // The MIME type of the image (e.g., "image/jpeg", "image/png")
+    let id: Int?
+    let bookingId: Int
+    let carId: Int?
+    let customerId: Int?
+    let isBeforeRental: Bool?
+    let uploadDate: Date
+    let imageUrls: String// The MIME type of the image (e.g., "image/jpeg", "image/png")
+    
+}
+struct AddCarImageModel: Codable {
+    var bookingId: Int
+       var imageUrl1: String
+       var imageUrl2: String
+       var imageUrl3: String
+       var imageUrl4: String
+}
+
+struct CarImageResponse: Codable {
+    let message: String
+    let bookingId: Int
 }

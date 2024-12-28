@@ -51,7 +51,7 @@ class SearchPageViewController: UIViewController, UITableViewDelegate, UITableVi
     private func setupUI() {
         // Search Bar
         searchBar.delegate = self
-        searchBar.placeholder = "Search city or district"
+        searchBar.placeholder = "Şehir Ara"
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(searchBar)
 
@@ -98,6 +98,10 @@ class SearchPageViewController: UIViewController, UITableViewDelegate, UITableVi
                         .foregroundColor: UIColor.black
                     ]
                 )
+            vc.startLocationId=selectedCity?.id
+            vc.endLocationId=selectedCity?.id
+            vc.endLocation=selectedCity?.city
+            vc.startLocation=selectedCity?.city
             navigationController?.pushViewController(vc, animated: true)
         }
     }

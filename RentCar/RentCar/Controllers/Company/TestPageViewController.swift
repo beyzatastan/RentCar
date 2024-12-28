@@ -38,6 +38,19 @@ class TestPageViewController: UIViewController {
     var buton8Dolu=true
     var buton10Dolu=true
     var buton12Dolu=true
+    
+    //veritabanı işlemleri
+    var bookingId:Int?
+    
+    var customerId: Int?
+    var carId:Int?
+    
+    var startLocationId:Int?
+    var endLocationId:Int?
+    
+    var startDate:Date?
+    var endDate:Date?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.layer.cornerRadius = 10
@@ -177,6 +190,7 @@ class TestPageViewController: UIViewController {
     
     @IBAction func resimButtonClicked(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "camera") as? CameraPageViewController{
+            vc.bookingId=self.bookingId
             navigationController?.pushViewController(vc, animated: true)
         }
         else {

@@ -38,6 +38,15 @@ class NextFaturaViewController: UIViewController ,UITextFieldDelegate{
     let postaKoduText = UITextField()
     let postaKoduLabel = UILabel()
     
+    //veritabanı için
+    var carId:Int?
+    
+    var startLocationId:Int?
+    var endLocationId:Int?
+    
+    var startDate:Date?
+    var endDate:Date?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -331,6 +340,11 @@ class NextFaturaViewController: UIViewController ,UITextFieldDelegate{
         customerBilgi2?.postalCode = postaKoduText.text ?? ""
         let vc=storyboard?.instantiateViewController(identifier: "surucu") as! SurucuBilgiViewController
         vc.customerBilgi3 = customerBilgi2
+        vc.carId=self.carId
+        vc.startLocationId=self.startLocationId
+        vc.endLocationId=self.endLocationId
+        vc.endDate=self.endDate
+        vc.startDate=self.startDate
         navigationController?.pushViewController(vc, animated: true)
     }
     

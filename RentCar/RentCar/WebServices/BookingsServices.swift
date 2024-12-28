@@ -85,7 +85,7 @@ class BookingWebService {
         task.resume()
     }
     
-    func addBooking(booking: AddBookingModel, completion: @escaping (Result<BookingModel, Error>) -> Void) {
+    func addBooking(booking: AddBookingModel, completion: @escaping (Result<BookingResponse, Error>) -> Void) {
         // API URL
         guard let url = URL(string: "http://localhost:5163/api/BookingsContoller/addBooking") else {
             completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
@@ -104,6 +104,7 @@ class BookingWebService {
             completion(.failure(error))
             return
         }
+        
         // URLSession to send the request
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -114,26 +115,47 @@ class BookingWebService {
                 completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
                 return
             }
-            // Sunucudan gelen veriyi yazdır
-            if let jsonString = String(data: data, encoding: .utf8) {
-                print("Sunucudan Gelen Yanıt: \(jsonString)")
-            }
-
+            
             do {
-                // JSON decode et
+                // Decode the response into CustomerResponse
                 let decoder = JSONDecoder()
                 let bookingResponse = try decoder.decode(BookingResponse.self, from: data)
-
-                if let firstBooking = bookingResponse.values.first {
-                    completion(.success(firstBooking))
-                } else {
-                    completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No booking data found"])))
-                }
+                completion(.success(bookingResponse))
             } catch {
                 completion(.failure(error))
             }
         }.resume()
+    }
 
+    func fetchBookingById(bookingId: Int, completion: @escaping (Result<BookingModel, Error>) -> Void) {
+        guard let url = URL(string: "http://localhost:5163/api/BookingsContoller/getBookingById/\(bookingId)") else {
+            completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            guard let data = data else {
+                completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
+                return
+            }
+
+            // Log the raw response for debugging
+            if let jsonString = String(data: data, encoding: .utf8) {
+            }
+
+            do {
+                let decoder = JSONDecoder()
+                let booking = try decoder.decode(BookingModel.self, from: data)
+                completion(.success(booking))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
     }
 
 }
+

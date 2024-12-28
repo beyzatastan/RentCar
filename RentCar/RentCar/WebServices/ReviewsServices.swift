@@ -90,14 +90,14 @@ class ReviewWebService {
                 }
                 
                 do {
-                    let reviews = try JSONDecoder().decode([ReviewModel].self, from: data)
-                    print("Reviews for Car \(carId): \(reviews)")
-                    completion(.success(reviews)) // Başarı durumunda completion handler'ı çağır
-                } catch {
-                    print("Error decoding JSON: \(error)")
-                    completion(.failure(error)) // JSON çözümleme hatasında completion handler'ı çağır
-                }
-            }
+                    let reviewsResponse = try JSONDecoder().decode(ReviewResponse.self, from: data)
+                    print("Reviews for Car \(carId): \(reviewsResponse.values)")
+                    completion(.success(reviewsResponse.values)) // Pass the decoded reviews to the completion handler
+                          } catch {
+                              print("Error decoding JSON: \(error)")
+                              completion(.failure(error)) // Pass the error to the completion handler if decoding fails
+                          }
+                      }
         }
         task.resume()
     }

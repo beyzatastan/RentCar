@@ -39,6 +39,16 @@ class FaturaViewController: UIViewController, UITextFieldDelegate{
     var buton4 = false
     @IBOutlet weak var line: UILabel!
     
+    
+    //veritabanı için
+    var carId:Int?
+    
+    var startLocationId:Int?
+    var endLocationId:Int?
+    
+    var startDate:Date?
+    var endDate:Date?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         surucuView.layer.cornerRadius = 10
@@ -380,8 +390,13 @@ class FaturaViewController: UIViewController, UITextFieldDelegate{
                 return
             }
         
-        let vc=storyboard?.instantiateViewController(identifier: "dogrulama") as! TelefonDogrulamaViewController
-        vc.customerBilgi=userInput
+        let vc=storyboard?.instantiateViewController(identifier: "nextFatura") as! NextFaturaViewController
+        vc.customerBilgi2=userInput
+        vc.carId=self.carId
+        vc.startLocationId=self.startLocationId
+        vc.endLocationId=self.endLocationId
+        vc.endDate=self.endDate
+        vc.startDate=self.startDate
         navigationController?.pushViewController(vc, animated: true)
     }
     func convertToISO8601Date(_ dateString: String?) -> String? {

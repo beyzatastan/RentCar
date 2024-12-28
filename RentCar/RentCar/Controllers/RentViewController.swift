@@ -13,6 +13,14 @@ class RentViewController: UIViewController {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var buttonView: UIView!
     
+    //veritabanı için
+    var startLocationId:Int?
+    var endLocationId:Int?
+    
+    var startLocation:String?
+    var endLocation:String?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -57,6 +65,8 @@ class RentViewController: UIViewController {
             print("CarsViewController could not be instantiated")
             return
         }
+        
+        // Getting text from mekan field
         if let mekanPlaceholder = mekan.attributedPlaceholder?.string {
             carsVv.alisText = mekanPlaceholder
         } else {
@@ -67,22 +77,60 @@ class RentViewController: UIViewController {
         } else {
             carsVv.birakisText = "Varsayılan Text" // Placeholder yoksa bir varsayılan metin kullanabilirsiniz
         }
-        
-        carsVv.birakisTimeText=birakisDate.text
-        carsVv.alisTimeText=alisDate.text
-        if let alisDateText = alisDate.text, let birakisDateText = birakisDate.text {
-            print("Alış Tarihi: \(alisDateText)")
-            print("Bırakış Tarihi: \(birakisDateText)")
 
+        // Assigning the selected time to CarsViewController
+        carsVv.birakisTimeText = birakisDate.text
+        carsVv.alisTimeText = alisDate.text
+        
+        
+        // Combine date and time to create a complete Date object
+        if let alisDateText = alisDate.text, let alisTimeText = alisTime.text, let birakisDateText = birakisDate.text, let birakisTimeText = birakisTime.text {
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd MMM yyyy" // Date format
+            dateFormatter.locale = Locale(identifier: "en_US") // Locale for English month names
+
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "HH:mm" // Time format (hours and minutes)
+            
+            // Combine date and time for start date
+            if let alisDateObj = dateFormatter.date(from: alisDateText),
+               let alisTimeObj = timeFormatter.date(from: alisTimeText) {
+                let calendar = Calendar.current
+                let startDate = calendar.date(bySettingHour: calendar.component(.hour, from: alisTimeObj),
+                                              minute: calendar.component(.minute, from: alisTimeObj),
+                                              second: 0,
+                                              of: alisDateObj)
+                carsVv.startDate = startDate // Send the combined startDate to CarsViewController
+            }
+
+            // Combine date and time for end date
+            if let birakisDateObj = dateFormatter.date(from: birakisDateText),
+               let birakisTimeObj = timeFormatter.date(from: birakisTimeText) {
+                let calendar = Calendar.current
+                let endDate = calendar.date(bySettingHour: calendar.component(.hour, from: birakisTimeObj),
+                                            minute: calendar.component(.minute, from: birakisTimeObj),
+                                            second: 0,
+                                            of: birakisDateObj)
+                carsVv.endDate = endDate // Send the combined endDate to CarsViewController
+            }
+            
+            // Optional: calculate the difference in days between the start and end dates
             if let differenceInDays = calculateDateDifference(from: alisDateText, to: birakisDateText) {
                 carsVv.gunSayisi = differenceInDays
             } else {
-                print("Invalid dates")  // Bu kısımda tarihler hala geçersizse buraya düşer.
+                print("Invalid dates")  // This will handle invalid date input
             }
+        }
         
-           }
+        carsVv.startLocation=self.startLocation
+        carsVv.startLocationId=self.startLocationId
+        carsVv.endLocation=self.endLocation
+        carsVv.endLocationId=self.endLocationId
+
         navigationController?.pushViewController(carsVv, animated: true)
     }
+
 
     func calculateDateDifference(from startDateText: String, to endDateText: String) -> Int? {
         let dateFormatter = DateFormatter()
@@ -102,7 +150,7 @@ class RentViewController: UIViewController {
 
     let mekan: UITextField = {
         let textField = UITextField()
-        textField.placeholder = " İl, ilçe ya da havalimanı"
+        textField.placeholder = " Kiralanacak İl"
         textField.borderStyle = .none
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.textColor = .darkGray
@@ -222,7 +270,7 @@ class RentViewController: UIViewController {
            timePicker.preferredDatePickerStyle = .wheels
            timePicker.datePickerMode = .time // Sadece saat seçimi
            timePicker.locale = Locale(identifier: "tr_TR") // İsteğe bağlı: Türkçe saat formatı
-           
+           timePicker.minuteInterval = 10
            // Toolbar
            let toolbar = UIToolbar()
            toolbar.sizeToFit()

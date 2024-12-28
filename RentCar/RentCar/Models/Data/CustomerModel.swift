@@ -36,9 +36,6 @@ struct AddCustomerModel: Codable {
 }
 
 struct CustomerResponse: Codable {
-    var values: [CustomerModel]
-    
-    enum CodingKeys: String, CodingKey {
-        case values = "$values"
-    }
+    let message: String
+    let customerId: Int
 }

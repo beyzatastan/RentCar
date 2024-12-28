@@ -35,8 +35,8 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-      
+
+       
         self.navigationItem.hidesBackButton = true
         view1.layer.cornerRadius = 10
         view2.layer.cornerRadius = 10
@@ -59,9 +59,8 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
         timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(autoScrollImages), userInfo: nil, repeats: true)
         scrollView.showsHorizontalScrollIndicator = false
         
-        
-        
     }
+    
     @IBAction func rentPageButton(_ sender: Any) {
         let rentVc=storyboard?.instantiateViewController(identifier: "rent") as! RentViewController
         navigationController?.pushViewController(rentVc, animated: false)
@@ -141,15 +140,20 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
         let newBooking = AddBookingModel(
             customerId: 3,
             carId: 7,
-            startDate: "2024-12-28T10:00:00Z",
+            startDate: "2024-12-20T10:00:00Z",
             endDate: "2024-12-30T10:00:00Z",
             startLocationId: 16,
-            endLocationId: 16,
-            deposit: 3000.0,
-            startLocation: "Bursa",
-            endLocation: "Bursa"
+            endLocationId: 16
         )
-        viewModelB.addBooking(booking: newBooking)
+        
+        
+        viewModelB.addBooking(booking: newBooking) { bookingId in
+            if let bookingId = bookingId {
+                print(bookingId)
+            }else{
+                print(  "hata")
+            }
+        }
         //------------------------------------------------
         viewModelB.getBookingsByCustomerId(for: customerId) { success in
             if success {
@@ -236,7 +240,6 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
             postalCode: "16200",
             role: nil
         )
-        viewModelCustomer.addCustomer(customer: customerToAdd)
         //************************************************
         //karıd
         viewModelC.getCarById(for: carId) { success in

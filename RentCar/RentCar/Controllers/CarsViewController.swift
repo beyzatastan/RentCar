@@ -8,6 +8,7 @@ class CarsViewController: UIViewController {
     @IBOutlet weak var alisLabel: UILabel!
     @IBOutlet weak var alisTimeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sonucSayisi: UILabel!
     
     var birakisTimeText: String?
     var birakisText: String?
@@ -19,6 +20,17 @@ class CarsViewController: UIViewController {
     var carViewModel = CarViewModel()
     var cars: [CarModel] = []
     var car:CarModel?
+    
+    //veritabanı için
+    var startLocationId:Int?
+    var endLocationId:Int?
+    
+    var startLocation:String?
+    var endLocation:String?
+    
+    var startDate:Date?
+    var endDate:Date?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +44,9 @@ class CarsViewController: UIViewController {
         birakisTimeLabel.text = birakisTimeText
         alisLabel.text = alisText
         alisTimeLabel.text = alisTimeText
-        print(gunSayisi)
-        
+        print("Başlangıç Tarihi: \(startDate ?? Date())")
+        print("Bırakış Tarihi: \(endDate ?? Date())")
+        print("Gün Sayısı: \(gunSayisi ?? 0)")
         // Özel UIButton oluştur
         let backButton = UIButton(type: .system)
         backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
@@ -45,6 +58,7 @@ class CarsViewController: UIViewController {
         backButton.transform = CGAffineTransform(translationX: 0, y: -5) // `y: -5` butonu yukarı taşır
         
         fetchCars()
+        
         // UIBarButtonItem olarak ekle
         let barButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.leftBarButtonItem = barButtonItem
@@ -60,7 +74,11 @@ class CarsViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let carss):
-                    self?.cars = carss
+                    // Filter cars by cityId
+                    self?.cars = carss.filter { car in
+                        car.locationId == self?.startLocationId
+                    }
+                    self?.sonucSayisi.text = "\(self!.cars.count) sonuç listeleniyor"
                     self?.tableView.reloadData()
                 case .failure(let error):
                     print("API Error: \(error.localizedDescription)")
@@ -68,6 +86,7 @@ class CarsViewController: UIViewController {
             }
         }
     }
+
 }
 extension CarsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -81,6 +100,7 @@ extension CarsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.carNameLabel.text = (car.brand ?? " ") + " " + car.model
         cell.aracSınıfı.text = "\(car.carClass)"
         cell.vitesDurumu.text = "\(car.transmissionType)"
+        cell.toplamGunLabel.text="Toplam Fiyat(\(gunSayisi!)):"
         cell.yolcuSayisi.text = "\(car.seatCount) Kişilik"
         cell.gunlukFiyat.text = "Günlük Fiyat: \(car.dailyPrice)₺"
         cell.benzinDurumu.text = "\(car.gasType)"
@@ -113,6 +133,11 @@ extension CarsViewController: UITableViewDataSource, UITableViewDelegate {
             print("Selected car: \(car?.brand ?? "Unknown") \(car?.model ?? "Unknown")")
         let vc = storyboard?.instantiateViewController(identifier: "details") as! CarDetailsViewController
         vc.car = car // Seçilen aracı detay sayfasına aktarıyoruz.
+        vc.carId = car?.id
+        vc.startDate=self.startDate
+        vc.endDate=self.endDate
+        vc.startLocationId=self.startLocationId
+        vc.endLocationId=self.endLocationId
         vc.gunSayisi = gunSayisi
         navigationController?.pushViewController(vc, animated: true)
         }
