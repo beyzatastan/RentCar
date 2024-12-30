@@ -1,25 +1,32 @@
+//
+//  UserViewModel.swift
+//  RentCar
+//
+//  Created by beyza nur on 30.12.2024.
+//
+
 import Foundation
 import Combine
 
-class CustomerViewModel: ObservableObject {
-    @Published var customer: CustomerModel?
+class UserViewModel: ObservableObject {
+    @Published var user: UserModel?
     @Published var errorMessage: String?
     @Published var isLoading = false
 
-    private var customerWebService = CustomerWebService()
+    private var userWebService = UserWebServices()
     private var cancellables = Set<AnyCancellable>()
 
-    func addCustomer(customer: AddCustomerModel, completion: @escaping (Int?) -> Void) {
+    func addUser(user: AddUserModel, completion: @escaping (Int?) -> Void) {
         isLoading = true
-        customerWebService.addCustomer(customer: customer) { [weak self] result in
+        userWebService.addUser(user:user) { [weak self] result in
             DispatchQueue.main.async {
                 self?.isLoading = false
                 switch result {
                 case .success(let response):
                     // Müşteri ID'sini aldıktan sonra müşteri detaylarını alıyoruz
                     //müşteriyi kaydet
-                    UserDefaults.standard.set(response.customerId, forKey: "customerId")
-                    self?.fetchCustomerDetails(customerId: response.customerId, completion: completion)
+                    UserDefaults.standard.set(response.userId, forKey: "userId")
+                    self?.fetchUserDetails(userId: response.userId, completion: completion)
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
                     completion(nil)
@@ -28,21 +35,22 @@ class CustomerViewModel: ObservableObject {
         }
     }
 
-    func fetchCustomerDetails(customerId: Int, completion: @escaping (Int?) -> Void) {
+    func fetchUserDetails(userId: Int, completion: @escaping (Int?) -> Void) {
         // Müşteri detaylarını almak için başka bir API çağrısı yapıyoruz
-        customerWebService.fetchCustomerById(customerId: customerId) { [weak self] result in
+        userWebService.fetchUserById(userId: userId) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let customer):
-                    self?.customer = customer
-                    print(customer.id)
-                    completion(customer.id)
+                case .success(let user):
+                    self?.user = user
+                    print(user.id)
+                    completion(user.id)
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
                     completion(nil)
                 }
             }
         }
-    }
     
+    }
+
 }

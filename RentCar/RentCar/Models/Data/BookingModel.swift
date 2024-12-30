@@ -35,8 +35,14 @@ struct AddBookingModel: Codable {
     let startLocationId: Int
     let endLocationId: Int
 }
-
 struct BookingResponse: Codable {
+    let values: [BookingModel]
+    
+    private enum CodingKeys: String, CodingKey {
+        case values = "$values"
+    }
+}
+struct BookingResponsee: Codable {
     let message: String
     let bookingId: Int
 }

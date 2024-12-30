@@ -9,10 +9,15 @@ import UIKit
 
 class LastViewController: UIViewController {
 
+
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var mainVieww: UIView!
+    @IBOutlet weak var upView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       
+        mainVieww.layer.cornerRadius = 10
+        upView.layer.cornerRadius = 10
+        bottomView.layer.cornerRadius = 10
     }
     
     @IBAction func OKButtonClicked(_ sender: Any) {

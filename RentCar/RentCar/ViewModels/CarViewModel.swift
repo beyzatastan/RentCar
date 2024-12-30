@@ -36,16 +36,32 @@ class CarViewModel: ObservableObject {
             }
         }
     }
-    func getCarById(for carId: Int, completion: @escaping (Bool) -> Void) {
+    func getCarById(for carId: Int, completion: @escaping (Result<CarModel, Error>) -> Void) {
         CarWebService.shared.getCarById(for: carId) { [weak self] result in
-            if case let .success(car) = result {
-                self?.cars = [car]
-                completion(true)
-            } else {
-                completion(false)
+            switch result {
+            case .success(let car):
+                self?.cars = [car]  // Başarılı durumda car'ı cars listesine ekliyoruz
+                completion(.success(car))  // Başarı durumunda car modelini döndürüyoruz
+            case .failure(let error):
+                print("Hata: \(error.localizedDescription), Detaylar: \(error)")  // Hata mesajı yazdırıyoruz
+                completion(.failure(error))  // Hata durumunda error döndürüyoruz
             }
         }
     }
+
+    
+    func getCarByUserId(for userId: Int, completion: @escaping (Bool) -> Void) {
+           CarWebService.shared.gethCarsByUserId(userId: userId) { [weak self] result in
+               switch result {
+                       case .success(let cars): // Dizi döndürülür
+                           self?.cars = cars // Gelen diziyi atıyoruz
+                           completion(true)
+                       case .failure(let error): // Hata durumu
+                           print("Failed to fetch cars: \(error.localizedDescription)")
+                           completion(false)
+                       }
+           }
+       }
 
     func deleteCar(id: Int, completion: @escaping (Bool) -> Void) {
         CarWebService.shared.deleteCar(id: id) { result in

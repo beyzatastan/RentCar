@@ -6,10 +6,11 @@ class BookingWebService {
     
     private init() {}
     
-    func getBookingsByCustomerId(for customerId: Int, completion: @escaping (Result<[BookingModel], Error>) -> Void) {
-        let urlString = "http://localhost:5163/api/BookingsContoller/getBookingsByCustomer/\(customerId)"
+    func getBookingsByUserId(for userId: Int, completion: @escaping (Result<[BookingModel], Error>) -> Void) {
+        let urlString = "http://localhost:5163/api/BookingsContoller/getBookingsByUser/\(userId)"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
+            completion(.failure(NSError(domain: "APIError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL."])))
             return
         }
         
@@ -21,7 +22,7 @@ class BookingWebService {
                 return
             }
             
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 || httpResponse.statusCode == 204  else {
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
                 print("Invalid response or non-200 status code.")
                 completion(.failure(NSError(domain: "APIError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid response or non-200 status code."])))
                 return
@@ -34,9 +35,10 @@ class BookingWebService {
                 }
                 
                 do {
-                    let bookings = try JSONDecoder().decode([BookingModel].self, from: data)
-                    print("Bookings for Customer \(customerId): \(bookings)")
-                    completion(.success(bookings)) // Başarı durumunda completion handler'ı çağır
+                    // `BookingResponse` kullanarak $values içindeki rezervasyonları çöz
+                    let response = try JSONDecoder().decode(BookingResponse.self, from: data)
+                    print("Bookings for User \(userId): \(response.values)")
+                    completion(.success(response.values)) // Başarı durumunda rezervasyonları döndür
                 } catch {
                     print("Error decoding JSON: \(error)")
                     completion(.failure(error)) // JSON çözümleme hatasında completion handler'ı çağır
@@ -45,6 +47,7 @@ class BookingWebService {
         }
         task.resume()
     }
+
     func getBookingsByCarId(for carId: Int, completion: @escaping (Result<[BookingModel], Error>) -> Void) {
         let urlString = "http://localhost:5163/api/BookingsContoller/getBookingsByCar/\(carId)"
         guard let url = URL(string: urlString) else {
@@ -85,7 +88,7 @@ class BookingWebService {
         task.resume()
     }
     
-    func addBooking(booking: AddBookingModel, completion: @escaping (Result<BookingResponse, Error>) -> Void) {
+    func addBooking(booking: AddBookingModel, completion: @escaping (Result<BookingResponsee, Error>) -> Void) {
         // API URL
         guard let url = URL(string: "http://localhost:5163/api/BookingsContoller/addBooking") else {
             completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
@@ -119,7 +122,7 @@ class BookingWebService {
             do {
                 // Decode the response into CustomerResponse
                 let decoder = JSONDecoder()
-                let bookingResponse = try decoder.decode(BookingResponse.self, from: data)
+                let bookingResponse = try decoder.decode(BookingResponsee.self, from: data)
                 completion(.success(bookingResponse))
             } catch {
                 completion(.failure(error))

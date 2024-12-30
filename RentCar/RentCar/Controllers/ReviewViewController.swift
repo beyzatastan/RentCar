@@ -24,9 +24,33 @@ class ReviewViewController: UIViewController, UITextFieldDelegate {
     let yorumText = UITextField()
     let yorumLabel = UILabel()
     
+    var car: [CarModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let car = car.first {
+            aracNameLabel.text = "\(car.brand ?? "") \(car.model ?? "")"
+            gunlukFiyatLabel.text = "Günlük Fiyat: \(car.dailyPrice)₺"
+            yolcuSayisiLabel.text = "\(car.seatCount)"
+            vitesLabel.text = "\(car.transmissionType)"
+            benzinlabel.text = "\(car.gasType)"
+            depozitoLabel.text = "\(car.deposit)₺"
+            yolcuSayisiLabel.text = "\(car.seatCount)"
+            
+            // Eğer araç resmi varsa, resmi göster
+            if let imageUrl = URL(string: car.imageUrl) {
+                DispatchQueue.global().async {
+                    if let data = try? Data(contentsOf: imageUrl) {
+                        DispatchQueue.main.async {
+                            self.imageView.image = UIImage(data: data)
+                        }
+                    }
+                }
+            }
+               }
+        
+        
         // Rating Label Setup
         ratingLabel.text = "Yıldız"
         ratingLabel.font = UIFont.systemFont(ofSize: 12)

@@ -3,6 +3,8 @@ import Foundation
 class CarWebService {
     static let shared = CarWebService() // Singleton pattern
     private init() {}
+
+
     
         
     func addCar(car: AddCarModel, completion: @escaping (Result<CarModel, Error>) -> Void) {
@@ -85,8 +87,34 @@ class CarWebService {
         task.resume()
     }
     
-    
-    
+    func gethCarsByUserId(userId: Int, completion: @escaping (Result<[CarModel], Error>) -> Void) {
+        let urlString = "http://localhost:5163/api/Car/getCarsByUserId/\(userId)"
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "Invalid URL", code: -1, userInfo: nil)))
+            return
+        }
+
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No data", code: -1, userInfo: nil)))
+                return
+            }
+
+            do {
+                let apiResponse = try JSONDecoder().decode(ApiResponse<CarModel>.self, from: data)
+                completion(.success(apiResponse.values))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+        task.resume()
+    }
+
     func getCarById(for carId: Int, completion: @escaping (Result<CarModel, Error>) -> Void) {
         let urlString = "http://localhost:5163/api/Car/getCarById/\(carId)"
         guard let url = URL(string: urlString) else {
@@ -96,29 +124,41 @@ class CarWebService {
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
+                print("Error: \(error.localizedDescription)")
                 completion(.failure(error))
                 return
             }
             
-            guard let data = data else {
-                completion(.failure(NSError(domain: "NoData", code: -1, userInfo: nil)))
+            if let httpResponse = response as? HTTPURLResponse {
+                print("HTTP Status Code: \(httpResponse.statusCode)")
+                if httpResponse.statusCode != 200 {
+                    print("Error: Invalid response from server")
+                    completion(.failure(NSError(domain: "InvalidResponse", code: httpResponse.statusCode, userInfo: nil)))
+                    return
+                }
+            }
+            
+            guard let data = data, !data.isEmpty else {
+                print("Received empty data or data is not valid")
+                completion(.failure(NSError(domain: "EmptyData", code: -1, userInfo: nil)))
                 return
             }
             
+            // Veriyi yazdırarak kontrol et
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("Received JSON: \(jsonString)")
+            }
+            
             do {
-                let apiResponse = try JSONDecoder().decode(ApiResponse<CarModel>.self, from: data)
-                if let car = apiResponse.values.first {
-                    completion(.success(car))
-                } else {
-                    completion(.failure(NSError(domain: "NoCarFound", code: 404, userInfo: nil)))
-                }
+                let car = try JSONDecoder().decode(CarModel.self, from: data)
+                completion(.success(car))
             } catch {
+                print("JSON Decoding Error: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }
         task.resume()
     }
-    
     func deleteCar(id: Int, completion: @escaping (Result<Void, Error>) -> Void) {
         let urlString = "http://localhost:5163/api/CarController/deleteCarById/\(id)"
         guard let url = URL(string: urlString) else {

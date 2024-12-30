@@ -31,8 +31,8 @@ class BookingViewModel {
         }
     }
     
-    func getBookingsByCustomerId(for customerId: Int, completion: @escaping (Bool) -> Void) {
-        BookingWebService.shared.getBookingsByCustomerId(for: customerId) { [weak self] result in
+    func getBookingsByUserId(for userId: Int, completion: @escaping (Bool) -> Void) {
+        BookingWebService.shared.getBookingsByUserId(for: userId) { [weak self] result in
             switch result {
             case .success(let bookings):
                 self?.bookings = bookings

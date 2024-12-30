@@ -42,6 +42,7 @@ class FaturaViewController: UIViewController, UITextFieldDelegate{
     
     //veritabanı için
     var carId:Int?
+    var userId:Int?
     
     var startLocationId:Int?
     var endLocationId:Int?
@@ -370,34 +371,41 @@ class FaturaViewController: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func devamButtonClicked(_ sender: Any) {
-        var userInput = AddCustomerModel(firstName: nameField.text ?? "",
-                                         lastName: soyadText.text ?? "",
-                                         email: epostaText.text ?? "",
-                                         phoneNumber: telefonText.text ?? "",
-                                         identityNumber: tcText.text ?? "",
-                                         drivingLicenseIssuedDate: "",
-                                         drivingLicenseNumber: "",
-                                         birthDate: dogumText.text ?? "",
-                                         city: "",
-                                         district: "",
-                                         address: "",
-                                         postalCode: "",
-                                         role: "customer")
-        
-        if let dogumText = convertToISO8601Date(dogumText.text) {
-            userInput.birthDate = dogumText } else {
-                print("Invalid date format for dogumText")
-                return
-            }
-        
-        let vc=storyboard?.instantiateViewController(identifier: "nextFatura") as! NextFaturaViewController
-        vc.customerBilgi2=userInput
-        vc.carId=self.carId
-        vc.startLocationId=self.startLocationId
-        vc.endLocationId=self.endLocationId
-        vc.endDate=self.endDate
-        vc.startDate=self.startDate
-        navigationController?.pushViewController(vc, animated: true)
+        if let userIdString = UserDefaults.standard.string(forKey: "userId"),
+           let userIdInt = Int(userIdString) {
+            self.userId = userIdInt
+            print("Customer ID: \(userIdInt)")
+            var userInput = AddCustomerModel(userId: userId!,
+                                             firstName: nameField.text ?? "",
+                                             lastName: soyadText.text ?? "",
+                                             email: epostaText.text ?? "",
+                                             phoneNumber: telefonText.text ?? "",
+                                             identityNumber: tcText.text ?? "",
+                                             drivingLicenseIssuedDate: "",
+                                             drivingLicenseNumber: "",
+                                             birthDate: dogumText.text ?? "",
+                                             city: "",
+                                             district: "",
+                                             address: "",
+                                             postalCode: "",
+                                             role: "customer")
+            
+            if let dogumText = convertToISO8601Date(dogumText.text) {
+                userInput.birthDate = dogumText } else {
+                    print("Invalid date format for dogumText")
+                    return
+                }
+            
+            
+            let vc=storyboard?.instantiateViewController(identifier: "nextFatura") as! NextFaturaViewController
+            vc.customerBilgi2=userInput
+            vc.carId=self.carId
+            vc.startLocationId=self.startLocationId
+            vc.endLocationId=self.endLocationId
+            vc.endDate=self.endDate
+            vc.startDate=self.startDate
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     func convertToISO8601Date(_ dateString: String?) -> String? {
         guard let dateString = dateString else {

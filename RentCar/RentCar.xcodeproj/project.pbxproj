@@ -56,6 +56,10 @@
 		6DBDFE792D17470700FAD94F /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBDFE782D17470700FAD94F /* ReviewModel.swift */; };
 		6DBDFE7B2D1747C800FAD94F /* CustomerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBDFE7A2D1747C800FAD94F /* CustomerModel.swift */; };
 		6DBDFE7F2D1748EB00FAD94F /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBDFE7E2D1748EB00FAD94F /* BookingViewModel.swift */; };
+		6DC673B52D22DF66003751CD /* UsersServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC673B42D22DF66003751CD /* UsersServices.swift */; };
+		6DC673B72D22DFA4003751CD /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC673B62D22DFA4003751CD /* UserModel.swift */; };
+		6DC673B92D22E197003751CD /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC673B82D22E197003751CD /* UserViewModel.swift */; };
+		6DC673BD2D22EF9F003751CD /* LastRidesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC673BC2D22EF9F003751CD /* LastRidesTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +114,10 @@
 		6DBDFE782D17470700FAD94F /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		6DBDFE7A2D1747C800FAD94F /* CustomerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerModel.swift; sourceTree = "<group>"; };
 		6DBDFE7E2D1748EB00FAD94F /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
+		6DC673B42D22DF66003751CD /* UsersServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersServices.swift; sourceTree = "<group>"; };
+		6DC673B62D22DFA4003751CD /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		6DC673B82D22E197003751CD /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		6DC673BC2D22EF9F003751CD /* LastRidesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastRidesTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +221,7 @@
 				6D3B48792CED25DA00B961FD /* CarsTableViewCell.swift */,
 				6D1C95C52D1E340F0024312D /* BeforePhotosTableViewCell.swift */,
 				6D1C95C92D1F49AD0024312D /* ReviewTableViewCell.swift */,
+				6DC673BC2D22EF9F003751CD /* LastRidesTableViewCell.swift */,
 			);
 			path = ViewCells;
 			sourceTree = "<group>";
@@ -238,6 +247,7 @@
 				6DBDFE652D173F7D00FAD94F /* RentImagesServices.swift */,
 				6DBDFE672D173F8700FAD94F /* CustomersServices.swift */,
 				6DBDFE692D173FDA00FAD94F /* SuppliersServices.swift */,
+				6DC673B42D22DF66003751CD /* UsersServices.swift */,
 			);
 			path = WebServices;
 			sourceTree = "<group>";
@@ -250,6 +260,7 @@
 				6D1C95BA2D1823CA0024312D /* ReviewViewModel.swift */,
 				6D1C95BC2D1C551D0024312D /* LocationViewModels.swift */,
 				6D1C95BE2D1DB65C0024312D /* CustomerViewModel.swift */,
+				6DC673B82D22E197003751CD /* UserViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -272,6 +283,7 @@
 				6DBDFE762D1746ED00FAD94F /* SupplierModel.swift */,
 				6DBDFE782D17470700FAD94F /* ReviewModel.swift */,
 				6DBDFE7A2D1747C800FAD94F /* CustomerModel.swift */,
+				6DC673B62D22DFA4003751CD /* UserModel.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -354,9 +366,13 @@
 				6D418B092CC2E7DC003B851C /* LastRidesViewController.swift in Sources */,
 				6D1C95B92D1767470024312D /* CarViewModel.swift in Sources */,
 				6DA132642CF68EA2002000EB /* OnayPageViewController.swift in Sources */,
+				6DC673B52D22DF66003751CD /* UsersServices.swift in Sources */,
 				6D1C95CA2D1F49AD0024312D /* ReviewTableViewCell.swift in Sources */,
 				6DA132662CF77040002000EB /* TestPageViewController.swift in Sources */,
+				6DC673B72D22DFA4003751CD /* UserModel.swift in Sources */,
+				6DC673BD2D22EF9F003751CD /* LastRidesTableViewCell.swift in Sources */,
 				6D15EB7A2CC5BFA7003CF7D2 /* AddCarViewController.swift in Sources */,
+				6DC673B92D22E197003751CD /* UserViewModel.swift in Sources */,
 				6D3B487F2CED33EE00B961FD /* InfosViewController.swift in Sources */,
 				6DBDFE642D173F5E00FAD94F /* ReviewsServices.swift in Sources */,
 				6DA132602CF5BCB4002000EB /* OdemeViewController.swift in Sources */,

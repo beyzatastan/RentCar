@@ -9,7 +9,6 @@ import UIKit
 
 class PersonalPageViewController: UIViewController {
     
-    @IBOutlet weak var cıkısYapButton: UIButton!
     @IBOutlet weak var personView: UIView!
     @IBOutlet weak var personLabel: UILabel!
     @IBOutlet weak var view1: UIView!
@@ -30,23 +29,7 @@ class PersonalPageViewController: UIViewController {
         tableView.delegate=self
         tableView.dataSource=self
         
-        if let customerId = UserDefaults.standard.value(forKey: "customerId") as? Int {
-              // Eğer customerId varsa, "Çıkış Yap" yazsın
-              cıkısYapButton.setTitle("Mevcut Kullanıcı Bilgilerimi Sıfırla ", for: .normal)
-          } else {
-              // Eğer customerId yoksa, "Giriş Yap" yazsın
-              cıkısYapButton.isHidden=true
-          }
-    }
-    @IBAction func cikisYapButtonClicked(_ sender: Any) {
-        
-            if let customerId = UserDefaults.standard.value(forKey: "customerId") as? Int {
-                // Eğer customerId varsa, çıkış yap
-                UserDefaults.standard.removeObject(forKey: "customerId")
-                
-                makeAlert(title: "Başarılı", message: "Kullanıcı başarıyla sıfırlandı.")
-
-            }
+       
     }
     
     @IBAction func homeButton(_ sender: Any) {
@@ -87,8 +70,7 @@ extension PersonalPageViewController: UITableViewDataSource,UITableViewDelegate{
                vc.selectedCase = "4"
                navigationController?.pushViewController(vc, animated: true)
            case 1:
-               let vc=storyboard?.instantiateViewController(identifier: "infos") as! InfosViewController
-               vc.selectedCase = "5"
+               let vc=storyboard?.instantiateViewController(identifier: "lastRides") as! LastRidesViewController
                navigationController?.pushViewController(vc, animated: true)
            case 2:
                let vc=storyboard?.instantiateViewController(identifier: "infos") as! InfosViewController

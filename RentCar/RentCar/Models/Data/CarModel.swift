@@ -49,15 +49,15 @@ struct CarModel: Codable {
         case reviews = "reviews"
     }
 }
-struct ApiResponse<T: Codable>: Codable {
-    let id: String
-    let values: [T] // Burada values bir dizi olmalı
-
+struct ApiResponse<T: Decodable>: Decodable {
+    let values: [T]
+    
     enum CodingKeys: String, CodingKey {
-        case id = "$id"
         case values = "$values"
     }
 }
+
+
 struct AddCarModel: Codable {
     let brand: String? // Car brand
     let model: String // Car model

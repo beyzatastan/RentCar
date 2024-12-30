@@ -36,7 +36,7 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print(UserDefaults.standard.string(forKey: "customerId"))
+        print(UserDefaults.standard.string(forKey: "userId"))
         self.navigationItem.hidesBackButton = true
         view1.layer.cornerRadius = 10
         view2.layer.cornerRadius = 10
@@ -136,6 +136,9 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
                 print("Failed to fetch reviews")
             }
         }
+        
+        //************************************************
+        
         //************************************************
         let newBooking = AddBookingModel(
             customerId: 3,
@@ -155,14 +158,6 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
             }
         }
         //------------------------------------------------
-        viewModelB.getBookingsByCustomerId(for: customerId) { success in
-            if success {
-                // UI'yi güncelle
-                print(self.viewModelB.bookings)
-            } else {
-                print("Failed to fetch bookings")
-            }
-        }
                viewModelB.getBookingsByCarId(for: carId) { success in
                    if success {
                        // UI'yi güncelle
@@ -225,24 +220,10 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
             viewModelC.addCar(car: newCar)
         //************************************************
         //customer adddddd
-        let customerToAdd = AddCustomerModel(
-            firstName: "İrem",
-            lastName: "Yaşar",
-            email: "iremyasar@gmail.com",
-            phoneNumber: "5055424343",
-            identityNumber: "11223344578",
-            drivingLicenseIssuedDate: "2000-10-12T00:00:00",
-            drivingLicenseNumber: "11223344567",
-            birthDate: "1993-04-09T00:00:00",
-            city: "Bursa",
-            district: "Nilüfer",
-            address: "Ord Kent",
-            postalCode: "16200",
-            role: nil
-        )
+      
         //************************************************
         //karıd
-        viewModelC.getCarById(for: carId) { success in
+      /*  viewModelC.getCarById(for: carId) { success in
             DispatchQueue.main.async {
                 if success {
                     // Access the car details from viewModel.cars
@@ -257,7 +238,7 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
                     print("Failed to fetch car with ID \(carId)")
                 }
             }
-        }
+        } */
     }
-   
+  
 }

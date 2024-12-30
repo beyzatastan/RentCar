@@ -30,7 +30,7 @@ class OnayPageViewController: UIViewController {
         
         if let customerIdString = UserDefaults.standard.string(forKey: "customerId"),
                    let customerIdInt = Int(customerIdString) {
-                    self.customerId = customerIdInt // Assign to the class property
+                    self.customerId = customerIdInt 
                     print("customerId: \(customerIdInt)")
                 } else {
                     print("Customer ID not found or invalid.")
