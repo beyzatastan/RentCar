@@ -9,6 +9,7 @@ import UIKit
 
 class PersonalPageViewController: UIViewController {
     
+    @IBOutlet weak var cıkısYapButton: UIButton!
     @IBOutlet weak var personView: UIView!
     @IBOutlet weak var personLabel: UILabel!
     @IBOutlet weak var view1: UIView!
@@ -28,6 +29,24 @@ class PersonalPageViewController: UIViewController {
         buttonView.layer.cornerRadius = 10
         tableView.delegate=self
         tableView.dataSource=self
+        
+        if let customerId = UserDefaults.standard.value(forKey: "customerId") as? Int {
+              // Eğer customerId varsa, "Çıkış Yap" yazsın
+              cıkısYapButton.setTitle("Mevcut Kullanıcı Bilgilerimi Sıfırla ", for: .normal)
+          } else {
+              // Eğer customerId yoksa, "Giriş Yap" yazsın
+              cıkısYapButton.isHidden=true
+          }
+    }
+    @IBAction func cikisYapButtonClicked(_ sender: Any) {
+        
+            if let customerId = UserDefaults.standard.value(forKey: "customerId") as? Int {
+                // Eğer customerId varsa, çıkış yap
+                UserDefaults.standard.removeObject(forKey: "customerId")
+                
+                makeAlert(title: "Başarılı", message: "Kullanıcı başarıyla sıfırlandı.")
+
+            }
     }
     
     @IBAction func homeButton(_ sender: Any) {
@@ -86,5 +105,18 @@ extension PersonalPageViewController: UITableViewDataSource,UITableViewDelegate{
            tableView.deselectRow(at: indexPath, animated: true)
        }
     
-    
+    func makeAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okButton = UIAlertAction(title: "Tamam", style: .cancel) { _ in
+            // OK butonuna basıldığında ana sayfaya yönlendiriyoruz
+            if let viewController = self.storyboard?.instantiateViewController(identifier: "main") as? MainPageViewController {
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+        }
+        
+        alert.addAction(okButton)
+        self.present(alert, animated: true, completion: nil)
+    }
+
 }

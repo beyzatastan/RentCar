@@ -49,14 +49,16 @@ class BeforePhotosViewController: UIViewController, UITableViewDataSource, UITab
             switch result {
             case .success(let response):
                 print("Images uploaded successfully: \(response)")
-                let vc = self.storyboard?.instantiateViewController(identifier: "beforeResimleriKaydet") as! LastViewController
-                self.navigationController?.pushViewController(vc, animated: true)
-                
+                // Ensure navigation is performed on the main thread
+                           DispatchQueue.main.async {
+                               let vc = self.storyboard?.instantiateViewController(identifier: "beforeResimleriKaydet") as! LastViewController
+                               self.navigationController?.pushViewController(vc, animated: true)
+                           }
             case .failure(let error):
                 print("Failed to upload images: \(error.localizedDescription)")
                 // Hata durumunda kullanıcıya bir uyarı gösterebilirsiniz
-                let alert = UIAlertController(title: "Error", message: "Failed to upload images. Please try again.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                let alert = UIAlertController(title: "Error", message: "Resimleri yüklerken hata oluştu. Lütfen tekrar deneyiniz.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Tamam", style: .default))
                 self.present(alert, animated: true, completion: nil)
             }
         }

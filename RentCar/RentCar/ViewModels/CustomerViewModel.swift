@@ -17,6 +17,8 @@ class CustomerViewModel: ObservableObject {
                 switch result {
                 case .success(let response):
                     // Müşteri ID'sini aldıktan sonra müşteri detaylarını alıyoruz
+                    //müşteriyi kaydet
+                    UserDefaults.standard.set(response.customerId, forKey: "customerId")
                     self?.fetchCustomerDetails(customerId: response.customerId, completion: completion)
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription

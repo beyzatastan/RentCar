@@ -186,6 +186,8 @@ class SurucuBilgiViewController: UIViewController ,UITextFieldDelegate{
             }
         
         viewModel.addCustomer(customer: customerBilgi3!) { customerId in
+            print("UserDefaults Calıştı")
+            print(UserDefaults.standard.string(forKey: "customerId"))
             // customerId verisi alındığında
             if let customerId = customerId {
                 let vc = self.storyboard?.instantiateViewController(identifier: "odeme") as! OdemeViewController

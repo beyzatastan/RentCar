@@ -100,13 +100,54 @@ class CarDetailsViewController: UIViewController {
     
     
     @IBAction func kiralaButton(_ sender: Any) {
-        let vc=storyboard?.instantiateViewController(identifier: "fatura") as! FaturaViewController
-        vc.carId=self.carId
-        vc.startLocationId=self.startLocationId
-        vc.endLocationId=self.endLocationId
-        vc.endDate=self.endDate
-        vc.startDate=self.startDate
-        navigationController?.pushViewController(vc, animated: true)
+        let customerId = UserDefaults.standard.integer(forKey: "customerId")
+        if customerId != 0 {
+               showAlert(title: "Önceki Bilgiler", message: "Son kiralama bilgilerinizle devam etmek ister misiniz?") { continueWithOldInfo in
+                   if continueWithOldInfo {
+                       // Kullanıcı evet dediyse, bilgileri doldurup Fatura sayfasına yönlendiriyoruz
+                       let vc = self.storyboard?.instantiateViewController(identifier: "odeme") as! OdemeViewController
+                       vc.carId=self.carId
+                       vc.startLocationId=self.startLocationId
+                       vc.endLocationId=self.endLocationId
+                       vc.endDate=self.endDate
+                       vc.startDate=self.startDate
+                       self.navigationController?.pushViewController(vc, animated: true)
+                   } else {
+                       let vc = self.storyboard?.instantiateViewController(identifier: "fatura") as! FaturaViewController
+                       vc.carId=self.carId
+                       vc.startLocationId=self.startLocationId
+                       vc.endLocationId=self.endLocationId
+                       vc.endDate=self.endDate
+                       vc.startDate=self.startDate
+                       self.navigationController?.pushViewController(vc, animated: true)
+                                          }
+               }
+           } else {
+               let vc=storyboard?.instantiateViewController(identifier: "fatura") as! FaturaViewController
+               vc.carId=self.carId
+               vc.startLocationId=self.startLocationId
+               vc.endLocationId=self.endLocationId
+               vc.endDate=self.endDate
+               vc.startDate=self.startDate
+               navigationController?.pushViewController(vc, animated: true)
+               
+           }
+    }
+    func showAlert(title: String, message: String, completion: @escaping (Bool) -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        // Evet butonu
+        alert.addAction(UIAlertAction(title: "Evet", style: .default, handler: { _ in
+            completion(true)
+        }))
+        
+        // Hayır butonu
+        alert.addAction(UIAlertAction(title: "Hayır", style: .cancel, handler: { _ in
+            completion(false)
+        }))
+        
+        // Alerti gösteriyoruz
+        self.present(alert, animated: true, completion: nil)
     }
     func getReviewsByCarId(carId: Int) {
         reviewViewModel.getReviewsByCarId(for: carId) { success in

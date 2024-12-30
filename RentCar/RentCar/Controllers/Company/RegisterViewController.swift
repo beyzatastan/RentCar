@@ -32,11 +32,11 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButton(_ sender: Any) {
+        
     }
-}
-
-class VerifyViewController: UIViewController{
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBAction func kaydolButton(_ sender: Any) {
+        let vc=storyboard?.instantiateViewController(identifier: "register") as! RegisterViewController
+        navigationController?.pushViewController(vc, animated: false)
     }
+    
 }

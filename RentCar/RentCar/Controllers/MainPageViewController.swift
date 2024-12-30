@@ -36,7 +36,7 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
+        print(UserDefaults.standard.string(forKey: "customerId"))
         self.navigationItem.hidesBackButton = true
         view1.layer.cornerRadius = 10
         view2.layer.cornerRadius = 10

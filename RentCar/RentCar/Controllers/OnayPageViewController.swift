@@ -28,6 +28,14 @@ class OnayPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let customerIdString = UserDefaults.standard.string(forKey: "customerId"),
+                   let customerIdInt = Int(customerIdString) {
+                    self.customerId = customerIdInt // Assign to the class property
+                    print("customerId: \(customerIdInt)")
+                } else {
+                    print("Customer ID not found or invalid.")
+                }
+                
         print("customerId: \(String(describing: customerId))")
         print("carId: \(String(describing: carId))")
         print("startDate: \(String(describing: startDate))")
@@ -39,33 +47,45 @@ class OnayPageViewController: UIViewController {
         navigationItem.hidesBackButton = true
     }
     @IBAction func nextButton(_ sender: Any) {
-        //booking oluştur
-        let newBooking = AddBookingModel(
-            customerId: customerId!,
-            carId: carId!,
-            startDate: convertDateToString(date: startDate!),
-            endDate: convertDateToString(date: endDate!),
-            startLocationId: startLocationId!,
-            endLocationId: endLocationId!
-        )
-        bookingVM.addBooking(booking: newBooking) { bookingId in
-            if let bookingId = bookingId {
-                let vc=self.storyboard?.instantiateViewController(identifier: "test") as! TestPageViewController
-                vc.bookingId = bookingId
-                vc.customerId=self.customerId
-                vc.carId = self.carId
-                vc.startLocationId = self.startLocationId
-                vc.endLocationId = self.endLocationId
-                vc.endDate = self.endDate
-                vc.startDate = self.startDate
-                
-                // Son olarak geçişi sağlıyoruz
-                self.navigationController?.pushViewController(vc, animated: true)
-            }else{
-                print("Customer ID could not be fetched.")
-            }
-        }
-    }
+        
+        // Safely unwrap values before creating newBooking
+              if let customerId = customerId,
+                 let carId = carId,
+                 let startDate = startDate,
+                 let endDate = endDate,
+                 let startLocationId = startLocationId,
+                 let endLocationId = endLocationId {
+                  
+                  let newBooking = AddBookingModel(
+                      customerId: customerId,
+                      carId: carId,
+                      startDate: convertDateToString(date: startDate),
+                      endDate: convertDateToString(date: endDate),
+                      startLocationId: startLocationId,
+                      endLocationId: endLocationId
+                  )
+                  
+                  bookingVM.addBooking(booking: newBooking) { bookingId in
+                      if let bookingId = bookingId {
+                          let vc = self.storyboard?.instantiateViewController(identifier: "test") as! TestPageViewController
+                          vc.bookingId = bookingId
+                          vc.customerId = self.customerId
+                          vc.carId = self.carId
+                          vc.startLocationId = self.startLocationId
+                          vc.endLocationId = self.endLocationId
+                          vc.endDate = self.endDate
+                          vc.startDate = self.startDate
+                          
+                          // Son olarak geçişi sağlıyoruz
+                          self.navigationController?.pushViewController(vc, animated: true)
+                      } else {
+                          print("Booking ID could not be fetched.")
+                      }
+                  }
+              } else {
+                  print("Missing required booking details.")
+              }
+          }
     func convertDateToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd" // Veya ihtiyacınıza uygun bir format belirleyin

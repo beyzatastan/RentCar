@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="t7u-xa-qE9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NqK-dc-tSJ">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
@@ -189,6 +189,27 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hesabın yok mu?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9J-Wf-wsZ">
+                                <rect key="frame" x="107" y="666" width="150" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                                <color key="textColor" red="0.98823529409999999" green="0.98039215690000003" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQ1-fi-rHZ">
+                                <rect key="frame" x="188" y="660" width="101" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Kaydol"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Kayıt Ol">
+                                    <fontDescription key="titleFontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="15"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="kaydolButton:" destination="rSz-AK-fku" eventType="touchUpInside" id="hDl-9x-r7L"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zn3-o3-Y9D"/>
                         <color key="backgroundColor" red="0.77647058823529413" green="0.1803921568627451" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
@@ -200,7 +221,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMm-20-efG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="766" y="-55"/>
+            <point key="canvasLocation" x="765.64885496183206" y="-55.633802816901408"/>
         </scene>
         <!--Main Page View Controller-->
         <scene sceneID="FhE-G4-nGu">
@@ -393,12 +414,12 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="tintColor" red="0.77647058820000003" green="0.18039215689999999" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Uygulamaya Giriş Yap ➤">
+                                        <buttonConfiguration key="configuration" style="filled" title="Çıkış Yap➤">
                                             <color key="baseForegroundColor" red="0.76470589639999997" green="0.30980393290000002" blue="0.26274511220000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="findButtonClicked:" destination="vvA-BK-Yl3" eventType="touchUpInside" id="wzv-V5-hIP"/>
+                                            <action selector="cikisYapButtonClicked:" destination="BJL-IP-dPe" eventType="touchUpInside" id="pso-hP-ujp"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -457,6 +478,7 @@
                     </view>
                     <connections>
                         <outlet property="buttonView" destination="Edr-Cx-tzc" id="f1m-Yd-pfP"/>
+                        <outlet property="cıkısYapButton" destination="vKi-ag-0zw" id="7rS-KX-cp3"/>
                         <outlet property="personLabel" destination="YIZ-bV-8AI" id="4x5-xW-MHl"/>
                         <outlet property="personView" destination="qSY-Nw-KKV" id="dAZ-or-bij"/>
                         <outlet property="tableView" destination="Ws4-J6-CeD" id="kcr-pc-1K1"/>
@@ -1178,7 +1200,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fiatEgea" translatesAutoresizingMaskIntoConstraints="NO" id="TvG-zE-zq9">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TvG-zE-zq9">
                                                             <rect key="frame" x="12" y="28" width="200" height="160"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
@@ -1838,7 +1860,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LiA-8x-O6L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3613" y="649"/>
+            <point key="canvasLocation" x="3671" y="649"/>
         </scene>
         <!--Next Fatura View Controller-->
         <scene sceneID="JOQ-8v-mAW">
@@ -1971,7 +1993,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="34S-Sh-wxH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4288" y="649"/>
+            <point key="canvasLocation" x="4311" y="649"/>
         </scene>
         <!--Odeme View Controller-->
         <scene sceneID="e92-l7-G7q">
@@ -2108,7 +2130,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tc1-mD-u6a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5580.9160305343512" y="648.59154929577471"/>
+            <point key="canvasLocation" x="5581" y="649"/>
         </scene>
         <!--Surucu Bilgi View Controller-->
         <scene sceneID="BV6-7S-Xmh">
@@ -2259,7 +2281,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cFZ-AG-nuk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4905" y="649"/>
+            <point key="canvasLocation" x="4940" y="649"/>
         </scene>
         <!--Onay Page View Controller-->
         <scene sceneID="mzQ-S1-Sml">
@@ -2698,7 +2720,7 @@
                 <viewController storyboardIdentifier="camera" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t7u-xa-qE9" customClass="CameraPageViewController" customModule="RentCar" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QYy-84-UWC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4259" y="1311"/>
+            <point key="canvasLocation" x="4360" y="1311"/>
         </scene>
         <!--Search Page View Controller-->
         <scene sceneID="MOV-QN-bcH">
@@ -3239,15 +3261,15 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="tintColor" red="0.76470589639999997" green="0.30980393290000002" blue="0.26274511220000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aracı Kiralamadan Önce Her Yönden Resmini Çekmeyi Unutmayın." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzw-ai-wjn">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yolculuğunuzun tadını çıkarın!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzw-ai-wjn">
                                         <rect key="frame" x="13" y="361" width="346" height="121"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="22"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="25"/>
                                         <color key="textColor" systemColor="viewFlipsideBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ödeme İşlemi Başarıyla Gerçekleşti." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUI-Uz-mVL">
-                                        <rect key="frame" x="13" y="31" width="346" height="102"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yükleme İşlemi Başarıyla Gerçekleşti" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUI-Uz-mVL">
+                                        <rect key="frame" x="13" y="8" width="346" height="127"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="22"/>
                                         <color key="textColor" systemColor="viewFlipsideBackgroundColor"/>
@@ -3272,6 +3294,7 @@
                                     <color key="baseBackgroundColor" red="0.76470589639999997" green="0.30980393290000002" blue="0.26274511220000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
+                                    <action selector="OKButtonClicked:" destination="egn-Cc-2Jm" eventType="touchUpInside" id="38u-Ya-68H"/>
                                     <action selector="devamButtonClicked:" destination="wsr-xa-Ooh" eventType="touchUpInside" id="FC0-Kg-v7s"/>
                                     <action selector="nextButton:" destination="egn-Cc-2Jm" eventType="touchUpInside" id="afG-vE-FVI"/>
                                 </connections>
@@ -3287,7 +3310,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ib-2g-HnL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5581" y="1311"/>
+            <point key="canvasLocation" x="5580.9160305343512" y="1310.5633802816901"/>
         </scene>
     </scenes>
     <resources>
