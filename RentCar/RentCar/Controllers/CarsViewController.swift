@@ -1,4 +1,3 @@
-
 import UIKit
 
 class CarsViewController: UIViewController {
@@ -10,6 +9,8 @@ class CarsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sonucSayisi: UILabel!
     
+    var carRatings: [Int: Double] = [:]
+    
     var birakisTimeText: String?
     var birakisText: String?
     var alisTimeText: String?
@@ -18,19 +19,19 @@ class CarsViewController: UIViewController {
     var gunSayisi: Int?
     // ViewModel
     var carViewModel = CarViewModel()
+    var reviewViewModel = ReviewViewModel()
+    
     var cars: [CarModel] = []
-    var car:CarModel?
-    
+    var car: CarModel?
     //veritabanı için
-    var startLocationId:Int?
-    var endLocationId:Int?
+    var startLocationId: Int?
+    var endLocationId: Int?
     
-    var startLocation:String?
-    var endLocation:String?
+    var startLocation: String?
+    var endLocation: String?
     
-    var startDate:Date?
-    var endDate:Date?
-    
+    var startDate: Date?
+    var endDate: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,7 @@ class CarsViewController: UIViewController {
         print("Başlangıç Tarihi: \(startDate ?? Date())")
         print("Bırakış Tarihi: \(endDate ?? Date())")
         print("Gün Sayısı: \(gunSayisi ?? 0)")
+        
         // Özel UIButton oluştur
         let backButton = UIButton(type: .system)
         backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
@@ -68,7 +70,6 @@ class CarsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    
     private func fetchCars() {
         carViewModel.getCars { [weak self] result in
             DispatchQueue.main.async {
@@ -79,6 +80,10 @@ class CarsViewController: UIViewController {
                         car.locationId == self?.startLocationId
                     }
                     self?.sonucSayisi.text = "\(self!.cars.count) sonuç listeleniyor"
+                    
+                    // Fetch reviews and calculate average rating for each car
+                    self?.fetchReviewsForCars()
+                    
                     self?.tableView.reloadData()
                 case .failure(let error):
                     print("API Error: \(error.localizedDescription)")
@@ -86,8 +91,29 @@ class CarsViewController: UIViewController {
             }
         }
     }
-
+    
+    private func fetchReviewsForCars() {
+        for car in cars {
+            reviewViewModel.getReviewsByCarId(for: car.id) { [weak self] success in
+                if success {
+                    // Yorumları al
+                    let reviews = self?.reviewViewModel.reviews.filter { $0.carId == car.id } ?? []
+                    let totalRating = reviews.reduce(0) { $0 + ($1.rating ?? 0) }
+                    let averageRating = reviews.isEmpty ? 0 : Double(totalRating) / Double(reviews.count)
+                    // Car ID'sine göre puanı kaydet
+                    self?.carRatings[car.id] = averageRating
+                    // Tabloları yeniden yükle
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                    }
+                } else {
+                    print("Failed to fetch reviews for car \(car.id)")
+                }
+            }
+        }
+    }
 }
+
 extension CarsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cars.count
@@ -100,11 +126,18 @@ extension CarsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.carNameLabel.text = (car.brand ?? " ") + " " + car.model
         cell.aracSınıfı.text = "\(car.carClass)"
         cell.vitesDurumu.text = "\(car.transmissionType)"
-        cell.toplamGunLabel.text="Toplam Fiyat(\(gunSayisi!)):"
+        cell.toplamGunLabel.text = "Toplam Fiyat(\(gunSayisi!)):"
         cell.yolcuSayisi.text = "\(car.seatCount) Kişilik"
         cell.gunlukFiyat.text = "Günlük Fiyat: \(car.dailyPrice)₺"
         cell.benzinDurumu.text = "\(car.gasType)"
-       // cell.puanDurumu.text = "\(car.reviews)" ??
+        
+        // Dictionary'den puanı al
+        if let averageRating = carRatings[car.id] {
+            cell.puanDurumu.text = String(format: "%.1f", averageRating) + "★"
+        } else {
+            cell.puanDurumu.text = "No reviews"
+        }
+        
         if let gunSayisi = self.gunSayisi {
             let toplamFiyat = car.dailyPrice * Decimal(gunSayisi)
             cell.toplamFiyat.text = "\(toplamFiyat)₺"
@@ -112,10 +145,8 @@ extension CarsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.toplamFiyat.text = "Toplam Fiyat: -"
         }
 
-            
-        // İmaj URL'sini gösterme
+        // Image URL handling
         if let imageUrl = URL(string: car.imageUrl) {
-            // Resmi yavaşça yükleyin
             DispatchQueue.global().async {
                 if let data = try? Data(contentsOf: imageUrl) {
                     DispatchQueue.main.async {
@@ -127,22 +158,22 @@ extension CarsViewController: UITableViewDataSource, UITableViewDelegate {
 
         return cell
     }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            // Seçilen aracı kaydediyoruz.
-            car = cars[indexPath.row]
-            print("Selected car: \(car?.brand ?? "Unknown") \(car?.model ?? "Unknown")")
+        car = cars[indexPath.row]
+        print("Selected car: \(car?.brand ?? "Unknown") \(car?.model ?? "Unknown")")
         let vc = storyboard?.instantiateViewController(identifier: "details") as! CarDetailsViewController
-        vc.car = car // Seçilen aracı detay sayfasına aktarıyoruz.
+        vc.car = car
         vc.carId = car?.id
-        vc.startDate=self.startDate
-        vc.endDate=self.endDate
-        vc.startLocationId=self.startLocationId
-        vc.endLocationId=self.endLocationId
+        vc.startDate = self.startDate
+        vc.endDate = self.endDate
+        vc.startLocationId = self.startLocationId
+        vc.endLocationId = self.endLocationId
         vc.gunSayisi = gunSayisi
         navigationController?.pushViewController(vc, animated: true)
-        }
-    
+    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 340 // Satır yüksekliğini belirleyin
+        return 340
     }
 }

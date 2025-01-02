@@ -9,6 +9,7 @@ import UIKit
 
 class CarDetailsViewController: UIViewController {
     
+    @IBOutlet weak var puanLabel: UILabel!
     @IBOutlet weak var upView: UIView!
     @IBOutlet weak var teslimYeriLabel: UILabel!
     @IBOutlet weak var benzinLabel: UILabel!
@@ -31,7 +32,6 @@ class CarDetailsViewController: UIViewController {
     var gunSayisi:Int?
     var aracReviews: [ReviewModel] = []
     var review:ReviewModel?
-    
     //veritabanı için
     var carId:Int?
     
