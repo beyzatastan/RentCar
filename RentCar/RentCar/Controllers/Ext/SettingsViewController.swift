@@ -13,6 +13,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var upView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var girisYapButton: UIButton!
+    
     
     let array = ["Hakkımızda","İletişim","Kullanım Koşulları","Uygulama Bilgileri"]
     
@@ -29,9 +31,27 @@ class SettingsViewController: UIViewController {
         tableView.delegate=self
         tableView.dataSource=self
         
+        if let userId = UserDefaults.standard.value(forKey: "userId") as? Int {
+              // Eğer customerId varsa, "Çıkış Yap" yazsın
+              girisYapButton.setTitle("Mevcut Hesaptan Çıkış Yap➤", for: .normal)
+          } else {
+              // Eğer customerId yoksa, "Giriş Yap" yazsın
+              girisYapButton.setTitle("Mevcut Hesaba Giriş Yap➤", for: .normal)
+          }
         
     }
     
+    @IBAction func girisYapButtonClicked(_ sender: Any) {
+        if let userId = UserDefaults.standard.value(forKey: "userId") as? Int {
+            UserDefaults.standard.removeObject(forKey: "userId")
+            UserDefaults.standard.removeObject(forKey: "customerId")
+            let vc=storyboard?.instantiateViewController(withIdentifier: "login") as! LoginViewController
+            navigationController?.pushViewController(vc, animated: true)
+        }else{
+            let vc=storyboard?.instantiateViewController(withIdentifier: "login") as! LoginViewController
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
     @IBAction func homeButton(_ sender: Any) {
         let home=storyboard?.instantiateViewController(identifier: "main") as! MainPageViewController
         navigationController?.pushViewController(home, animated: false)
@@ -85,5 +105,5 @@ extension SettingsViewController:UITableViewDelegate,UITableViewDataSource{
            tableView.deselectRow(at: indexPath, animated: true)
        }
     
-    
+   
 }

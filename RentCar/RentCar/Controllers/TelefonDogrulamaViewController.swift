@@ -17,6 +17,8 @@ class TelefonDogrulamaViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var sayacText: UILabel!
     var otpFields: [UITextField] = []
     
+    var customerBilgi : AddCustomerModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.layer.cornerRadius = 10
@@ -117,6 +119,7 @@ class TelefonDogrulamaViewController: UIViewController,UITextFieldDelegate {
     }
     @IBAction func devamButtonClicked(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(identifier: "nextFatura") as! NextFaturaViewController
+        vc.customerBilgi2 = customerBilgi
         navigationController?.pushViewController(vc, animated: true)
     }
     

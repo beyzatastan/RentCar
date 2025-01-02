@@ -28,6 +28,8 @@ class PersonalPageViewController: UIViewController {
         buttonView.layer.cornerRadius = 10
         tableView.delegate=self
         tableView.dataSource=self
+        
+       
     }
     
     @IBAction func homeButton(_ sender: Any) {
@@ -68,8 +70,7 @@ extension PersonalPageViewController: UITableViewDataSource,UITableViewDelegate{
                vc.selectedCase = "4"
                navigationController?.pushViewController(vc, animated: true)
            case 1:
-               let vc=storyboard?.instantiateViewController(identifier: "infos") as! InfosViewController
-               vc.selectedCase = "5"
+               let vc=storyboard?.instantiateViewController(identifier: "lastRides") as! LastRidesViewController
                navigationController?.pushViewController(vc, animated: true)
            case 2:
                let vc=storyboard?.instantiateViewController(identifier: "infos") as! InfosViewController
@@ -86,5 +87,18 @@ extension PersonalPageViewController: UITableViewDataSource,UITableViewDelegate{
            tableView.deselectRow(at: indexPath, animated: true)
        }
     
-    
+    func makeAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okButton = UIAlertAction(title: "Tamam", style: .cancel) { _ in
+            // OK butonuna basıldığında ana sayfaya yönlendiriyoruz
+            if let viewController = self.storyboard?.instantiateViewController(identifier: "main") as? MainPageViewController {
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+        }
+        
+        alert.addAction(okButton)
+        self.present(alert, animated: true, completion: nil)
+    }
+
 }

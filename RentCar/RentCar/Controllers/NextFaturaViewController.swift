@@ -9,6 +9,9 @@ import UIKit
 
 class NextFaturaViewController: UIViewController ,UITextFieldDelegate{
 
+    var customerBilgi2 : AddCustomerModel?
+    var CustomerViewModel: CustomerViewModel?
+    
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var buton1: UIButton!
     @IBOutlet weak var buton2: UIButton!
@@ -34,6 +37,15 @@ class NextFaturaViewController: UIViewController ,UITextFieldDelegate{
     
     let postaKoduText = UITextField()
     let postaKoduLabel = UILabel()
+    
+    //veritabanı için
+    var carId:Int?
+    
+    var startLocationId:Int?
+    var endLocationId:Int?
+    
+    var startDate:Date?
+    var endDate:Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -322,7 +334,17 @@ class NextFaturaViewController: UIViewController ,UITextFieldDelegate{
     }
     
     @IBAction func devamButtonClicked(_ sender: Any) {
+        customerBilgi2?.city = ilField.text ?? ""
+        customerBilgi2?.district = ilceText.text ?? ""
+        customerBilgi2?.address = adresText.text ?? "" 
+        customerBilgi2?.postalCode = postaKoduText.text ?? ""
         let vc=storyboard?.instantiateViewController(identifier: "surucu") as! SurucuBilgiViewController
+        vc.customerBilgi3 = customerBilgi2
+        vc.carId=self.carId
+        vc.startLocationId=self.startLocationId
+        vc.endLocationId=self.endLocationId
+        vc.endDate=self.endDate
+        vc.startDate=self.startDate
         navigationController?.pushViewController(vc, animated: true)
     }
     

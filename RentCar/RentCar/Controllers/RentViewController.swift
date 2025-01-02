@@ -13,6 +13,14 @@ class RentViewController: UIViewController {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var buttonView: UIView!
     
+    //veritabanı için
+    var startLocationId:Int?
+    var endLocationId:Int?
+    
+    var startLocation:String?
+    var endLocation:String?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -27,22 +35,13 @@ class RentViewController: UIViewController {
         
         //arama kısmına basılınca
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mekanTapped))
-        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(ikinciMekanTapped))
-
             mekan.addGestureRecognizer(tapGesture)
-            ikinciMekan.addGestureRecognizer(tapGesture2)
-        
         }
         @objc func mekanTapped() {
             let vc = storyboard?.instantiateViewController(identifier: "search") as! SearchPageViewController
             navigationController?.pushViewController(vc, animated: true)
         }
     
-        @objc func ikinciMekanTapped() {
-            let vc = storyboard?.instantiateViewController(identifier: "search2") as! Search2PageViewController
-            navigationController?.pushViewController(vc, animated: true)
-    }
-        
     
     @IBAction func homeButton(_ sender: Any) {
         let homeVc=storyboard?.instantiateViewController(identifier: "main") as! MainPageViewController
@@ -62,19 +61,96 @@ class RentViewController: UIViewController {
     
     
     @IBAction func findButtonClicked(_ sender: Any) {
-        let carsVv=storyboard?.instantiateViewController(withIdentifier: "cars") as! CarsViewController
-        //carsVv.alisLabel.text = mekan.attributedPlaceholder?.string ??
-       // carsVv.birakisLabel.text = ikinciMekan.placeholder
-        //carsVv.alisTimeLabel.text = alisDate.text
-        //carsVv.birakisTimeLabel.text = birakisDate.text
+        guard let carsVv = storyboard?.instantiateViewController(withIdentifier: "cars") as? CarsViewController else {
+            print("CarsViewController could not be instantiated")
+            return
+        }
+        
+        // Getting text from mekan field
+        if let mekanPlaceholder = mekan.attributedPlaceholder?.string {
+            carsVv.alisText = mekanPlaceholder
+        } else {
+            carsVv.alisText = "Varsayılan Text" // Placeholder yoksa bir varsayılan metin kullanabilirsiniz
+        }
+        if let mekanPlaceholder = mekan.attributedPlaceholder?.string {
+            carsVv.birakisText = mekanPlaceholder
+        } else {
+            carsVv.birakisText = "Varsayılan Text" // Placeholder yoksa bir varsayılan metin kullanabilirsiniz
+        }
+
+        // Assigning the selected time to CarsViewController
+        carsVv.birakisTimeText = birakisDate.text
+        carsVv.alisTimeText = alisDate.text
+        
+        
+        // Combine date and time to create a complete Date object
+        if let alisDateText = alisDate.text, let alisTimeText = alisTime.text, let birakisDateText = birakisDate.text, let birakisTimeText = birakisTime.text {
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd MMM yyyy" // Date format
+            dateFormatter.locale = Locale(identifier: "en_US") // Locale for English month names
+
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "HH:mm" // Time format (hours and minutes)
+            
+            // Combine date and time for start date
+            if let alisDateObj = dateFormatter.date(from: alisDateText),
+               let alisTimeObj = timeFormatter.date(from: alisTimeText) {
+                let calendar = Calendar.current
+                let startDate = calendar.date(bySettingHour: calendar.component(.hour, from: alisTimeObj),
+                                              minute: calendar.component(.minute, from: alisTimeObj),
+                                              second: 0,
+                                              of: alisDateObj)
+                carsVv.startDate = startDate // Send the combined startDate to CarsViewController
+            }
+
+            // Combine date and time for end date
+            if let birakisDateObj = dateFormatter.date(from: birakisDateText),
+               let birakisTimeObj = timeFormatter.date(from: birakisTimeText) {
+                let calendar = Calendar.current
+                let endDate = calendar.date(bySettingHour: calendar.component(.hour, from: birakisTimeObj),
+                                            minute: calendar.component(.minute, from: birakisTimeObj),
+                                            second: 0,
+                                            of: birakisDateObj)
+                carsVv.endDate = endDate // Send the combined endDate to CarsViewController
+            }
+            
+            // Optional: calculate the difference in days between the start and end dates
+            if let differenceInDays = calculateDateDifference(from: alisDateText, to: birakisDateText) {
+                carsVv.gunSayisi = differenceInDays
+            } else {
+                print("Invalid dates")  // This will handle invalid date input
+            }
+        }
+        
+        carsVv.startLocation=self.startLocation
+        carsVv.startLocationId=self.startLocationId
+        carsVv.endLocation=self.endLocation
+        carsVv.endLocationId=self.endLocationId
+
         navigationController?.pushViewController(carsVv, animated: true)
     }
-    
-    
-    
+
+
+    func calculateDateDifference(from startDateText: String, to endDateText: String) -> Int? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy" // Tarih formatını doğru şekilde ayarla
+        dateFormatter.locale = Locale(identifier: "en_US") // İngilizce ay ismi ile uyumlu olması için
+        
+        guard let startDate = dateFormatter.date(from: startDateText),
+              let endDate = dateFormatter.date(from: endDateText) else {
+            return nil
+        }
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day], from: startDate, to: endDate)
+        return components.day
+    }
+
+
     let mekan: UITextField = {
         let textField = UITextField()
-        textField.placeholder = " İl, ilçe ya da havalimanı"
+        textField.placeholder = " Kiralanacak İl"
         textField.borderStyle = .none
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.textColor = .darkGray
@@ -90,41 +166,7 @@ class RentViewController: UIViewController {
         return textField
     }()
     
-    let farkliBirakLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Aracı farklı bir yerde bırakmak istiyorum"
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .darkGray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let farkliBirakSwitch: UISwitch = {
-        let switchControl = UISwitch()
-        switchControl.isOn = false
-        switchControl.translatesAutoresizingMaskIntoConstraints = false
-        return switchControl
-    }()
-    
-    let ikinciMekan: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = " Bırakılacak yer"
-        textField.borderStyle = .none
-        textField.font = UIFont.systemFont(ofSize: 16)
-        textField.textColor = .darkGray
-        textField.backgroundColor = .white
-        textField.layer.borderColor = UIColor.lightGray.cgColor
-        textField.layer.borderWidth = 1.0
-        textField.layer.cornerRadius = 9
-        textField.layer.shadowColor = UIColor.black.cgColor
-        textField.layer.shadowOffset = CGSize(width: 0, height: 2)
-        textField.layer.shadowOpacity = 0.1
-        textField.layer.shadowRadius = 4
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.isHidden = true // Başlangıçta gizli
-        return textField
-    }()
-    
+  
     let alisDate: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Araç Alış Tarihi"
@@ -171,9 +213,7 @@ class RentViewController: UIViewController {
     
     func setupUI() {
         view.addSubview(mekan)
-        view.addSubview(farkliBirakLabel)
-        view.addSubview(farkliBirakSwitch)
-        view.addSubview(ikinciMekan)
+       
         
         // Tarih ve saat için stackView'ları ayarla
         let alisStackView = UIStackView(arrangedSubviews: [alisTime, alisDate])
@@ -199,29 +239,15 @@ class RentViewController: UIViewController {
             mekan.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             mekan.heightAnchor.constraint(equalToConstant: 50),
             
-            farkliBirakLabel.topAnchor.constraint(equalTo: mekan.bottomAnchor, constant: 20),
-            farkliBirakLabel.leadingAnchor.constraint(equalTo: mekan.leadingAnchor),
-            
-            farkliBirakSwitch.centerYAnchor.constraint(equalTo: farkliBirakLabel.centerYAnchor),
-            farkliBirakSwitch.leadingAnchor.constraint(equalTo: farkliBirakLabel.trailingAnchor, constant: 8),
-            
-            ikinciMekan.topAnchor.constraint(equalTo: farkliBirakLabel.bottomAnchor, constant: 20),
-            ikinciMekan.leadingAnchor.constraint(equalTo: mekan.leadingAnchor),
-            ikinciMekan.trailingAnchor.constraint(equalTo: mekan.trailingAnchor),
-            ikinciMekan.heightAnchor.constraint(equalToConstant: 50),
-            
-            horizontalStackView.topAnchor.constraint(equalTo: ikinciMekan.bottomAnchor, constant: 20),
+           
+            horizontalStackView.topAnchor.constraint(equalTo: mekan.bottomAnchor, constant: 20),
             horizontalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             horizontalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
         
-        // Switch action
-        farkliBirakSwitch.addTarget(self, action: #selector(toggleSwitch), for: .valueChanged)
     }
     
-    @objc func toggleSwitch() {
-        ikinciMekan.isHidden = !farkliBirakSwitch.isOn
-    }
+   
     func createDatePicker(for textField: UITextField) {
            let datePicker = UIDatePicker()
            datePicker.preferredDatePickerStyle = .wheels
@@ -244,7 +270,7 @@ class RentViewController: UIViewController {
            timePicker.preferredDatePickerStyle = .wheels
            timePicker.datePickerMode = .time // Sadece saat seçimi
            timePicker.locale = Locale(identifier: "tr_TR") // İsteğe bağlı: Türkçe saat formatı
-           
+           timePicker.minuteInterval = 10
            // Toolbar
            let toolbar = UIToolbar()
            toolbar.sizeToFit()
