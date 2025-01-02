@@ -47,7 +47,6 @@ class SettingsViewController: UIViewController {
             UserDefaults.standard.removeObject(forKey: "customerId")
             let vc=storyboard?.instantiateViewController(withIdentifier: "login") as! LoginViewController
             navigationController?.pushViewController(vc, animated: true)
-            makeAlert(title: "Başarılı", message: "Kullanıcı başarıyla sıfırlandı.")
         }else{
             let vc=storyboard?.instantiateViewController(withIdentifier: "login") as! LoginViewController
             navigationController?.pushViewController(vc, animated: true)
@@ -106,17 +105,5 @@ extension SettingsViewController:UITableViewDelegate,UITableViewDataSource{
            tableView.deselectRow(at: indexPath, animated: true)
        }
     
-    func makeAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let okButton = UIAlertAction(title: "Tamam", style: .cancel) { _ in
-            // OK butonuna basıldığında ana sayfaya yönlendiriyoruz
-            if let viewController = self.storyboard?.instantiateViewController(identifier: "main") as? MainPageViewController {
-                self.navigationController?.pushViewController(viewController, animated: true)
-            }
-        }
-        
-        alert.addAction(okButton)
-        self.present(alert, animated: true, completion: nil)
-    }
+   
 }

@@ -11,9 +11,7 @@ class ReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var kmLabel: UILabel!
     @IBOutlet weak var bottomView: UIView!
-    @IBOutlet weak var toplamFiyattLabel: UILabel!
     @IBOutlet weak var gunlukFiyatLabel: UILabel!
-    @IBOutlet weak var toplamFiyatLabel: UILabel!
     @IBOutlet weak var depozitoLabel: UILabel!
     @IBOutlet weak var yolcuSayisiLabel: UILabel!
     @IBOutlet weak var aracSınıfLabel: UILabel!
@@ -24,12 +22,14 @@ class ReviewViewController: UIViewController, UITextFieldDelegate {
     let yorumText = UITextField()
     let yorumLabel = UILabel()
     
-    var car: [CarModel] = []
+    var car: CarModel?
+    var viewModelR = ReviewViewModel()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let car = car.first {
+        if let car = car{
             aracNameLabel.text = "\(car.brand ?? "") \(car.model ?? "")"
             gunlukFiyatLabel.text = "Günlük Fiyat: \(car.dailyPrice)₺"
             yolcuSayisiLabel.text = "\(car.seatCount)"
@@ -52,7 +52,7 @@ class ReviewViewController: UIViewController, UITextFieldDelegate {
         
         
         // Rating Label Setup
-        ratingLabel.text = "Yıldız"
+        ratingLabel.text = "1-5 Arası Puanınız"
         ratingLabel.font = UIFont.systemFont(ofSize: 12)
         ratingLabel.textColor = .gray
         ratingLabel.isHidden = true
@@ -60,10 +60,11 @@ class ReviewViewController: UIViewController, UITextFieldDelegate {
         surusView.addSubview(ratingLabel)
         
         // Rating TextField Setup
-        ratingText.placeholder = "Yıldız"
+        ratingText.placeholder = "1-5 Arası Puanınız"
         ratingText.borderStyle = .roundedRect
         ratingText.delegate = self
         ratingText.translatesAutoresizingMaskIntoConstraints = false
+        ratingText.keyboardType = .numberPad
         surusView.addSubview(ratingText)
         
         // Yorum TextField Setup
@@ -103,8 +104,6 @@ class ReviewViewController: UIViewController, UITextFieldDelegate {
         ])
         mainView.layer.cornerRadius=10
         surusView.layer.cornerRadius=10
-        toplamFiyattLabel.layer.cornerRadius=5
-        toplamFiyattLabel.layer.masksToBounds=true
         navigationItem.backButtonTitle = ""
          
         // Özel UIButton oluştur
@@ -146,5 +145,53 @@ class ReviewViewController: UIViewController, UITextFieldDelegate {
         }
     }
     @IBAction func degerlendirmeyiGonderButtonClicked(_ sender: Any) {
+        guard let customerIdString = UserDefaults.standard.string(forKey: "customerId"),
+              let customerId = Int(customerIdString) else {
+            print("Geçerli bir customerId bulunamadı.")
+            return
+        }
+
+        guard let ratingString = ratingText.text,
+              let rating = Int(ratingString) else {
+            print("Geçerli bir rating girilmedi.")
+            return
+        }
+
+        // Mevcut tarihi ve saati ISO 8601 formatında alın
+        let dateFormatter = ISO8601DateFormatter()
+        let createDate = dateFormatter.string(from: Date())
+
+        // AddReviewModel nesnesini oluştur
+        let newReview = AddReviewModel(
+            customerId: customerId,
+            supplierId: car?.supplierId,
+            carId: car?.id,
+            rating: rating,
+            comment: yorumText.text,
+            dateCreated: createDate
+        )
+
+        // Review'ı eklemek için ViewModel'i çağır
+        viewModelR.addReview(review: newReview)
+
+        // Başarı mesajı gösterin
+        showAlert(title: "Başarılı", message: "Yorumunuz Kaydedildi") { success in
+            let vc = self.storyboard?.instantiateViewController(identifier: "main") as! MainPageViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
+
+    func showAlert(title: String, message: String, completion: @escaping (Bool) -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        // Evet butonu
+        alert.addAction(UIAlertAction(title: "Tamam", style: .default, handler: { _ in
+            completion(true)
+        }))
+        
+        // Alerti gösteriyoruz
+        self.present(alert, animated: true, completion: nil)
+    }
+
 }
+

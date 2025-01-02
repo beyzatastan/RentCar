@@ -169,17 +169,19 @@ extension CarDetailsViewController: UITableViewDataSource,UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell=tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ReviewTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ReviewTableViewCell
        
         let review = aracReviews[indexPath.row]
         
-        cell.commentLabel.text=review.comment
-        cell.rateLabel.text="Değerlendirme: \(review.rating!)★"
-       // cell.reviewDateLabel.text=review.dateCreated
+        cell.commentLabel.text = review.comment
+        cell.rateLabel.text = "\(review.rating ?? 0)★"
+
+
         return cell
     }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 60
     }
     
 }

@@ -23,6 +23,15 @@ struct AddReviewModel: Codable {
     var rating: Int? // 1-5 arası puan
     var comment: String?
     var dateCreated: String?
+    
+    enum CodingKeys: String, CodingKey {
+           case customerId
+           case supplierId
+           case carId
+           case rating
+           case comment
+           case dateCreated = "createDate"
+       }
 }
 struct ReviewResponse: Codable {
     var values: [ReviewModel]

@@ -19,6 +19,7 @@ class ReviewViewModel {
             switch result {
             case .success(let reviews):
                 self?.reviews = reviews
+                print("yorum gonderildi")
                 completion(true)
             case .failure(let error):
                 print("Error fetching reviews: \(error)")
