@@ -101,66 +101,76 @@ class CarDetailsViewController: UIViewController {
     
     @IBAction func kiralaButton(_ sender: Any) {
         let customerId = UserDefaults.standard.integer(forKey: "customerId")
-        if customerId != 0 {
-               showAlert(title: "Önceki Bilgiler", message: "Son kiralama bilgilerinizle devam etmek ister misiniz?") { continueWithOldInfo in
-                   if continueWithOldInfo {
-                       // Kullanıcı evet dediyse, bilgileri doldurup Fatura sayfasına yönlendiriyoruz
-                       let vc = self.storyboard?.instantiateViewController(identifier: "odeme") as! OdemeViewController
-                       vc.carId=self.carId
-                       vc.startLocationId=self.startLocationId
-                       vc.endLocationId=self.endLocationId
-                       vc.endDate=self.endDate
-                       vc.startDate=self.startDate
-                       self.navigationController?.pushViewController(vc, animated: true)
-                   } else {
-                       let vc = self.storyboard?.instantiateViewController(identifier: "fatura") as! FaturaViewController
-                       vc.carId=self.carId
-                       vc.startLocationId=self.startLocationId
-                       vc.endLocationId=self.endLocationId
-                       vc.endDate=self.endDate
-                       vc.startDate=self.startDate
-                       self.navigationController?.pushViewController(vc, animated: true)
-                                          }
-               }
-           } else {
-               let vc=storyboard?.instantiateViewController(identifier: "fatura") as! FaturaViewController
-               vc.carId=self.carId
-               vc.startLocationId=self.startLocationId
-               vc.endLocationId=self.endLocationId
-               vc.endDate=self.endDate
-               vc.startDate=self.startDate
-               navigationController?.pushViewController(vc, animated: true)
-               
-           }
-    }
-    func showAlert(title: String, message: String, completion: @escaping (Bool) -> Void) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        // Evet butonu
-        alert.addAction(UIAlertAction(title: "Evet", style: .default, handler: { _ in
-            completion(true)
-        }))
-        
-        // Hayır butonu
-        alert.addAction(UIAlertAction(title: "Hayır", style: .cancel, handler: { _ in
-            completion(false)
-        }))
-        
-        // Alerti gösteriyoruz
-        self.present(alert, animated: true, completion: nil)
-    }
-    func getReviewsByCarId(carId: Int) {
-        reviewViewModel.getReviewsByCarId(for: carId) { success in
-            if success {
-                print(self.reviewViewModel.reviews)
-                self.aracReviews = self.reviewViewModel.reviews
-                self.tableView.reloadData() // Reload table view after fetching the reviews
+        let userId = UserDefaults.standard.integer(forKey:"userId")
+        if userId == 0 {
+            showAlert(title: "Hata", message: "Devam etmeden önce uygulamaya giriş yapmalısınız.") { yes in
+                if yes{
+                    let vc = self.storyboard?.instantiateViewController(identifier: "login") as! LoginViewController
+                    self.navigationController?.pushViewController(vc, animated: false)
+                }
+            }
+        }
+            if customerId != 0 {
+                showAlert(title: "Önceki Bilgiler", message: "Son kiralama bilgilerinizle devam etmek ister misiniz?") { continueWithOldInfo in
+                    if continueWithOldInfo {
+                        // Kullanıcı evet dediyse, bilgileri doldurup Fatura sayfasına yönlendiriyoruz
+                        let vc = self.storyboard?.instantiateViewController(identifier: "odeme") as! OdemeViewController
+                        vc.carId=self.carId
+                        vc.startLocationId=self.startLocationId
+                        vc.endLocationId=self.endLocationId
+                        vc.endDate=self.endDate
+                        vc.startDate=self.startDate
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    } else {
+                        let vc = self.storyboard?.instantiateViewController(identifier: "fatura") as! FaturaViewController
+                        vc.carId=self.carId
+                        vc.startLocationId=self.startLocationId
+                        vc.endLocationId=self.endLocationId
+                        vc.endDate=self.endDate
+                        vc.startDate=self.startDate
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
             } else {
-                print("Failed to fetch reviews")
+                let vc=storyboard?.instantiateViewController(identifier: "fatura") as! FaturaViewController
+                vc.carId=self.carId
+                vc.startLocationId=self.startLocationId
+                vc.endLocationId=self.endLocationId
+                vc.endDate=self.endDate
+                vc.startDate=self.startDate
+                navigationController?.pushViewController(vc, animated: true)
+                
+            }
+        }
+        func showAlert(title: String, message: String, completion: @escaping (Bool) -> Void) {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            
+            // Evet butonu
+            alert.addAction(UIAlertAction(title: "Evet", style: .default, handler: { _ in
+                completion(true)
+            }))
+            
+            // Hayır butonu
+            alert.addAction(UIAlertAction(title: "Hayır", style: .cancel, handler: { _ in
+                completion(false)
+            }))
+            
+            // Alerti gösteriyoruz
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        func getReviewsByCarId(carId: Int) {
+            reviewViewModel.getReviewsByCarId(for: carId) { success in
+                if success {
+                    print(self.reviewViewModel.reviews)
+                    self.aracReviews = self.reviewViewModel.reviews
+                    self.tableView.reloadData() // Reload table view after fetching the reviews
+                } else {
+                    print("Failed to fetch reviews")
+                }
             }
         }
     }
-}
 
 extension CarDetailsViewController: UITableViewDataSource,UITableViewDelegate{
     
