@@ -70,10 +70,9 @@ The attached screenshots showcase the user interface and workflows, including lo
  <img src="https://github.com/user-attachments/assets/c509e78d-e5d1-4693-8a08-99f888cbeb7d" width="300" />    
  <img src="https://github.com/user-attachments/assets/480f9b92-d7a2-47d6-8f31-0766493a239a" width="300" />  <br>
  <img src="https://github.com/user-attachments/assets/263c2db9-cabd-40b8-9a1c-aa1f13e8709c" width="300" />   
- <img src="https://github.com/user-attachments/assets/5e88754a-4d70-42ce-a12a-92a6819d77c2" width="300" />
- <img src="https://github.com/user-attachments/assets/123a35fa-2f6d-4521-9044-28653496c863" width="300" />    <br>
- <img src="https://github.com/user-attachments/assets/5dce8a83-70d7-4031-8bb6-23cc4a27f46e" width="300" />
-
+ <img src="https://github.com/user-attachments/assets/5abe64b0-a6da-4d88-aba1-5d309a3ecf2b" width="300" />   
+ <img src="https://github.com/user-attachments/assets/e06d887c-82d6-4bae-a22e-f91feb284eac" width="300" />     <br>
+ <img src="https://github.com/user-attachments/assets/3fdbf864-2feb-4436-ae65-b6a7cf126037"  width="300" />   
 
 ---
 
