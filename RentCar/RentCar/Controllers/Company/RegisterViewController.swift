@@ -89,6 +89,12 @@ class LoginViewController: UIViewController {
         navigationItem.hidesBackButton = true
     }
     
+    @IBAction func kaydolButtonTapped(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(identifier: "register") as! RegisterViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         guard let phoneNumber = phoneNumberText.text, !phoneNumber.isEmpty else {
             showAlert(title: "Hata", message: "Telefon numarasını giriniz.")

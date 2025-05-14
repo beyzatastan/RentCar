@@ -62,19 +62,28 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
     }
     
     @IBAction func rentPageButton(_ sender: Any) {
-        let rentVc=storyboard?.instantiateViewController(identifier: "rent") as! RentViewController
+        guard let rentVc = storyboard?.instantiateViewController(withIdentifier: "rent") as? RentViewController else {
+            print("Error: Could not instantiate RentViewController")
+            return
+        }
         navigationController?.pushViewController(rentVc, animated: false)
     }
-    
+
     @IBAction func personButton(_ sender: Any) {
-        let personVc=storyboard?.instantiateViewController(identifier: "personal") as! PersonalPageViewController
+        guard let personVc = storyboard?.instantiateViewController(withIdentifier: "personal") as? PersonalPageViewController else {
+            print("Error: Could not instantiate PersonalPageViewController")
+            return
+        }
         navigationController?.pushViewController(personVc, animated: false)
     }
+
     @IBAction func settingsButton(_ sender: Any) {
-        let settingVc=storyboard?.instantiateViewController(identifier: "settings") as! SettingsViewController
+        guard let settingVc = storyboard?.instantiateViewController(withIdentifier: "settings") as? SettingsViewController else {
+            print("Error: Could not instantiate SettingsViewController")
+            return
+        }
         navigationController?.pushViewController(settingVc, animated: false)
     }
-    
     func setupScrollView() {
         for i in 0..<photos.count {
             let imageView = UIImageView()

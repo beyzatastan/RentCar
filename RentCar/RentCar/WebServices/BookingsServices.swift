@@ -7,7 +7,7 @@ class BookingWebService {
     private init() {}
     
     func getBookingsByUserId(for userId: Int, completion: @escaping (Result<[BookingModel], Error>) -> Void) {
-        let urlString = "http://localhost:5163/api/BookingsContoller/getBookingsByUser/\(userId)"
+        let urlString = "http://localhost:5163/api/Bookings/getBookingsByUserId/\(userId)"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             completion(.failure(NSError(domain: "APIError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL."])))
@@ -49,7 +49,7 @@ class BookingWebService {
     }
 
     func getBookingsByCarId(for carId: Int, completion: @escaping (Result<[BookingModel], Error>) -> Void) {
-        let urlString = "http://localhost:5163/api/BookingsContoller/getBookingsByCar/\(carId)"
+        let urlString = "http://localhost:5163/api/Bookings/getBookingsByCar/\(carId)"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             return
@@ -90,7 +90,7 @@ class BookingWebService {
     
     func addBooking(booking: AddBookingModel, completion: @escaping (Result<BookingResponsee, Error>) -> Void) {
         // API URL
-        guard let url = URL(string: "http://localhost:5163/api/BookingsContoller/addBooking") else {
+        guard let url = URL(string: "http://localhost:5163/api/Bookings/addBooking") else {
             completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }
@@ -131,7 +131,7 @@ class BookingWebService {
     }
 
     func fetchBookingById(bookingId: Int, completion: @escaping (Result<BookingModel, Error>) -> Void) {
-        guard let url = URL(string: "http://localhost:5163/api/BookingsContoller/getBookingById/\(bookingId)") else {
+        guard let url = URL(string: "http://localhost:5163/api/Bookings/getBookingById/\(bookingId)") else {
             completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }
@@ -161,4 +161,3 @@ class BookingWebService {
     }
 
 }
-

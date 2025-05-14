@@ -9,11 +9,12 @@ import Foundation
 class ReviewWebService {
     
     static let shared = ReviewWebService() // Singleton pattern
-    
+    let baseUrl = BaseUrl().baseUrl;
+
     private init() {}
     func addReview(review: AddReviewModel, completion: @escaping (Result<ReviewModel, Error>) -> Void) {
         // API URL
-        guard let url = URL(string: "http://localhost:5163/api/ReviewContoller/addReview") else {
+        guard let url = URL(string: "\(baseUrl)/ReviewContoller/addReview") else {
             completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }
@@ -63,7 +64,7 @@ class ReviewWebService {
     }
     
     func getReviewsByCarId(for carId: Int, completion: @escaping (Result<[ReviewModel], Error>) -> Void) {
-        let urlString = "http://localhost:5163/api/ReviewContoller/getReviewsByCarId/\(carId)"
+        let urlString = "\(baseUrl)/ReviewContoller/getReviewsByCarId/\(carId)"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             return

@@ -2,10 +2,11 @@ import Foundation
 import UIKit
 
 class RentImagesWebServices {
-    
-   static let baseURL = "http://localhost:5163/api/RentImages/uploadBeforeRentalImages/"
-    static let shared = RentImagesWebServices()
-    
+    let baseUrl = BaseUrl().baseUrl;
+    var baseURL: String { // Computed property
+        return "\(baseUrl)/RentImages/uploadBeforeRentalImages"
+        let shared = RentImagesWebServices()}
+        
         func uploadImages(bookingId: Int, images: [UIImage], isBeforeRental: Bool, completion: @escaping (Result<String, Error>) -> Void) {
             // Resimleri base64'e çevir
             let imageBase64Strings = images.compactMap { image -> String? in
@@ -18,7 +19,7 @@ class RentImagesWebServices {
                 completion(.failure(NSError(domain: "com.rentcar", code: 400, userInfo: [NSLocalizedDescriptionKey: "You must upload exactly 4 images."])))
                 return
             }
-
+            
             // DTO'yu oluştur
             let rentImageDto = AddCarImageModel(
                 bookingId: bookingId,
@@ -27,9 +28,9 @@ class RentImagesWebServices {
                 imageUrl3: imageBase64Strings[2],
                 imageUrl4: imageBase64Strings[3]
             )
-
+            
             // API endpoint'ine POST isteği yapalım
-            let urlString = isBeforeRental ? "http://localhost:5163/api/RentImages/uploadBeforeRentalImages" : "http://localhost:5163/api/RentImages/uploadAfterRentalImages"
+            let urlString = isBeforeRental ? "\(baseUrl)/RentImages/uploadBeforeRentalImages" : "\(baseUrl)/RentImages/uploadAfterRentalImages"
             
             guard let url = URL(string: urlString) else {
                 completion(.failure(NSError(domain: "com.rentcar", code: 400, userInfo: [NSLocalizedDescriptionKey: "Invalid URL."])))
@@ -48,7 +49,7 @@ class RentImagesWebServices {
                 completion(.failure(error))
                 return
             }
-
+            
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 if let error = error {
                     completion(.failure(error))
@@ -65,5 +66,6 @@ class RentImagesWebServices {
             task.resume()
         }
     }
+    
+    
 
-   

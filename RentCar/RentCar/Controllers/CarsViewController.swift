@@ -126,6 +126,7 @@ extension CarsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.carNameLabel.text = (car.brand ?? " ") + " " + car.model
         cell.aracSınıfı.text = "\(car.carClass)"
         cell.vitesDurumu.text = "\(car.transmissionType)"
+        cell.depozito.text = "\(car.deposit)"
         cell.toplamGunLabel.text = "Toplam Fiyat(\(gunSayisi!)):"
         cell.yolcuSayisi.text = "\(car.seatCount) Kişilik"
         cell.gunlukFiyat.text = "Günlük Fiyat: \(car.dailyPrice)₺"

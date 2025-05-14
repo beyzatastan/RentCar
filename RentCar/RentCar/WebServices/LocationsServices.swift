@@ -3,10 +3,12 @@ import Foundation
 class LocationWebServices {
     
     static let shared = LocationWebServices() // Singleton pattern
+    let baseUrl = BaseUrl().baseUrl;
+
     
     private init() {}
     func getLocations(completion: @escaping (Result<[LocationModel], Error>) -> Void) {
-        let url = URL(string: "http://localhost:5163/api/Location/getAllLocations")!
+        let url = URL(string: "\(baseUrl)/Location/getAllLocations")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -38,7 +40,7 @@ class LocationWebServices {
     }
 
     func getLocationById(for locationId: Int, completion: @escaping (Result<LocationModel, Error>) -> Void) {
-        let urlString = "http://localhost:5163/api/Location/getLocationById/\(locationId)"
+        let urlString = "\(baseUrl)/Location/getLocationById/\(locationId)"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             return

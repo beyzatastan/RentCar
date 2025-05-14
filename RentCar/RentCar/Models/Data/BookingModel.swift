@@ -8,7 +8,7 @@
 import Foundation
 
 struct BookingModel: Codable {
-    let id: Int? // This should match the "id" field in the response
+    let id: Int?
     let customerId: Int?
     let carId: Int?
     let startDate: String?
@@ -46,5 +46,4 @@ struct BookingResponsee: Codable {
     let message: String
     let bookingId: Int
 }
-
 
