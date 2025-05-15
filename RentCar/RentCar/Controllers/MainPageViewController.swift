@@ -187,13 +187,7 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate,UIScro
         viewModelR.addReview(review: newReview)
         //************************************************
 
-        viewModelL.getLocationById(for: 1) { success in
-                           if success {
-                               print("Location fetched successfully")
-                           } else {
-                               print("Failed to fetch location")
-                           }
-                       }
+
        
         //************************************************
           viewModelL.getLocation { result in

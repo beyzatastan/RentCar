@@ -21,8 +21,8 @@ struct CarModel: Codable {
     let carClass: String
     let supplierId: Int // Foreign key linking to the supplier
     let supplier: SupplierModel? // Navigation property
-    let locationId: Int? // Foreign key linking to the location
-    let location: LocationModel? // Navigation property
+    let locationId: Int // Foreign key linking to the location
+    let location: LocationModel?// Navigation property
     let imageUrl: String
     let bookings: BookingModel? // List of bookings
     let reviews: ReviewModel? // Car reviews

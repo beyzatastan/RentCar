@@ -389,12 +389,14 @@ class FaturaViewController: UIViewController, UITextFieldDelegate{
             showAlert(message: "Kullanıcı ID'si bulunamadı. Lütfen giriş yapın veya kayıt olun.")
             return
         }
+        print("AAAAAAAAAA");
+        print(userIdString);
         
         // userId'nin geçerli olduğunu doğrula
         let userViewModel = UserViewModel()
         userViewModel.fetchUserDetails(userId: userIdInt) { userId in
             DispatchQueue.main.async {
-                guard userId != nil else {
+                guard userId == nil else {
                     self.showAlert(message: "Geçersiz kullanıcı ID'si. Lütfen tekrar giriş yapın.")
                     return
                 }

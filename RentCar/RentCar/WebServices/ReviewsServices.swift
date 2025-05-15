@@ -14,7 +14,7 @@ class ReviewWebService {
     private init() {}
     func addReview(review: AddReviewModel, completion: @escaping (Result<ReviewModel, Error>) -> Void) {
         // API URL
-        guard let url = URL(string: "\(baseUrl)/ReviewContoller/addReview") else {
+        guard let url = URL(string: "\(baseUrl)/Review/addReview") else {
             completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }
@@ -64,7 +64,7 @@ class ReviewWebService {
     }
     
     func getReviewsByCarId(for carId: Int, completion: @escaping (Result<[ReviewModel], Error>) -> Void) {
-        let urlString = "\(baseUrl)/ReviewContoller/getReviewsByCarId/\(carId)"
+        let urlString = "\(baseUrl)/Review/getReviewsByCarId/\(carId)"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             return

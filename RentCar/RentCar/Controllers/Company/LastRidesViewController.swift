@@ -10,8 +10,10 @@ class LastRidesViewController: UIViewController, UITableViewDataSource, UITableV
 
     var viewModelC = CarViewModel()
     var viewmodelB = BookingViewModel()
+    var viewModelL = LocationViewModel()
     var cars: [CarModel] = []
     var userId: Int?
+    private var reviewStatus:  Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,20 +58,40 @@ class LastRidesViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-               self?.viewmodelB.getBookingsByUserId(for: userId) { [weak self] success in
-                   DispatchQueue.main.async {
-                       if success {
-                           // Rezervasyonlardan carId'leri al
-                           let carIds = self?.viewmodelB.bookings.map { $0.carId! } ?? []
-                           self?.fetchCars(by: carIds)
-                           print("Bookinglar alındı")
-                       } else {
-                           print("Failed to fetch bookings for user ID: \(userId)")
-                       }
-                   }
-               }
-           }
-       }
+            self?.viewmodelB.getBookingsByUserId(for: userId) { [weak self] success in
+                DispatchQueue.main.async {
+                    if success {
+                        // Rezervasyonlardan carId'leri ve customerId'leri al
+                        let carIds = self?.viewmodelB.bookings.map { $0.carId! } ?? []
+                        self?.fetchCars(by: carIds)
+                        print("Bookinglar alındı")
+                        // CustomerId için review kontrolü yap
+                        self?.checkReviewsForCustomer(userId: userId)
+                    } else {
+                        print("Failed to fetch bookings for user ID: \(userId)")
+                    }
+                }
+            }
+        }
+    }
+
+  
+
+    private func checkReviewsForCustomer(userId: Int) {
+        let reviewViewModel = ReviewViewModel()
+        // Assuming customerId is linked to userId; adjust based on your data model
+        reviewViewModel.checkReviewExists(userId: userId) { [weak self] hasReview, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error checking review: \(error.localizedDescription)")
+                    return
+                }
+                self?.reviewStatus = hasReview
+                self?.tableView.reloadData()
+            }
+        }
+    }
+ 
     private func fetchCars(by carIds: [Int]) {
         let dispatchGroup = DispatchGroup()
         var fetchedCars: [CarModel] = []
@@ -112,33 +134,54 @@ class LastRidesViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "lastRides", for: indexPath) as! LastRidesTableViewCell
         let car = cars[indexPath.row]
+        
+        // Load image
         if let imageUrl = URL(string: car.imageUrl) {
-                DispatchQueue.global(qos: .userInitiated).async {
-                    if let data = try? Data(contentsOf: imageUrl) {
-                        DispatchQueue.main.async {
-                            cell.lastRideImage!.image = UIImage(data: data)
-                        }
+            DispatchQueue.global(qos: .userInitiated).async {
+                if let data = try? Data(contentsOf: imageUrl) {
+                    DispatchQueue.main.async {
+                        cell.lastRideImage.image = UIImage(data: data)
                     }
                 }
             }
-            cell.lastCarName.text = "\(car.brand ?? "") \(car.model ?? "")"
-
-            cell.selectionStyle = .default
-
-            return cell
         }
- 
+        
+        cell.lastCarName.text = "\(car.brand ?? "") \(car.model ?? "")"
+        cell.lastLocation.text = "\(car.locationId)"
+        
+        // Update review button text based on review status
+        if let userId = userId, reviewStatus == true {
+            cell.reviewButton.setTitle("Puan Verildi", for: .normal)
+            cell.reviewButton.isEnabled = false // Disable button if reviewed
+        } else {
+            cell.reviewButton.setTitle("Değerlendir", for: .normal)
+            cell.reviewButton.isEnabled = true
+        }
+        
+        cell.selectionStyle = .default
+        return cell
+    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("SEÇİLDİ") // Bu sadece konsolda görünecek
+        print("SEÇİLDİ")
+        
+        guard let userId = userId, reviewStatus != true  else {
+            print("Review already exists for this customer.")
+            showAlert(message: "Bu sürüşe daha önce puan verdiniz")
+            return
+        }
         
         let vc = storyboard?.instantiateViewController(identifier: "review") as! ReviewViewController
         vc.car = cars[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
-
     }
-
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Hata", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Tamam", style: .default))
+        present(alert, animated: true)
+    }
     
 }

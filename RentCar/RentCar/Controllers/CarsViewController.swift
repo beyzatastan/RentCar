@@ -136,7 +136,7 @@ extension CarsViewController: UITableViewDataSource, UITableViewDelegate {
         if let averageRating = carRatings[car.id] {
             cell.puanDurumu.text = String(format: "%.1f", averageRating) + "★"
         } else {
-            cell.puanDurumu.text = "No reviews"
+            cell.puanDurumu.text = "Yok"
         }
         
         if let gunSayisi = self.gunSayisi {
