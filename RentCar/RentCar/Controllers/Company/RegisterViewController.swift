@@ -23,44 +23,52 @@ class RegisterViewController: UIViewController {
        
     }
     
+    @IBAction func girisYapButton(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(identifier: "login") as! LoginViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     @IBAction func nextButton(_ sender: Any) {
         guard let firstName = nameText.text, !firstName.isEmpty else {
-                showErrorMessage("First name cannot be empty")
-                return
-            }
-            guard let lastName = soyadText.text, !lastName.isEmpty else {
-                showErrorMessage("Last name cannot be empty")
-                return
-            }
-            guard let email = emailText.text, !email.isEmpty else {
-                showErrorMessage("Email cannot be empty")
-                return
-            }
-            guard let phoneNumber = phoneNumberText.text, !phoneNumber.isEmpty else {
-                showErrorMessage("Phone number cannot be empty")
-                return
-            }
-            guard let password = passwordText.text, !password.isEmpty else {
-                showErrorMessage("Password cannot be empty")
-                return
-            }
+            showErrorMessage("First name cannot be empty")
+            return
+        }
+        guard let lastName = soyadText.text, !lastName.isEmpty else {
+            showErrorMessage("Last name cannot be empty")
+            return
+        }
+        guard let email = emailText.text, !email.isEmpty else {
+            showErrorMessage("Email cannot be empty")
+            return
+        }
+        guard let phoneNumber = phoneNumberText.text, !phoneNumber.isEmpty else {
+            showErrorMessage("Phone number cannot be empty")
+            return
+        }
+        guard let password = passwordText.text, !password.isEmpty else {
+            showErrorMessage("Password cannot be empty")
+            return
+        }
+        
         let newUser = AddUserModel(firstName: firstName, lastName: lastName, emailAddress: email, phoneNumber: phoneNumber, password: password)
-
-           // Backend'e gönderim için işlemi başlatıyoruz
-           viewModel.addUser(user: newUser) { userId in
-               if let userId = userId {
-                   // İşlem başarılıysa, kullanıcıyı ilgili ekrana yönlendiriyoruz
-                   print("User created with ID: \(userId)")
-                   
-                   // Örneğin, OdemeViewController'e geçiş yapıyoruz
-                   let vc = self.storyboard?.instantiateViewController(identifier: "main") as! MainPageViewController
-                   self.navigationController?.pushViewController(vc, animated: true)
-               } else {
-                   // Hata durumunda yapılacaklar
-                   print("User creation failed.")
-               }
-           }
-       }
+        
+        viewModel.addUser(user: newUser) { userId in
+            DispatchQueue.main.async { // Tüm UI işlemlerini ana iş parçacığında yap
+                if let userId = userId {
+                    print("User created with ID: \(userId)")
+                    self.showAlert(title: "Kayıt Başarılı", message: "Hesaba Giriş Yapıldı");
+                    let vc = self.storyboard?.instantiateViewController(identifier: "main") as! MainPageViewController
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    print("User creation failed.")
+                    if let errorMessage = self.viewModel.errorMessage {
+                        self.showErrorMessage(errorMessage)
+                    } else {
+                        self.showErrorMessage("An unknown error occurred.")
+                    }
+                }
+            }
+        }
+    }
     func showErrorMessage(_ message: String) {
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         
@@ -73,7 +81,11 @@ class RegisterViewController: UIViewController {
         // Present the alert controller
         self.present(alertController, animated: true, completion: nil)
     }
-
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Tamam", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 import UIKit
 

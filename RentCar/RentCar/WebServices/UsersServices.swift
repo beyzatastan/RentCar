@@ -68,17 +68,21 @@ class UserWebServices {
                 return
             }
             
+            // Ham veriyi konsola yazdır
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("fetchUserById response: \(jsonString)")
+            }
+            
             do {
-                // Decode the customer details into CustomerModel
                 let decoder = JSONDecoder()
                 let user = try decoder.decode(UserModel.self, from: data)
                 completion(.success(user))
             } catch {
+                print("Decoding error: \(error)")
                 completion(.failure(error))
             }
         }.resume()
     }
-
     func loginUser(phoneNumber: String, password: String, completion: @escaping (Result<Int, Error>) -> Void) {
         // API URL'si
         guard let url = URL(string: "\(baseUrl)/User/login") else {
