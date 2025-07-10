@@ -28,9 +28,14 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GY-Jx-tld">
                                 <rect key="frame" x="101" y="645" width="190" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.46274509800000002" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" red="0.97647058819999999" green="0.3294117647" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.46274509800000002" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="strokeColor" red="0.92549019610000005" green="0.46274509800000002" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </backgroundConfiguration>
                                     <attributedString key="attributedTitle">
                                         <fragment content="Devam">
                                             <attributes>
@@ -108,6 +113,27 @@
                                 <color key="textColor" red="0.98823529409999999" green="0.98039215690000003" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hesabın var mı?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enb-Dv-5Yc">
+                                <rect key="frame" x="109" y="753" width="150" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                                <color key="textColor" red="0.98823529409999999" green="0.98039215690000003" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDW-Ra-ybq">
+                                <rect key="frame" x="190" y="747" width="101" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Kaydol"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Giriş Yap">
+                                    <fontDescription key="titleFontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="15"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="girisYapButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="MWy-nk-nDT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.77647058823529413" green="0.1803921568627451" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
@@ -122,7 +148,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="117" y="-55"/>
+            <point key="canvasLocation" x="700" y="4"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="9q0-wO-oR5">
@@ -161,10 +187,24 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RjS-IP-19Q">
                                 <rect key="frame" x="68" y="474" width="257" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.46274509800000002" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" red="0.97647058823529409" green="0.32941176470588235" blue="0.32941176470588235" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Giriş">
-                                    <fontDescription key="titleFontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="24"/>
+                                <buttonConfiguration key="configuration" style="filled">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.46274509800000002" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="strokeColor" red="0.92549019610000005" green="0.46274509800000002" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </backgroundConfiguration>
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Devam">
+                                            <attributes>
+                                                <font key="NSFont" size="24" name="GillSans-SemiBold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="loginButtonTapped:" destination="rSz-AK-fku" eventType="touchUpInside" id="bfT-vi-tzg"/>
@@ -195,7 +235,7 @@
                                     <fontDescription key="titleFontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="15"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="kaydolButton:" destination="rSz-AK-fku" eventType="touchUpInside" id="hDl-9x-r7L"/>
+                                    <action selector="kaydolButtonTapped:" destination="rSz-AK-fku" eventType="touchUpInside" id="XuV-We-GtR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -209,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMm-20-efG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="765.64885496183206" y="-55.633802816901408"/>
+            <point key="canvasLocation" x="1364" y="4"/>
         </scene>
         <!--Main Page View Controller-->
         <scene sceneID="FhE-G4-nGu">
@@ -551,7 +591,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Deq-lt-8QS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140" y="613"/>
+            <point key="canvasLocation" x="700" y="649"/>
         </scene>
         <!--Last Rides View Controller-->
         <scene sceneID="9tj-K5-zlO">
@@ -595,10 +635,18 @@
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" title="Değerlendir"/>
                                                         </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54G-xn-pwL">
+                                                            <rect key="frame" x="312" y="55" width="53" height="41"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="lastCarName" destination="6ON-oG-tZN" id="uzf-lh-Hcb"/>
+                                                    <outlet property="lastLocation" destination="54G-xn-pwL" id="wUT-CJ-04p"/>
                                                     <outlet property="lastRideImage" destination="3st-jO-Dsa" id="93S-Fs-N6Q"/>
                                                     <outlet property="reviewButton" destination="csL-M8-tum" id="GkM-4G-9hJ"/>
                                                 </connections>
@@ -634,7 +682,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sTz-zr-Emp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-518.32061068702285" y="612.67605633802816"/>
+            <point key="canvasLocation" x="52.671755725190835" y="648.59154929577471"/>
         </scene>
         <!--Add Car View Controller-->
         <scene sceneID="2CH-GK-r1G">
@@ -847,7 +895,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kPS-Zq-QVF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="767" y="613"/>
+            <point key="canvasLocation" x="1363" y="649"/>
         </scene>
         <!--Rent View Controller-->
         <scene sceneID="kce-le-aY0">
@@ -919,6 +967,7 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o7I-EB-zoj">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="148"/>
@@ -1198,15 +1247,8 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fiat Egea Cross" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tz9-gV-3j6">
-                                                            <rect key="frame" x="12" y="13" width="240" height="26"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="22"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TvG-zE-zq9">
-                                                            <rect key="frame" x="12" y="28" width="200" height="160"/>
+                                                            <rect key="frame" x="12" y="39" width="198" height="149"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Araç Teslim Şekli" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Apq-eD-IIl">
@@ -1231,7 +1273,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ekonomi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byO-gI-HVi">
-                                                            <rect key="frame" x="229" y="100" width="50" height="17"/>
+                                                            <rect key="frame" x="229" y="100" width="58" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
                                                             <nil key="textColor"/>
@@ -1294,6 +1336,13 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                                             <color key="textColor" systemColor="systemYellowColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fiat Egea Cross" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tz9-gV-3j6">
+                                                            <rect key="frame" x="12" y="11" width="240" height="26"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="22"/>
+                                                            <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -1374,7 +1423,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oy7-nj-IaM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="766" y="1263"/>
+            <point key="canvasLocation" x="1363" y="1311"/>
         </scene>
         <!--Car Details View Controller-->
         <scene sceneID="eEP-uT-JPR">
@@ -1606,8 +1655,8 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dec-2024" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdF-uC-1Ce">
-                                                            <rect key="frame" x="248" y="42" width="104" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mayıs-2025" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdF-uC-1Ce">
+                                                            <rect key="frame" x="242" y="42" width="110" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="13"/>
                                                             <color key="textColor" systemColor="underPageBackgroundColor"/>
@@ -2724,7 +2773,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nG2-Q6-Tic" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2978" y="1311"/>
+            <point key="canvasLocation" x="2978" y="1310"/>
         </scene>
         <!--Camera Page View Controller-->
         <scene sceneID="D5k-lK-X3m">
@@ -2732,7 +2781,7 @@
                 <viewController storyboardIdentifier="camera" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t7u-xa-qE9" customClass="CameraPageViewController" customModule="RentCar" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QYy-84-UWC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4360" y="1311"/>
+            <point key="canvasLocation" x="4311" y="1311"/>
         </scene>
         <!--Search Page View Controller-->
         <scene sceneID="MOV-QN-bcH">
@@ -2760,6 +2809,7 @@
                                 <rect key="frame" x="0.0" y="144" width="404" height="627"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zfe-fP-4PT">
                                 <rect key="frame" x="0.0" y="767" width="393" height="85"/>
@@ -2793,6 +2843,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbW-fJ-uX9">
                                 <rect key="frame" x="101" y="645" width="190" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.92549019607843142" green="0.46274509803921571" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" red="0.97647058819999999" green="0.3294117647" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -2885,7 +2936,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hbN-nF-tii" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-560" y="-56"/>
+            <point key="canvasLocation" x="54" y="4"/>
         </scene>
         <!--Review View Controller-->
         <scene sceneID="VF4-Bb-drX">
@@ -3106,7 +3157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ngF-OM-m2u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3612.9770992366412" y="1309.8591549295775"/>
+            <point key="canvasLocation" x="3671" y="1310"/>
         </scene>
         <!--Before Photos View Controller-->
         <scene sceneID="y4i-SZ-2pP">

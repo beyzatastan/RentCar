@@ -371,42 +371,74 @@ class FaturaViewController: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func devamButtonClicked(_ sender: Any) {
-        if let userIdString = UserDefaults.standard.string(forKey: "userId"),
-           let userIdInt = Int(userIdString) {
-            self.userId = userIdInt
-            print("Customer ID: \(userIdInt)")
-            var userInput = AddCustomerModel(userId: userId!,
-                                             firstName: nameField.text ?? "",
-                                             lastName: soyadText.text ?? "",
-                                             email: epostaText.text ?? "",
-                                             phoneNumber: telefonText.text ?? "",
-                                             identityNumber: tcText.text ?? "",
-                                             drivingLicenseIssuedDate: "",
-                                             drivingLicenseNumber: "",
-                                             birthDate: dogumText.text ?? "",
-                                             city: "",
-                                             district: "",
-                                             address: "",
-                                             postalCode: "",
-                                             role: "customer")
-            
-            if let dogumText = convertToISO8601Date(dogumText.text) {
-                userInput.birthDate = dogumText } else {
-                    print("Invalid date format for dogumText")
+        guard let name = nameField.text, !name.isEmpty else {
+            showAlert(message: "Ad alanı boş olamaz.")
+            return
+        }
+        guard let tc = tcText.text, !tc.isEmpty else {
+            showAlert(message: "TCKN veya Pasaport No boş olamaz.")
+            return
+        }
+        guard let birthDateText = dogumText.text, !birthDateText.isEmpty else {
+            showAlert(message: "Doğum tarihi boş olamaz.")
+            return
+        }
+        
+        guard let userIdString = UserDefaults.standard.string(forKey: "userId"),
+              let userIdInt = Int(userIdString) else {
+            showAlert(message: "Kullanıcı ID'si bulunamadı. Lütfen giriş yapın veya kayıt olun.")
+            return
+        }
+        print("AAAAAAAAAA");
+        print(userIdString);
+        
+        // userId'nin geçerli olduğunu doğrula
+        let userViewModel = UserViewModel()
+        userViewModel.fetchUserDetails(userId: userIdInt) { userId in
+            DispatchQueue.main.async {
+                guard userId == nil else {
+                    self.showAlert(message: "Geçersiz kullanıcı ID'si. Lütfen tekrar giriş yapın.")
                     return
                 }
-            
-            
-            let vc=storyboard?.instantiateViewController(identifier: "nextFatura") as! NextFaturaViewController
-            vc.customerBilgi2=userInput
-            vc.carId=self.carId
-            vc.startLocationId=self.startLocationId
-            vc.endLocationId=self.endLocationId
-            vc.endDate=self.endDate
-            vc.startDate=self.startDate
-            navigationController?.pushViewController(vc, animated: true)
+                
+                let userInput = AddCustomerModel(
+                    userId: userIdInt,
+                    firstName: self.nameField.text ?? "",
+                    lastName: self.soyadText.text ?? "",
+                    email: self.epostaText.text ?? "",
+                    phoneNumber: self.telefonText.text ?? "",
+                    identityNumber: self.tcText.text ?? "",
+                    drivingLicenseIssuedDate: "",
+                    drivingLicenseNumber: "",
+                    birthDate: self.convertToISO8601Date(self.dogumText.text) ?? "",
+                    city: "",
+                    district: "",
+                    address: "",
+                    postalCode: "",
+                    role: "customer"
+                )
+                
+                guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "nextFatura") as? NextFaturaViewController else {
+                    self.showAlert(message: "Sonraki ekran yüklenemedi.")
+                    return
+                }
+                vc.customerBilgi2 = userInput
+                vc.carId = self.carId
+                vc.startLocationId = self.startLocationId
+                vc.endLocationId = self.endLocationId
+                vc.endDate = self.endDate
+                vc.startDate = self.startDate
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
+
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Hata", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Tamam", style: .default))
+        present(alert, animated: true)
+    }
+   
     func convertToISO8601Date(_ dateString: String?) -> String? {
         guard let dateString = dateString else {
             return nil }

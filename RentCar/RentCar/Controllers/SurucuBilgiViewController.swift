@@ -171,43 +171,75 @@ class SurucuBilgiViewController: UIViewController ,UITextFieldDelegate{
         textField.inputAccessoryView = createToolBar()
     }
     @objc func doneButtonTapped() {
-        if let currentField = ehliyettx  as? UITextField {
-            currentField.resignFirstResponder()
-        }
+        view.endEditing(true)
     }
     @IBAction func devamButtonClicked(_ sender: Any) {
-        customerBilgi3?.drivingLicenseIssuedDate = ehliyettx.text ?? ""
-        customerBilgi3?.drivingLicenseNumber = surucukimliktx.text ?? ""
+        guard let drivingLicenseNumber = surucukimliktx.text, !drivingLicenseNumber.isEmpty else {
+            showAlert(message: "Ehliyet numarası boş olamaz.")
+            return
+        }
+        guard let drivingLicenseDateText = ehliyettx.text, !drivingLicenseDateText.isEmpty else {
+            showAlert(message: "Ehliyet veriliş tarihi boş olamaz.")
+            return
+        }
         
-        if let drivingLicenseDate = convertToISO8601Date(ehliyettx.text) {
-            customerBilgi3?.drivingLicenseIssuedDate = drivingLicenseDate } else {
-                print("Invalid date format for drivingLicenseIssuedDate")
-                return
-            }
+        customerBilgi3?.drivingLicenseNumber = drivingLicenseNumber
+        if let drivingLicenseDate = convertToISO8601Date(drivingLicenseDateText) {
+            customerBilgi3?.drivingLicenseIssuedDate = drivingLicenseDate
+        } else {
+            showAlert(message: "Geçersiz ehliyet veriliş tarihi formatı. Lütfen DD-MM-YYYY formatında girin.")
+            return
+        }
         
-        viewModel.addCustomer(customer: customerBilgi3!) { customerId in
-            print("UserDefaults Calıştı")
-            print(UserDefaults.standard.string(forKey: "customerId"))
-            // customerId verisi alındığında
-            if let customerId = customerId {
-                let vc = self.storyboard?.instantiateViewController(identifier: "odeme") as! OdemeViewController
-                vc.customerId = customerId
-                
-                vc.carId = self.carId
-                vc.startLocationId = self.startLocationId
-                vc.endLocationId = self.endLocationId
-                vc.endDate = self.endDate
-                vc.startDate = self.startDate
-                
-                // Son olarak geçişi sağlıyoruz
-                self.navigationController?.pushViewController(vc, animated: true)
-            } else {
-                // Hata durumunda gerekli işlemler yapılabilir
-                print("Customer ID could not be fetched.")
+        guard let customer = customerBilgi3 else {
+            showAlert(message: "Müşteri bilgileri eksik.")
+            return
+        }
+        
+        // Zorunlu alanları kontrol et
+        guard !customer.firstName.isEmpty else {
+            showAlert(message: "Ad alanı boş olamaz.")
+            return
+        }
+        guard !customer.identityNumber.isEmpty else {
+            showAlert(message: "TCKN veya pasaport numarası boş olamaz.")
+            return
+        }
+        guard customer.userId > 0 else {
+            showAlert(message: "Geçersiz kullanıcı ID'si.")
+            return
+        }
+        
+        print("Gönderilen müşteri verileri: \(customer)")
+        
+        viewModel.addCustomer(customer: customer) { customerId in
+            DispatchQueue.main.async {
+                if let customerId = customerId {
+                    UserDefaults.standard.set(customerId, forKey: "customerId")
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "odeme") as? OdemeViewController
+                    guard let vc = vc else {
+                        self.showAlert(message: "Ödeme ekranı yüklenemedi.")
+                        return
+                    }
+                    vc.customerId = customerId
+                    vc.carId = self.carId
+                    vc.startLocationId = self.startLocationId
+                    vc.endLocationId = self.endLocationId
+                    vc.endDate = self.endDate
+                    vc.startDate = self.startDate
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    let errorMessage = self.viewModel.errorMessage ?? "Bilinmeyen bir hata oluştu."
+                    self.showAlert(message: "Müşteri kaydedilemedi: \(errorMessage)")
+                }
             }
         }
     }
-
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Hata", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Tamam", style: .default))
+        present(alert, animated: true)
+    }
     func convertToISO8601Date(_ dateString: String?) -> String? {
         guard let dateString = dateString else {
             return nil }

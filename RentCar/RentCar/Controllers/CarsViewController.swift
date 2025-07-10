@@ -126,6 +126,7 @@ extension CarsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.carNameLabel.text = (car.brand ?? " ") + " " + car.model
         cell.aracSınıfı.text = "\(car.carClass)"
         cell.vitesDurumu.text = "\(car.transmissionType)"
+        cell.depozito.text = "\(car.deposit)"
         cell.toplamGunLabel.text = "Toplam Fiyat(\(gunSayisi!)):"
         cell.yolcuSayisi.text = "\(car.seatCount) Kişilik"
         cell.gunlukFiyat.text = "Günlük Fiyat: \(car.dailyPrice)₺"
@@ -135,7 +136,7 @@ extension CarsViewController: UITableViewDataSource, UITableViewDelegate {
         if let averageRating = carRatings[car.id] {
             cell.puanDurumu.text = String(format: "%.1f", averageRating) + "★"
         } else {
-            cell.puanDurumu.text = "No reviews"
+            cell.puanDurumu.text = "Yok"
         }
         
         if let gunSayisi = self.gunSayisi {

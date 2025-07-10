@@ -7,10 +7,11 @@
 
 import Foundation
 class UserWebServices {
-    
+    let baseUrl = BaseUrl().baseUrl;
+
     func addUser(user: AddUserModel, completion: @escaping (Result<UserResponse, Error>) -> Void) {
         // API URL
-        guard let url = URL(string: "http://localhost:5163/api/User/addUser") else {
+        guard let url = URL(string: "\(baseUrl)/User/addUser") else {
             completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }
@@ -52,7 +53,7 @@ class UserWebServices {
 
     // Fetch customer details after successful creation
     func fetchUserById(userId: Int, completion: @escaping (Result<UserModel, Error>) -> Void) {
-        guard let url = URL(string: "http://localhost:5163/api/User/getUserById/\(userId)") else {
+        guard let url = URL(string: "\(baseUrl)/User/getUserById/\(userId)") else {
             completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }
@@ -67,20 +68,24 @@ class UserWebServices {
                 return
             }
             
+            // Ham veriyi konsola yazdır
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("fetchUserById response: \(jsonString)")
+            }
+            
             do {
-                // Decode the customer details into CustomerModel
                 let decoder = JSONDecoder()
                 let user = try decoder.decode(UserModel.self, from: data)
                 completion(.success(user))
             } catch {
+                print("Decoding error: \(error)")
                 completion(.failure(error))
             }
         }.resume()
     }
-
     func loginUser(phoneNumber: String, password: String, completion: @escaping (Result<Int, Error>) -> Void) {
         // API URL'si
-        guard let url = URL(string: "http://localhost:5163/api/User/login") else {
+        guard let url = URL(string: "\(baseUrl)/User/login") else {
             completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Geçersiz URL"])))
             return
         }
